@@ -682,8 +682,10 @@ MonoBehaviour:
   speed: 20
   jumpPower: 15
   jumpStatus: 0
+  characterTrasform: {fileID: 0}
   cameraArm: {fileID: 1503222337}
   characterBody: {fileID: 1575379974}
+  camera: {fileID: 963194228}
 --- !u!4 &1333910211
 Transform:
   m_ObjectHideFlags: 0
@@ -930,7 +932,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575379970}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ce3621716f6d384e95f6bbfc1cbe712, type: 3}
   m_Name: 
@@ -938,8 +940,10 @@ MonoBehaviour:
   speed: 0
   jumpPower: 0
   jumpStatus: 0
+  characterTrasform: {fileID: 0}
   cameraArm: {fileID: 0}
   characterBody: {fileID: 0}
+  camera: {fileID: 0}
 --- !u!136 &1575379972
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -968,7 +972,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!4 &1575379974 stripped
 Transform:

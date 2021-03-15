@@ -9,10 +9,19 @@ public class Player : MonoBehaviour
     public float jumpPower;
     Rigidbody rigid;
     public bool jumpStatus;
+    public Transform characterTrasform;
 
+    //키보드
     float hAxis;
     float vAxis;
     bool wDown;
+    bool viewPoint;
+
+    //flag
+    // 1 = 3인칭 0 = 1인칭
+    int viewPointFlag = 1;
+
+
 
     Vector3 moveVec;
 
@@ -21,6 +30,9 @@ public class Player : MonoBehaviour
     private Transform cameraArm;
     [SerializeField]
     private Transform characterBody;
+    [SerializeField]
+    private Transform camera;
+ 
     //// Start is called before the first frame update
     //void Start()
     //{
@@ -28,6 +40,7 @@ public class Player : MonoBehaviour
     //}
     void Awake()
     {
+        
         animator = GetComponentInChildren<Animator>();
         jumpStatus = false;
         rigid = GetComponentInChildren<Rigidbody>();
@@ -39,18 +52,23 @@ public class Player : MonoBehaviour
     {
         LookAround();
         Move();
-        Debug.Log(jumpStatus);
+        PointOfView();
+        //Debug.Log(jumpStatus);
+
     }
     void FixedUpdate()
     {
-       // rigid.AddForce(new Vector3(Input.GetAxis("Horizontal"),
-       //0,
-       //Input.GetAxis("Vertical")), ForceMode.Impulse);
+        
+        // rigid.AddForce(new Vector3(Input.GetAxis("Horizontal"),
+        //0,
+        //Input.GetAxis("Vertical")), ForceMode.Impulse);
 
 
     }
     void OnCollisionEnter(Collision collision)
     {
+
+
 
     }
     private void LookAround()
@@ -79,6 +97,8 @@ public class Player : MonoBehaviour
         vAxis = Input.GetAxisRaw("Vertical");
         wDown = Input.GetButton("Run");
 
+        
+
         Vector2 moveInput = new Vector2(hAxis, vAxis);
         bool isMove = moveInput.magnitude != 0;
         if (isMove)
@@ -99,7 +119,8 @@ public class Player : MonoBehaviour
 
         animator.SetBool("isWalk", moveInput != Vector2.zero);
         animator.SetBool("isRun", wDown);
-
+        //카메라
+        
         //transform.LookAt(transform.position + moveVec);
 
         if (Input.GetButtonDown("Jump") && !jumpStatus)
@@ -108,14 +129,52 @@ public class Player : MonoBehaviour
             rigid.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
         }
     }
-
+    //충돌
     public void CollisionFromChild(Collision collision)
     {
        
-        Debug.Log("호출여부");
+        //Debug.Log("호출여부");
         if (collision.gameObject.tag == "Floor")
         {
             jumpStatus = false;
+        }
+    }
+    void LateUpdate()
+    {
+        //cameraArm.position = characterBody.position;
+        Vector3 vector = characterBody.position;
+        vector.y = characterBody.position.y + 2.5f;
+        if(viewPointFlag == 1)
+        {
+            cameraArm.position = vector;
+        }
+        else
+        {
+            camera.position = characterBody.position;
+            
+        }
+        
+        //Debug.Log("카메라"+cameraArm.position);
+        //Debug.Log("캐릭터"+ characterBody.position);
+    }
+    private void PointOfView()
+    {
+        viewPoint = Input.GetButtonDown("V");
+        if (viewPoint)
+        {
+            if(viewPointFlag == 1)
+            {
+                
+                viewPointFlag = 0;
+            }
+            else 
+            {
+                viewPointFlag = 1;
+            }
+            //viewPointFlag == 1 ? viewPointFlag = 0 : viewPointFlag = 1;
+            
+            Debug.Log("v 누름");
+            Debug.Log(viewPointFlag);
         }
     }
 }
