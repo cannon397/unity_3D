@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     Rigidbody rigid;
     public bool jumpStatus;
     public Transform characterTrasform;
+    private float camera_dstc;
 
     //키보드
     float hAxis;
@@ -45,7 +46,7 @@ public class Player : MonoBehaviour
         jumpStatus = false;
         rigid = GetComponentInChildren<Rigidbody>();
         Debug.Log(jumpStatus);
-
+        camera_dstc = Mathf.Sqrt(4 * 4 + 10 * 10);
     }
     // Update is called once per frame
     void Update()
@@ -75,18 +76,19 @@ public class Player : MonoBehaviour
     {
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         Vector3 camAngle = cameraArm.rotation.eulerAngles;
-        float x = camAngle.x - mouseDelta.y;
+        cameraArm.rotation = Quaternion.Euler(camAngle.x - mouseDelta.y, camAngle.y + mouseDelta.x, camAngle.z);
 
-        if( x < 180f)
+        RaycastHit hitinfo;
+        if (Physics.Linecast(cameraArm.position, camera.position, out hitinfo))//레이케스트 성공시
         {
-            x = Mathf.Clamp(x, -1f, 70f);
+            //point로 옮긴다.
+            camera.transform.position = hitinfo.point;
         }
         else
         {
-            x = Mathf.Clamp(x, 335f, 361f);
+            camera.localPosition = Vector3.Lerp(camera.localPosition, new Vector3(0, 4f, -10f).normalized * camera_dstc, Time.deltaTime * 3);
         }
 
-        cameraArm.rotation = Quaternion.Euler(x, camAngle.y + mouseDelta.x, camAngle.z);
     }
     private void Move()
     {
