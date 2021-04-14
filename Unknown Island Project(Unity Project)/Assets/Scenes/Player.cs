@@ -1,9 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.Audio;
+using Assets.Scenes;
+using Mono.Data.Sqlite;
+using System.Data;
 
 public class Player : MonoBehaviour
 {
+   
+
     Collision collision;
     public float speed;
     public float jumpPower;
@@ -11,7 +19,7 @@ public class Player : MonoBehaviour
     public bool jumpStatus;
     public Transform characterTrasform;
     private float camera_dstc;
-
+    DBAccess db;
     //키보드
     float hAxis;
     float vAxis;
@@ -41,12 +49,26 @@ public class Player : MonoBehaviour
     //}
     void Awake()
     {
-        
+         db = new DBAccess();
         animator = GetComponentInChildren<Animator>();
         jumpStatus = false;
         rigid = GetComponentInChildren<Rigidbody>();
         Debug.Log(jumpStatus);
         camera_dstc = Mathf.Sqrt(4 * 4 + 10 * 10);
+    }
+     void Start()
+    {
+        SqliteDataReader m_Reader = db.ReadFullTable("settings");
+        while (m_Reader.Read()) {
+            Debug.Log("no : "+ m_Reader["no"] + "monitor_dropdown_value : " + m_Reader["monitor_dropdown_value"] + "fullscreen : " + m_Reader["fullscreen"]);
+        }
+
+   
+       
+
+
+        
+        db.CloseSqlConnection();
     }
     // Update is called once per frame
     void Update()
@@ -178,4 +200,5 @@ public class Player : MonoBehaviour
             Debug.Log(viewPointFlag);
         }
     }
+
 }

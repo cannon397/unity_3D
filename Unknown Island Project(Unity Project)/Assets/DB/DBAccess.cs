@@ -8,15 +8,16 @@ using Mono.Data.Sqlite;
 
 
 
-public class DBAccess : MonoBehaviour
+public class DBAccess 
 {
 
     private SqliteConnection m_DatabaseConnection;
     private SqliteCommand m_DatabaseCommand;
     private SqliteDataReader m_Reader;
 
-    public DBAccess(string connectionString)
+    public DBAccess()
     {
+        string connectionString = "URI=file:" + Application.dataPath + "/Plugins/UIP.db"; //Path to database.
         OpenDatabase(connectionString);
     }
 
