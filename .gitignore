@@ -6,12 +6,12 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 Unknown Island Project(Unity Project)/[Ll]ibrary/
-/[Tt]emp/
+[Tt]emp/
 Unknown Island Project(Unity Project)/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Mm]emoryCaptures/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
 
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
