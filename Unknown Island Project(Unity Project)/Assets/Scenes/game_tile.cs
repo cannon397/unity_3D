@@ -9,7 +9,6 @@ using Assets.Scenes;
 public class game_tile : MonoBehaviour
 {
     // Start is called before the first frame update
-    Setting_header sh = new Setting_header();
     public GameObject lable_on;
     public GameObject lable_off;
     public Toggle fullscreen_toggle;
@@ -19,11 +18,17 @@ public class game_tile : MonoBehaviour
     public Dropdown monitorsize_dropdown;
     public InputField mousedpi_inputfield;
     public Slider mousedpi_slider;
+    Setting_header sh;
 
     void Start()
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
+    }
+
+    public void Awake()
+    {
+        sh = new Setting_header();
         //ImportSettingValue(); //설정 동기화
     }
 

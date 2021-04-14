@@ -84,7 +84,6 @@ public class Player : MonoBehaviour
         else
         {
             x = Mathf.Clamp(x, 335f, 361f);
-
         }
 
         cameraArm.rotation = Quaternion.Euler(x, camAngle.y + mouseDelta.x, camAngle.z);
