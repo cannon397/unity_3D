@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
+using Mono.Data.Sqlite;
 
 namespace Assets.Scenes
 {
@@ -14,24 +16,101 @@ namespace Assets.Scenes
         private float mouse_dpi = 1;
         private string key_biding_point;
         private string[] key_biding;
+        private DBAccess db;
+        private String settings_table = "settings";
+
+        String[] where = { "no" };
+        String[] where_value = { "1" };
+
+        SqliteDataReader m_reader;
         /* 키 바인딩
          * 0 : 인칭 변환 (기본값 : V)
          */
 
+        public Setting_header()
+        {
+            db = new DBAccess();
+        }
+
         //모니터 해상도값
-        public int GetMonitorDV() { return(monitor_dropdown_value); }
-        public void SetMonitorDV(int i) { monitor_dropdown_value = i; }
+        public int GetMonitorDV() {
+
+            String[] db_cols = { "monitor_dropdown_value" };
+            String[] operation = { "=" };
+            m_reader = db.SelectWhere(settings_table, db_cols, where, operation, where_value);
+            m_reader.Read();
+
+            return m_reader.GetInt16(0);
+        }
+        public void SetMonitorDV(int i)
+        {
+            String[] db_monitor_dv_value = { i.ToString() };
+            String[] db_cols = { "monitor_dropdown_value" };
+            db.UpdateInto(settings_table, db_cols, db_monitor_dv_value, "no", "1");
+            monitor_dropdown_value = i;
+        }
         //전체화면 유무 값
-        public bool GetFullscreenBool() { return (fullscreen_bool); }
-        public void SetFullscreenBool(bool b) { fullscreen_bool = b; }
+        public bool GetFullscreenBool() {
+            String[] db_cols = { "fullscreen" };
+            String[] operation = { "=" };
+            m_reader = db.SelectWhere(settings_table, db_cols, where, operation, where_value);
+            m_reader.Read();
+            if (m_reader.GetInt16(0) == 1)
+            {
+                fullscreen_bool = true;
+            }
+            else
+            {
+                fullscreen_bool = false;
+            }
+            return (fullscreen_bool);
+        }
+        public void SetFullscreenBool(bool b) { 
+            fullscreen_bool = b; 
+        }
         //마스터 볼륨 값
-        public float GetSoundMasterVolume() { return (sound_master_volume); }
-        public void SetSoundMasterVolume(float f) { sound_master_volume = f; }
+        public float GetSoundMasterVolume() {
+
+            String[] db_cols = { "sound_master_volume" };
+            String[] operation = { "=" };
+            m_reader = db.SelectWhere(settings_table, db_cols, where, operation, where_value);
+            m_reader.Read();
+
+            return (sound_master_volume);
+        }
+        public void SetSoundMasterVolume(float f)
+        {
+            String[] db_master_volume_value = { f.ToString() };
+            String[] db_cols = { "sound_master_volume" };
+            db.UpdateInto(settings_table, db_cols, db_master_volume_value, "no", "1");
+
+            sound_master_volume = f;
+        }
         //마우스 감도 값
-        public float GetMouseDpi() { return (mouse_dpi); }
-        public void SetMouseDpi(float f) { mouse_dpi = f; }
+        public float GetMouseDpi()
+        {
+            String[] db_cols = { "mouse_dpi" };
+            String[] emptyStringArray = new string[0];
+            String[] operation = { "=" };
+
+
+
+            m_reader = db.SelectWhere(settings_table, db_cols, where, operation, where_value);
+            m_reader.Read();
+            
+                Debug.Log("db mouse_dpi : " + m_reader.GetFloat(0));
+                return m_reader.GetFloat(0);
+
+        }
+        public void SetMouseDpi(float f)
+        {
+            String[] db_mouse_dp_value = { f.ToString() };
+            String[] db_cols = { "mouse_dpi" };
+            db.UpdateInto(settings_table, db_cols, db_mouse_dp_value, "no", "1");
+            mouse_dpi = f;
+        }
         //키 바인딩 배열
-        public string GetKeyBiding(int i) { return key_biding[i]; }
+        public string GetKeyBiding(int i) { return "V"; /*key_biding[i]*/ }
         public void SetKeyBiding(string st, int i) { key_biding[i] = st; }
         //키 바인딩 입력값
         public string GetKeyBidingPoint() { return key_biding_point; }

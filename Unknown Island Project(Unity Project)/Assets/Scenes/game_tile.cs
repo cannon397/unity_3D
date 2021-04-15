@@ -124,10 +124,9 @@ public class game_tile : MonoBehaviour
     }
 
     //마우스 감도 조절
-    public void MouseDpiControlSlider(float f)
+    public void MouseDpiControlSlider()
     {
-        if (f == 0) { f = 0.05f; }
-        else { f = f / 50; }
+        float f = mousedpi_slider.value;
         sh.SetMouseDpi(f);
     }
 

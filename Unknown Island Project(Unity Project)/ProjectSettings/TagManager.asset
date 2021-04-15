@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CameraCenter
   - Floor
+  - MouseDPI_Slider
   layers:
   - Default
   - TransparentFX
