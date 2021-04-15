@@ -5,9 +5,9 @@
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
-Unknown Island Project(Unity Project)/[Ll]ibrary/
+[Ll]ibrary/
 [Tt]emp/
-Unknown Island Project(Unity Project)/[Oo]bj/
+[Oo]bj/
 [Bb]uild/
 [Bb]uilds/
 [Ll]ogs/
@@ -26,7 +26,7 @@ Unknown Island Project(Unity Project)/[Oo]bj/
 [Aa]ssets/Plugins/Editor/JetBrains*
 
 # Visual Studio cache directory
-#.vs/
+.vs/
 
 # Gradle cache directory
 .gradle/
