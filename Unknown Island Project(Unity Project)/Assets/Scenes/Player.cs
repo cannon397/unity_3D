@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
         rigid = GetComponentInChildren<Rigidbody>();
         Debug.Log(jumpStatus);
         camera_dstc = Mathf.Sqrt(4 * 4 + 10 * 10);
-        sh = new Setting_header();
+        sh = new Setting_header(db);
     }
      void Start()
     {
@@ -65,11 +65,6 @@ public class Player : MonoBehaviour
             Debug.Log("no : "+ m_Reader["no"] + "monitor_dropdown_value : " + m_Reader["monitor_dropdown_value"] + "fullscreen : " + m_Reader["fullscreen"]);
         }
 
-   
-       
-
-
-        
         db.CloseSqlConnection();
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 300;

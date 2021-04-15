@@ -27,9 +27,9 @@ namespace Assets.Scenes
          * 0 : 인칭 변환 (기본값 : V)
          */
 
-        public Setting_header()
+        public Setting_header(DBAccess db)
         {
-            db = new DBAccess();
+            this.db = db;
         }
 
         //모니터 해상도값
@@ -76,7 +76,7 @@ namespace Assets.Scenes
             m_reader = db.SelectWhere(settings_table, db_cols, where, operation, where_value);
             m_reader.Read();
 
-            return (sound_master_volume);
+            return m_reader.GetFloat(0);
         }
         public void SetSoundMasterVolume(float f)
         {

@@ -21,6 +21,7 @@ public class game_tile : MonoBehaviour
     public GameObject keybiding_panel;
     public GameObject keybiding_check_panel;
     Setting_header sh;
+    private DBAccess db;
 
     void Start()
     {
@@ -30,7 +31,8 @@ public class game_tile : MonoBehaviour
 
     public void Awake()
     {
-        sh = new Setting_header();
+        db = new DBAccess();
+        sh = new Setting_header(db);
         //ImportSettingValue(); //설정 동기화
     }
 
@@ -179,5 +181,9 @@ public class game_tile : MonoBehaviour
         monitorsize_dropdown.value = sh.GetMonitorDV();
         fullscreen_toggle.isOn = sh.GetFullscreenBool();
         mousedpi_slider.value = sh.GetMouseDpi();
+    }
+     void OnDestroy()
+    {
+        db.CloseSqlConnection();
     }
 }
