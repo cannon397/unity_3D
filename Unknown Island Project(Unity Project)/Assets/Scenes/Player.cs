@@ -7,6 +7,7 @@ using UnityEngine.Audio;
 using Assets.Scenes;
 using Mono.Data.Sqlite;
 using System.Data;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -71,6 +72,8 @@ public class Player : MonoBehaviour
 
         
         db.CloseSqlConnection();
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 300;
     }
     // Update is called once per frame
     void Update()
@@ -192,7 +195,7 @@ public class Player : MonoBehaviour
     }
     private void PointOfView()
     {
-        viewPoint = Input.GetButtonDown("V");
+        viewPoint = Input.GetButtonDown(sh.GetKeyBiding(0));
         if (viewPoint)
         {
             if(viewPointFlag == 1)

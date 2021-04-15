@@ -18,6 +18,8 @@ public class game_tile : MonoBehaviour
     public Dropdown monitorsize_dropdown;
     public InputField mousedpi_inputfield;
     public Slider mousedpi_slider;
+    public GameObject keybiding_panel;
+    public GameObject keybiding_check_panel;
     Setting_header sh;
 
     void Start()
@@ -35,7 +37,6 @@ public class game_tile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     //게임 시작
@@ -128,6 +129,49 @@ public class game_tile : MonoBehaviour
         if (f == 0) { f = 0.05f; }
         else { f = f / 50; }
         sh.SetMouseDpi(f);
+    }
+
+    //키 바인딩창 열기
+    public void KeyBidingOpen()
+    {
+        setting_panel.SetActive(false);
+        keybiding_panel.SetActive(true);
+    }
+    //키 바인딩창 닫기
+    public void KeyBidingClose()
+    {
+        keybiding_panel.SetActive(false);
+        setting_panel.SetActive(true);
+    }
+
+    //키 바인딩 인지 아닌지 확인 해서 바꾼 키 값 반환 하는 함수
+    public void KeyBidingCheck()
+    {
+        if (keybiding_check_panel.activeSelf == true)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                keybiding_check_panel.SetActive(false);
+            }
+            else if(Input.inputString != null)
+            {
+                sh.SetKeyBidingPoint(Input.inputString);
+            }
+        }
+    }
+    //인칭변환키 변경
+    public void KeyBidingPointOfViewKey()
+    {
+        keybiding_check_panel.SetActive(true);
+        string st;
+        while(sh.GetKeyBidingPoint() == null)
+        {
+            st = sh.GetKeyBidingPoint();
+            sh.SetKeyBiding(st, 0);
+            sh.SetKeyBidingPoint(null);
+            keybiding_check_panel.SetActive(false);
+            break;
+        }
     }
 
     private void ImportSettingValue()
