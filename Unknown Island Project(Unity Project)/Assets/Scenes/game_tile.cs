@@ -123,11 +123,11 @@ public class game_tile : MonoBehaviour
     }
 
     //마우스 감도 조절
-    public void MouseDpiControlInputField(string st)
+    public void MouseDpiControlSlider(float f)
     {
-        float f = float.Parse(st);
+        if (f == 0) { f = 0.05f; }
+        else { f = f / 50; }
         sh.SetMouseDpi(f);
-        mousedpi_inputfield.text = st;
     }
 
     private void ImportSettingValue()
@@ -135,5 +135,6 @@ public class game_tile : MonoBehaviour
         gamemaster_sound.value = sh.GetSoundMasterVolume();
         monitorsize_dropdown.value = sh.GetMonitorDV();
         fullscreen_toggle.isOn = sh.GetFullscreenBool();
+        mousedpi_slider.value = sh.GetMouseDpi();
     }
 }

@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     public Transform characterTrasform;
     private float camera_dstc;
     DBAccess db;
+    Setting_header sh;
     //키보드
     float hAxis;
     float vAxis;
@@ -55,6 +56,7 @@ public class Player : MonoBehaviour
         rigid = GetComponentInChildren<Rigidbody>();
         Debug.Log(jumpStatus);
         camera_dstc = Mathf.Sqrt(4 * 4 + 10 * 10);
+        sh = new Setting_header();
     }
      void Start()
     {
@@ -96,9 +98,17 @@ public class Player : MonoBehaviour
     }
     private void LookAround()
     {
+        //지금 당장은 sh 안에 값들이 제대로 지정 되지 않아서 NULL이 뜨기 때문에 적용 하려면 DB 연동 필요함
+        //Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X") * sh.GetMouseDpi(), Input.GetAxis("Mouse Y") * sh.GetMouseDpi());
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         Vector3 camAngle = cameraArm.rotation.eulerAngles;
-        cameraArm.rotation = Quaternion.Euler(camAngle.x - mouseDelta.y, camAngle.y + mouseDelta.x, camAngle.z);
+
+        float x = camAngle.x - mouseDelta.y;
+
+        if (x < 180f) {x = Mathf.Clamp(x, -1f, 70f);}
+        else {x = Mathf.Clamp(x, 290f, 361f);}
+
+        cameraArm.rotation = Quaternion.Euler(x, camAngle.y + mouseDelta.x, camAngle.z);
 
         RaycastHit hitinfo;
         if (Physics.Linecast(cameraArm.position, camera.position, out hitinfo))//레이케스트 성공시
