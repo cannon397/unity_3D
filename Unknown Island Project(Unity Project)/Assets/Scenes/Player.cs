@@ -11,7 +11,7 @@ using System;
 
 public class Player : MonoBehaviour
 {
-    1
+  
 
     Collision collision;
     public float speed;
