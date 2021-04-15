@@ -26,7 +26,7 @@ Unknown Island Project(Unity Project)/[Oo]bj/
 [Aa]ssets/Plugins/Editor/JetBrains*
 
 # Visual Studio cache directory
-.vs/
+#.vs/
 
 # Gradle cache directory
 .gradle/
