@@ -19,22 +19,45 @@ public class game_tile : MonoBehaviour
     public Slider mousedpi_slider;
     public GameObject keybiding_panel;
     public GameObject keybiding_check_panel;
-    Setting_header sh;
+    private Setting_header sh;
     private DBAccess db;
+    List<string> monitor_dropdown_options = new List<string>();
+
 
     void Start()
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
+
+        //setting_panel.SetActive(true);
         db = new DBAccess();
         sh = new Setting_header(db);
-        //setting_panel.SetActive(true);
-        //ImportSettingValue(); //설정 동기화
+
+        generate_moniotr_dropdown_list();
+
+        gamemaster_sound.onValueChanged.AddListener(delegate
+        {
+            SoundVolumeMaster(sh);
+        });
+        fullscreen_toggle.onValueChanged.AddListener(delegate
+        {
+            FullscreenBool(sh);
+        });
+        mousedpi_slider.onValueChanged.AddListener(delegate {
+            MouseDpiControlSlider(sh);
+        });
+        monitorsize_dropdown.onValueChanged.AddListener(delegate
+        {
+            MonitorSize(sh);
+        });
+         //설정 동기화
+        ImportSettingValue();
         //setting_panel.SetActive(false);
     }
 
     public void Awake()
     {
+        
 
     }
 
@@ -57,15 +80,18 @@ public class game_tile : MonoBehaviour
     public void OpenSetting()
     {
         setting_panel.SetActive(true);
+        
     }
     //설정창 닫기
     public void CloseSetting()
     {
+        
         setting_panel.SetActive(false);
+        
     }
 
     //전체화면 키고 끄는 옵션
-    public void FullscreenBool(bool _bool)
+    void FullscreenBool(Setting_header sh)
     {
         if (fullscreen_toggle.isOn)
         {
@@ -77,11 +103,11 @@ public class game_tile : MonoBehaviour
             lable_on.SetActive(false);
             lable_off.SetActive(true);
         }
-        MonitorSize();
+        MonitorSize(sh);
         sh.SetFullscreenBool(fullscreen_toggle.isOn);
     }
     //해상도 설정
-    public void MonitorSize()
+     void MonitorSize(Setting_header sh)
     {
         sh.SetMonitorDV(monitorsize_dropdown.value);//해상도 값 내보내기
         if (fullscreen_toggle.isOn == true)
@@ -117,15 +143,18 @@ public class game_tile : MonoBehaviour
     }
 
     //볼륨 조절
-    public void SoundVolumeMaster()
+     void SoundVolumeMaster(Setting_header sh)
     {
+        
         float volume = gamemaster_sound.value;
         master_mixer.SetFloat("Master_Volume", volume);
+        //db = new DBAccess();
+        //sh = new Setting_header();
         sh.SetSoundMasterVolume(volume);
     }
 
     //마우스 감도 조절
-    public void MouseDpiControlSlider()
+     void MouseDpiControlSlider(Setting_header sh)
     {
         float f = mousedpi_slider.value;
         sh.SetMouseDpi(f);
@@ -177,10 +206,8 @@ public class game_tile : MonoBehaviour
     private void ImportSettingValue()
     {
         float volume = sh.GetSoundMasterVolume();
-        Debug.Log("sound_master_volume = " + volume);
         gamemaster_sound.value = volume;
-        Debug.Log("sound_master_volume = " + gamemaster_sound.value);
-        master_mixer.SetFloat("Master", volume);
+        master_mixer.SetFloat("Master_Volume", volume);
         //monitorsize_dropdown.value = sh.GetMonitorDV();
         //fullscreen_toggle.isOn = sh.GetFullscreenBool();
         //MonitorSize();
@@ -189,6 +216,18 @@ public class game_tile : MonoBehaviour
     }
      void OnDestroy()
     {
-        db.CloseSqlConnection();
+        //db.CloseSqlConnection();
+    }
+    private void generate_moniotr_dropdown_list()
+    {
+        monitor_dropdown_options.Add("1920 x 1080");
+        monitor_dropdown_options.Add("1280 x 720");
+        monitor_dropdown_options.Add("720 x 540");
+        monitorsize_dropdown.AddOptions(monitor_dropdown_options);
+
+
+        monitorsize_dropdown.value = 0;
+
+
     }
 }

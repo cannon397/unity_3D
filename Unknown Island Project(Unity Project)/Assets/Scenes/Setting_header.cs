@@ -31,6 +31,10 @@ namespace Assets.Scenes
         {
             this.db = db;
         }
+        public Setting_header()
+        {
+           
+        }
 
         //모니터 해상도값
         public int GetMonitorDV() {
@@ -93,11 +97,12 @@ namespace Assets.Scenes
         }
         public void SetSoundMasterVolume(float f)
         {
+            
             String[] db_master_volume_value = { f.ToString() };
             String[] db_cols = { "sound_master_volume" };
             db.UpdateInto(settings_table, db_cols, db_master_volume_value, "no", "1");
-
-            sound_master_volume = f;
+            //db.CloseSqlConnection();
+            Debug.Log(db);
         }
         //마우스 감도 값
         public float GetMouseDpi()
@@ -117,9 +122,11 @@ namespace Assets.Scenes
         }
         public void SetMouseDpi(float f)
         {
+            
             String[] db_mouse_dp_value = { f.ToString() };
             String[] db_cols = { "mouse_dpi" };
             db.UpdateInto(settings_table, db_cols, db_mouse_dp_value, "no", "1");
+            
             mouse_dpi = f;
         }
         //키 바인딩 배열

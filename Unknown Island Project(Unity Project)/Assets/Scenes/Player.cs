@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using Assets.Scenes;
 using Mono.Data.Sqlite;
-using System.Data;
+using System;
 
 public class Player : MonoBehaviour
 {
