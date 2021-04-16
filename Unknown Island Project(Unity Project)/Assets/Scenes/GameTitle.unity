@@ -523,7 +523,6 @@ MonoBehaviour:
   gamemaster_sound: {fileID: 0}
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
-  mousedpi_inputfield: {fileID: 0}
   mousedpi_slider: {fileID: 0}
   keybiding_panel: {fileID: 719860901}
   keybiding_check_panel: {fileID: 1009161728}
@@ -957,7 +956,6 @@ MonoBehaviour:
   gamemaster_sound: {fileID: 0}
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
-  mousedpi_inputfield: {fileID: 0}
   mousedpi_slider: {fileID: 0}
   keybiding_panel: {fileID: 0}
   keybiding_check_panel: {fileID: 1009161728}
@@ -1656,7 +1654,6 @@ MonoBehaviour:
   gamemaster_sound: {fileID: 0}
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
-  mousedpi_inputfield: {fileID: 0}
   mousedpi_slider: {fileID: 0}
   keybiding_panel: {fileID: 0}
   keybiding_check_panel: {fileID: 1009161728}
@@ -2468,7 +2465,6 @@ MonoBehaviour:
   gamemaster_sound: {fileID: 0}
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
-  mousedpi_inputfield: {fileID: 0}
   mousedpi_slider: {fileID: 0}
   keybiding_panel: {fileID: 0}
   keybiding_check_panel: {fileID: 1009161728}
@@ -2844,7 +2840,6 @@ MonoBehaviour:
   gamemaster_sound: {fileID: 0}
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
-  mousedpi_inputfield: {fileID: 0}
   mousedpi_slider: {fileID: 1165846956}
   keybiding_panel: {fileID: 0}
   keybiding_check_panel: {fileID: 1009161728}
@@ -3059,7 +3054,6 @@ MonoBehaviour:
   gamemaster_sound: {fileID: 0}
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
-  mousedpi_inputfield: {fileID: 0}
   mousedpi_slider: {fileID: 0}
   keybiding_panel: {fileID: 719860901}
   keybiding_check_panel: {fileID: 1009161728}
@@ -3122,7 +3116,6 @@ MonoBehaviour:
   gamemaster_sound: {fileID: 0}
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
-  mousedpi_inputfield: {fileID: 0}
   mousedpi_slider: {fileID: 0}
   keybiding_panel: {fileID: 0}
   keybiding_check_panel: {fileID: 1009161728}
@@ -3436,13 +3429,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lable_on: {fileID: 0}
   lable_off: {fileID: 0}
-  fullscreen_toggle: {fileID: 0}
+  fullscreen_toggle: {fileID: 1580089613}
   setting_panel: {fileID: 917177080}
-  gamemaster_sound: {fileID: 0}
-  master_mixer: {fileID: 0}
-  monitorsize_dropdown: {fileID: 0}
-  mousedpi_inputfield: {fileID: 0}
-  mousedpi_slider: {fileID: 0}
+  gamemaster_sound: {fileID: 2140825726}
+  master_mixer: {fileID: 24100000, guid: cf73f59f70dcd0e46957a5d484040459, type: 2}
+  monitorsize_dropdown: {fileID: 2075711577}
+  mousedpi_slider: {fileID: 1165846956}
   keybiding_panel: {fileID: 0}
   keybiding_check_panel: {fileID: 1009161728}
 --- !u!1 &1418824935
@@ -3730,7 +3722,6 @@ MonoBehaviour:
   gamemaster_sound: {fileID: 0}
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 2075711577}
-  mousedpi_inputfield: {fileID: 0}
   mousedpi_slider: {fileID: 0}
   keybiding_panel: {fileID: 0}
   keybiding_check_panel: {fileID: 1009161728}
@@ -4575,7 +4566,6 @@ MonoBehaviour:
   gamemaster_sound: {fileID: 0}
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 2075711577}
-  mousedpi_inputfield: {fileID: 0}
   mousedpi_slider: {fileID: 0}
   keybiding_panel: {fileID: 0}
   keybiding_check_panel: {fileID: 1009161728}
@@ -4778,7 +4768,6 @@ MonoBehaviour:
   gamemaster_sound: {fileID: 2140825726}
   master_mixer: {fileID: 24100000, guid: cf73f59f70dcd0e46957a5d484040459, type: 2}
   monitorsize_dropdown: {fileID: 0}
-  mousedpi_inputfield: {fileID: 0}
   mousedpi_slider: {fileID: 0}
   keybiding_panel: {fileID: 0}
   keybiding_check_panel: {fileID: 1009161728}

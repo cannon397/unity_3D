@@ -16,6 +16,9 @@ namespace Assets.Scenes
         private float mouse_dpi = 1;
         private string key_biding_point;
         private string[] key_biding;
+        /* 키 바인딩
+         * 0 : 인칭 변환 (기본값 : V)
+         */
         private DBAccess db;
         private String settings_table = "settings";
 
@@ -23,9 +26,6 @@ namespace Assets.Scenes
         String[] where_value = { "1" };
 
         SqliteDataReader m_reader;
-        /* 키 바인딩
-         * 0 : 인칭 변환 (기본값 : V)
-         */
 
         public Setting_header(DBAccess db)
         {
@@ -65,7 +65,20 @@ namespace Assets.Scenes
             }
             return (fullscreen_bool);
         }
-        public void SetFullscreenBool(bool b) { 
+        public void SetFullscreenBool(bool b)
+        {
+            string i;
+            if(b == true)
+            {
+                i = "1";
+            }
+            else
+            {
+                i = "0";
+            }
+            String[] db_fullscreen_bool = { i };
+            String[] db_cols = { "fullscreen" };
+            db.UpdateInto(settings_table, db_cols, db_fullscreen_bool, "no", "1");
             fullscreen_bool = b; 
         }
         //마스터 볼륨 값

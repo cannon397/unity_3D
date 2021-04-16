@@ -7,7 +7,6 @@ using UnityEngine.Audio;
 using Assets.Scenes;
 using Mono.Data.Sqlite;
 using System.Data;
-using System;
 
 public class Player : MonoBehaviour
 {
@@ -50,16 +49,16 @@ public class Player : MonoBehaviour
     //}
     void Awake()
     {
-         db = new DBAccess();
         animator = GetComponentInChildren<Animator>();
         jumpStatus = false;
         rigid = GetComponentInChildren<Rigidbody>();
-        Debug.Log(jumpStatus);
+        //Debug.Log(jumpStatus);
         camera_dstc = Mathf.Sqrt(4 * 4 + 10 * 10);
-        sh = new Setting_header(db);
     }
      void Start()
     {
+        db = new DBAccess();
+        sh = new Setting_header(db);
         SqliteDataReader m_Reader = db.ReadFullTable("settings");
         while (m_Reader.Read()) {
             Debug.Log("no : "+ m_Reader["no"] + "monitor_dropdown_value : " + m_Reader["monitor_dropdown_value"] + "fullscreen : " + m_Reader["fullscreen"]);
@@ -96,8 +95,8 @@ public class Player : MonoBehaviour
     private void LookAround()
     {
         //지금 당장은 sh 안에 값들이 제대로 지정 되지 않아서 NULL이 뜨기 때문에 적용 하려면 DB 연동 필요함
-        //Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X") * sh.GetMouseDpi(), Input.GetAxis("Mouse Y") * sh.GetMouseDpi());
-        Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X") * sh.GetMouseDpi(), Input.GetAxis("Mouse Y") * sh.GetMouseDpi());
+        //Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         Vector3 camAngle = cameraArm.rotation.eulerAngles;
 
         float x = camAngle.x - mouseDelta.y;

@@ -16,7 +16,6 @@ public class game_tile : MonoBehaviour
     public Slider gamemaster_sound;
     public AudioMixer master_mixer;
     public Dropdown monitorsize_dropdown;
-    public InputField mousedpi_inputfield;
     public Slider mousedpi_slider;
     public GameObject keybiding_panel;
     public GameObject keybiding_check_panel;
@@ -27,13 +26,16 @@ public class game_tile : MonoBehaviour
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
+        db = new DBAccess();
+        sh = new Setting_header(db);
+        //setting_panel.SetActive(true);
+        //ImportSettingValue(); //설정 동기화
+        //setting_panel.SetActive(false);
     }
 
     public void Awake()
     {
-        db = new DBAccess();
-        sh = new Setting_header(db);
-        //ImportSettingValue(); //설정 동기화
+
     }
 
     // Update is called once per frame
@@ -65,18 +67,15 @@ public class game_tile : MonoBehaviour
     //전체화면 키고 끄는 옵션
     public void FullscreenBool(bool _bool)
     {
-        Debug.Log("FullscreenBool = " + _bool);
         if (fullscreen_toggle.isOn)
         {
             lable_on.SetActive(true);
             lable_off.SetActive(false);
-            Debug.Log("토글 온");
         }
         else
         {
             lable_on.SetActive(false);
             lable_off.SetActive(true);
-            Debug.Log("토글 오프");
         }
         MonitorSize();
         sh.SetFullscreenBool(fullscreen_toggle.isOn);
@@ -121,7 +120,7 @@ public class game_tile : MonoBehaviour
     public void SoundVolumeMaster()
     {
         float volume = gamemaster_sound.value;
-        master_mixer.SetFloat("Master", volume);
+        master_mixer.SetFloat("Master_Volume", volume);
         sh.SetSoundMasterVolume(volume);
     }
 
@@ -177,10 +176,16 @@ public class game_tile : MonoBehaviour
 
     private void ImportSettingValue()
     {
-        gamemaster_sound.value = sh.GetSoundMasterVolume();
-        monitorsize_dropdown.value = sh.GetMonitorDV();
-        fullscreen_toggle.isOn = sh.GetFullscreenBool();
-        mousedpi_slider.value = sh.GetMouseDpi();
+        float volume = sh.GetSoundMasterVolume();
+        Debug.Log("sound_master_volume = " + volume);
+        gamemaster_sound.value = volume;
+        Debug.Log("sound_master_volume = " + gamemaster_sound.value);
+        master_mixer.SetFloat("Master", volume);
+        //monitorsize_dropdown.value = sh.GetMonitorDV();
+        //fullscreen_toggle.isOn = sh.GetFullscreenBool();
+        //MonitorSize();
+        //float f = sh.GetMouseDpi();
+        //mousedpi_slider.value = f;
     }
      void OnDestroy()
     {
