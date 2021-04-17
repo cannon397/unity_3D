@@ -18,13 +18,14 @@ public class Player : MonoBehaviour
     public bool jumpStatus;
     public Transform characterTrasform;
     private float camera_dstc;
-    DBAccess db;
-    Setting_header sh;
+    private DBAccess db;
+    private Setting_header sh;
     //키보드
     float hAxis;
     float vAxis;
     bool wDown;
     bool viewPoint;
+    private float mouse_dpi;
 
     //flag
     // 1 = 3인칭 0 = 1인칭
@@ -55,18 +56,13 @@ public class Player : MonoBehaviour
         //Debug.Log(jumpStatus);
         camera_dstc = Mathf.Sqrt(4 * 4 + 10 * 10);
     }
-     void Start()
+    void Start()
     {
         db = new DBAccess();
         sh = new Setting_header(db);
-        SqliteDataReader m_Reader = db.ReadFullTable("settings");
-        while (m_Reader.Read()) {
-            Debug.Log("no : "+ m_Reader["no"] + "monitor_dropdown_value : " + m_Reader["monitor_dropdown_value"] + "fullscreen : " + m_Reader["fullscreen"]);
-        }
-
-        db.CloseSqlConnection();
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 300;
+        ImportSetting(sh);
     }
     // Update is called once per frame
     void Update()
@@ -95,7 +91,7 @@ public class Player : MonoBehaviour
     private void LookAround()
     {
         //지금 당장은 sh 안에 값들이 제대로 지정 되지 않아서 NULL이 뜨기 때문에 적용 하려면 DB 연동 필요함
-        Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X") * sh.GetMouseDpi(), Input.GetAxis("Mouse Y") * sh.GetMouseDpi());
+        Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X") * mouse_dpi, Input.GetAxis("Mouse Y") * mouse_dpi);
         //Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         Vector3 camAngle = cameraArm.rotation.eulerAngles;
 
@@ -206,5 +202,9 @@ public class Player : MonoBehaviour
             Debug.Log(viewPointFlag);
         }
     }
-
+    private void ImportSetting(Setting_header sh)
+    {
+        float f = sh.GetMouseDpi();
+        mouse_dpi = f / 50;
+    }
 }

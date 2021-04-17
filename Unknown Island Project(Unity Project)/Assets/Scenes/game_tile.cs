@@ -17,8 +17,8 @@ public class game_tile : MonoBehaviour
     public AudioMixer master_mixer;
     public Dropdown monitorsize_dropdown;
     public Slider mousedpi_slider;
-    public GameObject keybiding_panel;
-    public GameObject keybiding_check_panel;
+    public GameObject keycustom_panel;
+    public GameObject keycustom_check_panel;
     private Setting_header sh;
     private DBAccess db;
     List<string> monitor_dropdown_options = new List<string>();
@@ -29,11 +29,9 @@ public class game_tile : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
 
-        //setting_panel.SetActive(true);
         db = new DBAccess();
         sh = new Setting_header(db);
 
-        generate_moniotr_dropdown_list();
 
         gamemaster_sound.onValueChanged.AddListener(delegate
         {
@@ -51,8 +49,7 @@ public class game_tile : MonoBehaviour
             MonitorSize(sh);
         });
          //설정 동기화
-        ImportSettingValue();
-        //setting_panel.SetActive(false);
+        ImportSettingValue(sh);
     }
 
     public void Awake()
@@ -64,6 +61,7 @@ public class game_tile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        KeyCustomCheck(sh);
     }
 
     //게임 시작
@@ -85,9 +83,7 @@ public class game_tile : MonoBehaviour
     //설정창 닫기
     public void CloseSetting()
     {
-        
         setting_panel.SetActive(false);
-        
     }
 
     //전체화면 키고 끄는 옵션
@@ -107,7 +103,7 @@ public class game_tile : MonoBehaviour
         sh.SetFullscreenBool(fullscreen_toggle.isOn);
     }
     //해상도 설정
-     void MonitorSize(Setting_header sh)
+    void MonitorSize(Setting_header sh)
     {
         sh.SetMonitorDV(monitorsize_dropdown.value);//해상도 값 내보내기
         if (fullscreen_toggle.isOn == true)
@@ -140,16 +136,15 @@ public class game_tile : MonoBehaviour
                     break;
             }
         }
+        Debug.Log("sh.GetMonitorDV : "+ sh.GetMonitorDV());
+        Debug.Log("monitorsize_dropdown.value : " + monitorsize_dropdown.value);
     }
 
     //볼륨 조절
      void SoundVolumeMaster(Setting_header sh)
     {
-        
         float volume = gamemaster_sound.value;
         master_mixer.SetFloat("Master_Volume", volume);
-        //db = new DBAccess();
-        //sh = new Setting_header();
         sh.SetSoundMasterVolume(volume);
     }
 
@@ -161,26 +156,26 @@ public class game_tile : MonoBehaviour
     }
 
     //키 바인딩창 열기
-    public void KeyBidingOpen()
+    public void KeyCustomOpen()
     {
         setting_panel.SetActive(false);
-        keybiding_panel.SetActive(true);
+        keycustom_panel.SetActive(true);
     }
     //키 바인딩창 닫기
-    public void KeyBidingClose()
+    public void KeyCustomClose()
     {
-        keybiding_panel.SetActive(false);
+        keycustom_panel.SetActive(false);
         setting_panel.SetActive(true);
     }
 
     //키 바인딩 인지 아닌지 확인 해서 바꾼 키 값 반환 하는 함수
-    public void KeyBidingCheck()
+    public void KeyCustomCheck(Setting_header sh)
     {
-        if (keybiding_check_panel.activeSelf == true)
+        if (keycustom_check_panel.activeSelf == true)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                keybiding_check_panel.SetActive(false);
+                keycustom_check_panel.SetActive(false);
             }
             else if(Input.inputString != null)
             {
@@ -189,45 +184,34 @@ public class game_tile : MonoBehaviour
         }
     }
     //인칭변환키 변경
-    public void KeyBidingPointOfViewKey()
+    public void KeyCustomPointOfViewKey(Setting_header sh) {KeyCustom(sh, 0);}
+
+    public void KeyCustom(Setting_header sh, int i)
     {
-        keybiding_check_panel.SetActive(true);
+        keycustom_check_panel.SetActive(true);
         string st;
-        while(sh.GetKeyBidingPoint() == null)
+        while (sh.GetKeyBidingPoint() == null)
         {
             st = sh.GetKeyBidingPoint();
-            sh.SetKeyBiding(st, 0);
+            sh.SetKeyBiding(st, i);
             sh.SetKeyBidingPoint(null);
-            keybiding_check_panel.SetActive(false);
+            keycustom_check_panel.SetActive(false);
             break;
         }
     }
 
-    private void ImportSettingValue()
+    private void ImportSettingValue(Setting_header sh)
     {
         float volume = sh.GetSoundMasterVolume();
         gamemaster_sound.value = volume;
         master_mixer.SetFloat("Master_Volume", volume);
-        //monitorsize_dropdown.value = sh.GetMonitorDV();
-        //fullscreen_toggle.isOn = sh.GetFullscreenBool();
-        //MonitorSize();
-        //float f = sh.GetMouseDpi();
-        //mousedpi_slider.value = f;
+        monitorsize_dropdown.value = sh.GetMonitorDV();
+        fullscreen_toggle.isOn = sh.GetFullscreenBool();
+        MonitorSize(sh);
+        mousedpi_slider.value = sh.GetMouseDpi();
     }
      void OnDestroy()
     {
         //db.CloseSqlConnection();
-    }
-    private void generate_moniotr_dropdown_list()
-    {
-        monitor_dropdown_options.Add("1920 x 1080");
-        monitor_dropdown_options.Add("1280 x 720");
-        monitor_dropdown_options.Add("720 x 540");
-        monitorsize_dropdown.AddOptions(monitor_dropdown_options);
-
-
-        monitorsize_dropdown.value = 0;
-
-
     }
 }

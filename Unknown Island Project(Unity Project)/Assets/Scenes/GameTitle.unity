@@ -485,8 +485,8 @@ MonoBehaviour:
   master_mixer: {fileID: 24100000, guid: cf73f59f70dcd0e46957a5d484040459, type: 2}
   monitorsize_dropdown: {fileID: 2075711577}
   mousedpi_slider: {fileID: 1165846956}
-  keybiding_panel: {fileID: 0}
-  keybiding_check_panel: {fileID: 0}
+  keycustom_panel: {fileID: 719860901}
+  keycustom_check_panel: {fileID: 1009161728}
 --- !u!1 &202440846
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,7 +501,7 @@ GameObject:
   - component: {fileID: 202440849}
   - component: {fileID: 202440848}
   m_Layer: 5
-  m_Name: KeyBiding_Exit_Button
+  m_Name: KeyCustom_Exit_Button
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -534,7 +534,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 202440846}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c874a0167e7e7d048b80d24556a2218f, type: 3}
   m_Name: 
@@ -547,8 +547,8 @@ MonoBehaviour:
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
   mousedpi_slider: {fileID: 0}
-  keybiding_panel: {fileID: 719860901}
-  keybiding_check_panel: {fileID: 1009161728}
+  keycustom_panel: {fileID: 0}
+  keycustom_check_panel: {fileID: 0}
 --- !u!114 &202440849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,7 +593,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 202440848}
-        m_MethodName: KeyBidingClose
+        m_MethodName: KeyCustomClose
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -934,7 +934,7 @@ GameObject:
   - component: {fileID: 362522767}
   - component: {fileID: 362522766}
   m_Layer: 5
-  m_Name: KeyBiding_PointOfViewKey_Button
+  m_Name: KeyCustom_PointOfViewKey_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -967,7 +967,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 362522764}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c874a0167e7e7d048b80d24556a2218f, type: 3}
   m_Name: 
@@ -980,8 +980,8 @@ MonoBehaviour:
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
   mousedpi_slider: {fileID: 0}
-  keybiding_panel: {fileID: 0}
-  keybiding_check_panel: {fileID: 1009161728}
+  keycustom_panel: {fileID: 719860901}
+  keycustom_check_panel: {fileID: 1009161728}
 --- !u!114 &362522767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,7 +1026,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 362522766}
-        m_MethodName: KeyBidingPointOfViewKey
+        m_MethodName: KeyCustomPointOfViewKey
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1553,7 +1553,7 @@ GameObject:
   - component: {fileID: 719860904}
   - component: {fileID: 719860903}
   m_Layer: 5
-  m_Name: KeyBiding_Panel
+  m_Name: KeyCustom_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1678,8 +1678,8 @@ MonoBehaviour:
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
   mousedpi_slider: {fileID: 0}
-  keybiding_panel: {fileID: 0}
-  keybiding_check_panel: {fileID: 1009161728}
+  keycustom_panel: {fileID: 0}
+  keycustom_check_panel: {fileID: 0}
 --- !u!114 &741053196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2489,8 +2489,8 @@ MonoBehaviour:
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
   mousedpi_slider: {fileID: 0}
-  keybiding_panel: {fileID: 0}
-  keybiding_check_panel: {fileID: 1009161728}
+  keycustom_panel: {fileID: 0}
+  keycustom_check_panel: {fileID: 0}
 --- !u!1 &1009161728
 GameObject:
   m_ObjectHideFlags: 0
@@ -2503,7 +2503,7 @@ GameObject:
   - component: {fileID: 1009161731}
   - component: {fileID: 1009161730}
   m_Layer: 5
-  m_Name: KeyBiding_Check_Panel
+  m_Name: KeyCustom_Check_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -2864,8 +2864,8 @@ MonoBehaviour:
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
   mousedpi_slider: {fileID: 1165846956}
-  keybiding_panel: {fileID: 0}
-  keybiding_check_panel: {fileID: 1009161728}
+  keycustom_panel: {fileID: 0}
+  keycustom_check_panel: {fileID: 0}
 --- !u!114 &1165846956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2941,7 +2941,7 @@ GameObject:
   - component: {fileID: 1196536096}
   - component: {fileID: 1196536099}
   m_Layer: 5
-  m_Name: KeyBiding_Button
+  m_Name: KeyCustom_Button
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3011,7 +3011,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1196536099}
-        m_MethodName: KeyBidingOpen
+        m_MethodName: KeyCustomOpen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3078,8 +3078,8 @@ MonoBehaviour:
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
   mousedpi_slider: {fileID: 0}
-  keybiding_panel: {fileID: 719860901}
-  keybiding_check_panel: {fileID: 1009161728}
+  keycustom_panel: {fileID: 719860901}
+  keycustom_check_panel: {fileID: 1009161728}
 --- !u!1 &1201890725
 GameObject:
   m_ObjectHideFlags: 0
@@ -3140,8 +3140,8 @@ MonoBehaviour:
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
   mousedpi_slider: {fileID: 0}
-  keybiding_panel: {fileID: 0}
-  keybiding_check_panel: {fileID: 1009161728}
+  keycustom_panel: {fileID: 0}
+  keycustom_check_panel: {fileID: 0}
 --- !u!114 &1201890728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3458,8 +3458,8 @@ MonoBehaviour:
   master_mixer: {fileID: 24100000, guid: cf73f59f70dcd0e46957a5d484040459, type: 2}
   monitorsize_dropdown: {fileID: 2075711577}
   mousedpi_slider: {fileID: 1165846956}
-  keybiding_panel: {fileID: 0}
-  keybiding_check_panel: {fileID: 1009161728}
+  keycustom_panel: {fileID: 0}
+  keycustom_check_panel: {fileID: 0}
 --- !u!1 &1418824935
 GameObject:
   m_ObjectHideFlags: 0
@@ -3746,8 +3746,8 @@ MonoBehaviour:
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 2075711577}
   mousedpi_slider: {fileID: 0}
-  keybiding_panel: {fileID: 0}
-  keybiding_check_panel: {fileID: 1009161728}
+  keycustom_panel: {fileID: 0}
+  keycustom_check_panel: {fileID: 0}
 --- !u!114 &1580089613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4511,7 +4511,13 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 2
   m_Options:
-    m_Options: []
+    m_Options:
+    - m_Text: 720 x 540
+      m_Image: {fileID: 0}
+    - m_Text: 1280 x 720
+      m_Image: {fileID: 0}
+    - m_Text: 1920 x 1080
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -4584,8 +4590,8 @@ MonoBehaviour:
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 2075711577}
   mousedpi_slider: {fileID: 0}
-  keybiding_panel: {fileID: 0}
-  keybiding_check_panel: {fileID: 1009161728}
+  keycustom_panel: {fileID: 0}
+  keycustom_check_panel: {fileID: 0}
 --- !u!1 &2078203501
 GameObject:
   m_ObjectHideFlags: 0
@@ -4786,8 +4792,8 @@ MonoBehaviour:
   master_mixer: {fileID: 24100000, guid: cf73f59f70dcd0e46957a5d484040459, type: 2}
   monitorsize_dropdown: {fileID: 0}
   mousedpi_slider: {fileID: 0}
-  keybiding_panel: {fileID: 0}
-  keybiding_check_panel: {fileID: 1009161728}
+  keycustom_panel: {fileID: 0}
+  keycustom_check_panel: {fileID: 0}
 --- !u!114 &2140825726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4838,7 +4844,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2140825723}
         m_MethodName: 
         m_Mode: 1
         m_Arguments:

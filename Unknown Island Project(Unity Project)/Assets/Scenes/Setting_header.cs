@@ -8,7 +8,7 @@ using Mono.Data.Sqlite;
 
 namespace Assets.Scenes
 {
-    class Setting_header
+    public class Setting_header
     {
         private int monitor_dropdown_value = 2;
         private bool fullscreen_bool = true;
