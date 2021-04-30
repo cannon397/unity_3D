@@ -13,15 +13,19 @@ public class game_tile : MonoBehaviour
     public GameObject lable_off;
     public Toggle fullscreen_toggle;
     public GameObject setting_panel;
-    public Slider gamemaster_sound;
+    public Slider gamemaster_sound_slider;
     public AudioMixer master_mixer;
     public Dropdown monitorsize_dropdown;
     public Slider mousedpi_slider;
     public GameObject keycustom_panel;
     public GameObject keycustom_check_panel;
+    public Button key_pointofview_button;
+    public Button key_custom_save_button;
     private Setting_header sh;
     private DBAccess db;
-    List<string> monitor_dropdown_options = new List<string>();
+    private string[] key_custom_arry;
+    private string key_input;
+    private int key_adr;
 
 
     void Start()
@@ -32,8 +36,7 @@ public class game_tile : MonoBehaviour
         db = new DBAccess();
         sh = new Setting_header(db);
 
-
-        gamemaster_sound.onValueChanged.AddListener(delegate
+        gamemaster_sound_slider.onValueChanged.AddListener(delegate
         {
             SoundVolumeMaster(sh);
         });
@@ -48,7 +51,11 @@ public class game_tile : MonoBehaviour
         {
             MonitorSize(sh);
         });
-         //설정 동기화
+        key_custom_save_button.onClick.AddListener(delegate
+        {
+            SetKeyCustom(sh);
+        });
+        //설정 동기화
         ImportSettingValue(sh);
     }
 
@@ -67,7 +74,7 @@ public class game_tile : MonoBehaviour
     //게임 시작
     public void GameStart()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("UKI_MainGameScene");
     }
     public void GameExit()
     {
@@ -143,7 +150,7 @@ public class game_tile : MonoBehaviour
     //볼륨 조절
      void SoundVolumeMaster(Setting_header sh)
     {
-        float volume = gamemaster_sound.value;
+        float volume = gamemaster_sound_slider.value;
         master_mixer.SetFloat("Master_Volume", volume);
         sh.SetSoundMasterVolume(volume);
     }
@@ -155,20 +162,20 @@ public class game_tile : MonoBehaviour
         sh.SetMouseDpi(f);
     }
 
-    //키 바인딩창 열기
+    //키 커스텀창 열기
     public void KeyCustomOpen()
     {
         setting_panel.SetActive(false);
         keycustom_panel.SetActive(true);
     }
-    //키 바인딩창 닫기
+    //키 커스텀창 닫기
     public void KeyCustomClose()
     {
         keycustom_panel.SetActive(false);
         setting_panel.SetActive(true);
     }
 
-    //키 바인딩 인지 아닌지 확인 해서 바꾼 키 값 반환 하는 함수
+    //키 커스텀 인지 아닌지 확인 해서 바꾼 키 값 반환 하는 함수
     public void KeyCustomCheck(Setting_header sh)
     {
         if (keycustom_check_panel.activeSelf == true)
@@ -177,38 +184,44 @@ public class game_tile : MonoBehaviour
             {
                 keycustom_check_panel.SetActive(false);
             }
-            else if(Input.inputString != null)
+            if (sh.CheckKeyCustomAvble(Input.inputString))
             {
-                sh.SetKeyBidingPoint(Input.inputString);
+                switch (key_adr)
+                {
+                    case 0:
+                        key_custom_arry[0] = Input.inputString;
+                        break;
+                }
+                keycustom_check_panel.SetActive(false);
             }
         }
     }
-    //인칭변환키 변경
-    public void KeyCustomPointOfViewKey(Setting_header sh) {KeyCustom(sh, 0);}
-
-    public void KeyCustom(Setting_header sh, int i)
+    //키 커스텀 설정값 저장 함수
+    public void SetKeyCustom(Setting_header sh)
     {
+        sh.SetKeyCustom(key_custom_arry);
+    }
+    //키 커스텀 모함수
+    public void KeyCustom(int i)
+    {
+        key_adr = i;
         keycustom_check_panel.SetActive(true);
-        string st;
-        while (sh.GetKeyBidingPoint() == null)
-        {
-            st = sh.GetKeyBidingPoint();
-            sh.SetKeyBiding(st, i);
-            sh.SetKeyBidingPoint(null);
-            keycustom_check_panel.SetActive(false);
-            break;
-        }
     }
 
+    //인칭변환키 변경
+    public void KeyCustomPointOfViewKey() {KeyCustom(0);}
+
+    //설정값 동기화
     private void ImportSettingValue(Setting_header sh)
     {
         float volume = sh.GetSoundMasterVolume();
-        gamemaster_sound.value = volume;
+        gamemaster_sound_slider.value = volume;
         master_mixer.SetFloat("Master_Volume", volume);
         monitorsize_dropdown.value = sh.GetMonitorDV();
         fullscreen_toggle.isOn = sh.GetFullscreenBool();
         MonitorSize(sh);
         mousedpi_slider.value = sh.GetMouseDpi();
+        key_custom_arry = sh.SyncKeyCustom();
     }
      void OnDestroy()
     {

@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 74259414}
   - component: {fileID: 74259413}
   - component: {fileID: 74259412}
+  - component: {fileID: 74259415}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -282,6 +283,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &74259415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74259411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &96540918
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,19 +506,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 122691969}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c874a0167e7e7d048b80d24556a2218f, type: 3}
+  m_Script: {fileID: 11500000, guid: bcb8b2eb906967343919976ddf5c0d50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lable_on: {fileID: 258902605}
   lable_off: {fileID: 1090985976}
   fullscreen_toggle: {fileID: 1580089613}
   setting_panel: {fileID: 917177080}
-  gamemaster_sound: {fileID: 2140825726}
-  master_mixer: {fileID: 24100000, guid: cf73f59f70dcd0e46957a5d484040459, type: 2}
+  gamemaster_sound_slider: {fileID: 2140825726}
+  master_mixer: {fileID: 24100000, guid: daca31f939365a74983c8391661b7f5c, type: 2}
   monitorsize_dropdown: {fileID: 2075711577}
   mousedpi_slider: {fileID: 1165846956}
   keycustom_panel: {fileID: 719860901}
   keycustom_check_panel: {fileID: 1009161728}
+  key_pointofview_button: {fileID: 362522767}
+  key_custom_save_button: {fileID: 212343865}
 --- !u!1 &202440846
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,7 +558,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 231, y: 167.7}
+  m_AnchoredPosition: {x: 290, y: 247}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &202440848
@@ -536,19 +570,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 202440846}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c874a0167e7e7d048b80d24556a2218f, type: 3}
+  m_Script: {fileID: 11500000, guid: bcb8b2eb906967343919976ddf5c0d50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lable_on: {fileID: 0}
   lable_off: {fileID: 0}
   fullscreen_toggle: {fileID: 0}
   setting_panel: {fileID: 917177080}
-  gamemaster_sound: {fileID: 0}
+  gamemaster_sound_slider: {fileID: 0}
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
   mousedpi_slider: {fileID: 0}
-  keycustom_panel: {fileID: 0}
+  keycustom_panel: {fileID: 719860901}
   keycustom_check_panel: {fileID: 0}
+  key_pointofview_button: {fileID: 0}
+  key_custom_save_button: {fileID: 0}
 --- !u!114 &202440849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,6 +675,136 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 202440846}
+  m_CullTransparentMesh: 0
+--- !u!1 &212343863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 212343864}
+  - component: {fileID: 212343867}
+  - component: {fileID: 212343866}
+  - component: {fileID: 212343865}
+  m_Layer: 5
+  m_Name: KeyCustom_Save_Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &212343864
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212343863}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1131367416}
+  m_Father: {fileID: 719860902}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 255, y: -250}
+  m_SizeDelta: {x: 100, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &212343865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212343863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 212343866}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 212343863}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &212343866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212343863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &212343867
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212343863}
   m_CullTransparentMesh: 0
 --- !u!1 &246727638
 GameObject:
@@ -957,7 +1123,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -125.5, y: -97.2}
+  m_AnchoredPosition: {x: -165, y: -80}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &362522766
@@ -969,19 +1135,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 362522764}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c874a0167e7e7d048b80d24556a2218f, type: 3}
+  m_Script: {fileID: 11500000, guid: bcb8b2eb906967343919976ddf5c0d50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lable_on: {fileID: 0}
   lable_off: {fileID: 0}
   fullscreen_toggle: {fileID: 0}
   setting_panel: {fileID: 0}
-  gamemaster_sound: {fileID: 0}
+  gamemaster_sound_slider: {fileID: 0}
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
   mousedpi_slider: {fileID: 0}
-  keycustom_panel: {fileID: 719860901}
+  keycustom_panel: {fileID: 0}
   keycustom_check_panel: {fileID: 1009161728}
+  key_pointofview_button: {fileID: 0}
+  key_custom_save_button: {fileID: 0}
 --- !u!114 &362522767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1573,6 +1741,7 @@ RectTransform:
   - {fileID: 202440847}
   - {fileID: 362522765}
   - {fileID: 1009161729}
+  - {fileID: 212343864}
   m_Father: {fileID: 122691973}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1667,19 +1836,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 741053193}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c874a0167e7e7d048b80d24556a2218f, type: 3}
+  m_Script: {fileID: 11500000, guid: bcb8b2eb906967343919976ddf5c0d50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lable_on: {fileID: 0}
   lable_off: {fileID: 0}
   fullscreen_toggle: {fileID: 0}
   setting_panel: {fileID: 0}
-  gamemaster_sound: {fileID: 0}
+  gamemaster_sound_slider: {fileID: 0}
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
   mousedpi_slider: {fileID: 0}
   keycustom_panel: {fileID: 0}
   keycustom_check_panel: {fileID: 0}
+  key_pointofview_button: {fileID: 0}
+  key_custom_save_button: {fileID: 0}
 --- !u!114 &741053196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2478,19 +2649,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 986278308}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c874a0167e7e7d048b80d24556a2218f, type: 3}
+  m_Script: {fileID: 11500000, guid: bcb8b2eb906967343919976ddf5c0d50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lable_on: {fileID: 0}
   lable_off: {fileID: 0}
   fullscreen_toggle: {fileID: 0}
   setting_panel: {fileID: 0}
-  gamemaster_sound: {fileID: 0}
+  gamemaster_sound_slider: {fileID: 0}
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
   mousedpi_slider: {fileID: 0}
   keycustom_panel: {fileID: 0}
   keycustom_check_panel: {fileID: 0}
+  key_pointofview_button: {fileID: 0}
+  key_custom_save_button: {fileID: 0}
 --- !u!1 &1009161728
 GameObject:
   m_ObjectHideFlags: 0
@@ -2730,6 +2903,84 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!1 &1131367415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1131367416}
+  - component: {fileID: 1131367418}
+  - component: {fileID: 1131367417}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1131367416
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131367415}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 212343864}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1131367417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131367415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\uC800\uC7A5"
+--- !u!222 &1131367418
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131367415}
+  m_CullTransparentMesh: 0
 --- !u!1 &1153381894
 GameObject:
   m_ObjectHideFlags: 0
@@ -2814,7 +3065,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1165846954}
   - component: {fileID: 1165846956}
-  - component: {fileID: 1165846955}
   m_Layer: 5
   m_Name: MouseDPI_Slider
   m_TagString: MouseDPI_Slider
@@ -2844,28 +3094,6 @@ RectTransform:
   m_AnchoredPosition: {x: -1.1, y: -106.2}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1165846955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1165846953}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c874a0167e7e7d048b80d24556a2218f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lable_on: {fileID: 0}
-  lable_off: {fileID: 0}
-  fullscreen_toggle: {fileID: 0}
-  setting_panel: {fileID: 0}
-  gamemaster_sound: {fileID: 0}
-  master_mixer: {fileID: 0}
-  monitorsize_dropdown: {fileID: 0}
-  mousedpi_slider: {fileID: 1165846956}
-  keycustom_panel: {fileID: 0}
-  keycustom_check_panel: {fileID: 0}
 --- !u!114 &1165846956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2916,7 +3144,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1165846955}
+      - m_Target: {fileID: 0}
         m_MethodName: MouseDpiControlSlider
         m_Mode: 1
         m_Arguments:
@@ -3067,19 +3295,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1196536094}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c874a0167e7e7d048b80d24556a2218f, type: 3}
+  m_Script: {fileID: 11500000, guid: bcb8b2eb906967343919976ddf5c0d50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lable_on: {fileID: 0}
   lable_off: {fileID: 0}
   fullscreen_toggle: {fileID: 0}
   setting_panel: {fileID: 917177080}
-  gamemaster_sound: {fileID: 0}
+  gamemaster_sound_slider: {fileID: 0}
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
   mousedpi_slider: {fileID: 0}
   keycustom_panel: {fileID: 719860901}
-  keycustom_check_panel: {fileID: 1009161728}
+  keycustom_check_panel: {fileID: 0}
+  key_pointofview_button: {fileID: 0}
+  key_custom_save_button: {fileID: 0}
 --- !u!1 &1201890725
 GameObject:
   m_ObjectHideFlags: 0
@@ -3129,19 +3359,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1201890725}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c874a0167e7e7d048b80d24556a2218f, type: 3}
+  m_Script: {fileID: 11500000, guid: bcb8b2eb906967343919976ddf5c0d50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lable_on: {fileID: 0}
   lable_off: {fileID: 0}
   fullscreen_toggle: {fileID: 0}
   setting_panel: {fileID: 917177080}
-  gamemaster_sound: {fileID: 0}
+  gamemaster_sound_slider: {fileID: 0}
   master_mixer: {fileID: 0}
   monitorsize_dropdown: {fileID: 0}
   mousedpi_slider: {fileID: 0}
   keycustom_panel: {fileID: 0}
   keycustom_check_panel: {fileID: 0}
+  key_pointofview_button: {fileID: 0}
+  key_custom_save_button: {fileID: 0}
 --- !u!114 &1201890728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3447,19 +3679,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1366822102}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c874a0167e7e7d048b80d24556a2218f, type: 3}
+  m_Script: {fileID: 11500000, guid: bcb8b2eb906967343919976ddf5c0d50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lable_on: {fileID: 0}
   lable_off: {fileID: 0}
-  fullscreen_toggle: {fileID: 1580089613}
+  fullscreen_toggle: {fileID: 0}
   setting_panel: {fileID: 917177080}
-  gamemaster_sound: {fileID: 2140825726}
-  master_mixer: {fileID: 24100000, guid: cf73f59f70dcd0e46957a5d484040459, type: 2}
-  monitorsize_dropdown: {fileID: 2075711577}
-  mousedpi_slider: {fileID: 1165846956}
+  gamemaster_sound_slider: {fileID: 0}
+  master_mixer: {fileID: 0}
+  monitorsize_dropdown: {fileID: 0}
+  mousedpi_slider: {fileID: 0}
   keycustom_panel: {fileID: 0}
   keycustom_check_panel: {fileID: 0}
+  key_pointofview_button: {fileID: 0}
+  key_custom_save_button: {fileID: 0}
 --- !u!1 &1418824935
 GameObject:
   m_ObjectHideFlags: 0
@@ -3696,7 +3930,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1580089611}
   - component: {fileID: 1580089613}
-  - component: {fileID: 1580089612}
   m_Layer: 5
   m_Name: FullScreen_Toggle
   m_TagString: Untagged
@@ -3726,28 +3959,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -30}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1580089612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1580089610}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c874a0167e7e7d048b80d24556a2218f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lable_on: {fileID: 258902605}
-  lable_off: {fileID: 1090985976}
-  fullscreen_toggle: {fileID: 1580089613}
-  setting_panel: {fileID: 0}
-  gamemaster_sound: {fileID: 0}
-  master_mixer: {fileID: 0}
-  monitorsize_dropdown: {fileID: 2075711577}
-  mousedpi_slider: {fileID: 0}
-  keycustom_panel: {fileID: 0}
-  keycustom_check_panel: {fileID: 0}
 --- !u!114 &1580089613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4434,7 +4645,6 @@ GameObject:
   - component: {fileID: 2075711579}
   - component: {fileID: 2075711578}
   - component: {fileID: 2075711577}
-  - component: {fileID: 2075711580}
   m_Layer: 5
   m_Name: Monitor_Dropdown
   m_TagString: Untagged
@@ -4521,7 +4731,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2075711580}
+      - m_Target: {fileID: 0}
         m_MethodName: MonitorSize
         m_Mode: 1
         m_Arguments:
@@ -4570,28 +4780,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2075711575}
   m_CullTransparentMesh: 0
---- !u!114 &2075711580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2075711575}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c874a0167e7e7d048b80d24556a2218f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lable_on: {fileID: 0}
-  lable_off: {fileID: 0}
-  fullscreen_toggle: {fileID: 1580089613}
-  setting_panel: {fileID: 0}
-  gamemaster_sound: {fileID: 0}
-  master_mixer: {fileID: 0}
-  monitorsize_dropdown: {fileID: 2075711577}
-  mousedpi_slider: {fileID: 0}
-  keycustom_panel: {fileID: 0}
-  keycustom_check_panel: {fileID: 0}
 --- !u!1 &2078203501
 GameObject:
   m_ObjectHideFlags: 0
@@ -4742,7 +4930,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2140825724}
   - component: {fileID: 2140825726}
-  - component: {fileID: 2140825725}
   m_Layer: 5
   m_Name: MasterVolume_Slider
   m_TagString: Untagged
@@ -4757,7 +4944,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2140825723}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4772,28 +4959,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -58}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2140825725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2140825723}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c874a0167e7e7d048b80d24556a2218f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lable_on: {fileID: 0}
-  lable_off: {fileID: 0}
-  fullscreen_toggle: {fileID: 0}
-  setting_panel: {fileID: 0}
-  gamemaster_sound: {fileID: 2140825726}
-  master_mixer: {fileID: 24100000, guid: cf73f59f70dcd0e46957a5d484040459, type: 2}
-  monitorsize_dropdown: {fileID: 0}
-  mousedpi_slider: {fileID: 0}
-  keycustom_panel: {fileID: 0}
-  keycustom_check_panel: {fileID: 0}
 --- !u!114 &2140825726
 MonoBehaviour:
   m_ObjectHideFlags: 0

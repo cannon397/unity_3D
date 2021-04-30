@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public bool jumpStatus;
     public Transform characterTrasform;
     private float camera_dstc;
+    private string[] key_custom_arry;
     private DBAccess db;
     private Setting_header sh;
     //키보드
@@ -54,7 +55,7 @@ public class Player : MonoBehaviour
         jumpStatus = false;
         rigid = GetComponentInChildren<Rigidbody>();
         //Debug.Log(jumpStatus);
-        camera_dstc = Mathf.Sqrt(4 * 4 + 10 * 10);
+        camera_dstc = Mathf.Sqrt(4 * 4);
     }
     void Start()
     {
@@ -69,7 +70,7 @@ public class Player : MonoBehaviour
     {
         LookAround();
         Move();
-        PointOfView();
+        //PointOfView();
         //Debug.Log(jumpStatus);
 
     }
@@ -90,9 +91,7 @@ public class Player : MonoBehaviour
     }
     private void LookAround()
     {
-        //지금 당장은 sh 안에 값들이 제대로 지정 되지 않아서 NULL이 뜨기 때문에 적용 하려면 DB 연동 필요함
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X") * mouse_dpi, Input.GetAxis("Mouse Y") * mouse_dpi);
-        //Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         Vector3 camAngle = cameraArm.rotation.eulerAngles;
 
         float x = camAngle.x - mouseDelta.y;
@@ -110,7 +109,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            camera.localPosition = Vector3.Lerp(camera.localPosition, new Vector3(0, 4f, -10f).normalized * camera_dstc, Time.deltaTime * 3);
+            camera.localPosition = Vector3.Lerp(camera.localPosition, new Vector3(0, -1f, -4f).normalized * camera_dstc, Time.deltaTime * 3);
         }
 
     }
@@ -184,7 +183,7 @@ public class Player : MonoBehaviour
     }
     private void PointOfView()
     {
-        viewPoint = Input.GetButtonDown(sh.GetKeyBiding(0));
+        viewPoint = Input.GetButtonDown(key_custom_arry[0]);
         if (viewPoint)
         {
             if(viewPointFlag == 1)
@@ -206,5 +205,6 @@ public class Player : MonoBehaviour
     {
         float f = sh.GetMouseDpi();
         mouse_dpi = f / 50;
+        key_custom_arry = sh.SyncKeyCustom();
     }
 }

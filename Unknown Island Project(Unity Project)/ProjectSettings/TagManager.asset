@@ -7,6 +7,10 @@ TagManager:
   - CameraCenter
   - Floor
   - MouseDPI_Slider
+  - Tree
+  - Press_Button_Image
+  - Tree_Log
+  - Tree_Fruit
   layers:
   - Default
   - TransparentFX
@@ -16,7 +20,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Tree
   - 
   - 
   - 
