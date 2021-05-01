@@ -54,8 +54,6 @@ public class Ingame_Interection : MonoBehaviour
             {
                 tree_log.SetActive(true);
                 tree_fruit.SetActive(true);
-                //transform_tree_log.position = transform_tree.position;
-                //transform_tree_fruit.position = transform_tree.position + new Vector3(Random.Range(-1.0f, 1.0f), 1.0f, Random.Range(-1.0f, 1.0f));
                 tree_log.transform.localPosition = tree.transform.localPosition;
                 tree_fruit.transform.localPosition = tree.transform.localPosition + new Vector3(Random.Range(-1.0f, 1.0f), 1.0f, Random.Range(-1.0f, 1.0f));
                 tree.SetActive(false);

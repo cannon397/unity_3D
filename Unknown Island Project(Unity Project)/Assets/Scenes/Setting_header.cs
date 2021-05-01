@@ -16,7 +16,9 @@ namespace Assets.Scenes
             "Semicolon", "BackQuote", "LeftCurlyBracket", "RightCurlyBracket", "Mouse3", "Mouse4", "Quote", "Equals", "Minus", "LeftShift", "RightShift", "RightControl", "LeftControl",
             "RightAlt", "LeftAlt", "Tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m"};
         /* 키 바인딩
-         * 0 : 인칭 변환 (기본값 : V)
+         * 0 : 인칭 변환         (기본값 : v)
+         * 1 : 상호작용          (기본값 : e)
+         * 2 : 인벤토리          (기본값 : i)
          */
         private DBAccess db;
         private String settings_table = "settings";
@@ -99,7 +101,6 @@ namespace Assets.Scenes
         }
         public void SetSoundMasterVolume(float f)
         {
-
             String[] db_master_volume_value = { f.ToString() };
             String[] db_cols = { "sound_master_volume" };
             db.UpdateInto(settings_table, db_cols, db_master_volume_value, "no", "1");

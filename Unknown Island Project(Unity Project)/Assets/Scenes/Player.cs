@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     private string[] key_custom_arry;
     private DBAccess db;
     private Setting_header sh;
+    private static bool game_puase_bool;
     //키보드
     float hAxis;
     float vAxis;
@@ -56,6 +57,7 @@ public class Player : MonoBehaviour
         rigid = GetComponentInChildren<Rigidbody>();
         //Debug.Log(jumpStatus);
         camera_dstc = Mathf.Sqrt(4 * 4);
+        game_puase_bool = false;
     }
     void Start()
     {
@@ -68,11 +70,17 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LookAround();
-        Move();
-        //PointOfView();
-        //Debug.Log(jumpStatus);
+        if (game_puase_bool)
+        {
 
+        }
+        else
+        {
+            LookAround();
+            Move();
+            //PointOfView();
+            //Debug.Log(jumpStatus);
+        }
     }
     void FixedUpdate()
     {
@@ -201,10 +209,17 @@ public class Player : MonoBehaviour
             Debug.Log(viewPointFlag);
         }
     }
+    //설정값 동기화
     private void ImportSetting(Setting_header sh)
     {
         float f = sh.GetMouseDpi();
         mouse_dpi = f / 50;
         key_custom_arry = sh.SyncKeyCustom();
+    }
+
+    //게임 멈춤 상태인지 정해주는 함수
+    public void GamePause(bool bl)
+    {
+        game_puase_bool = bl;
     }
 }
