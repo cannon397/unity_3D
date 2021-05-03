@@ -9,45 +9,22 @@ using Assets.Scenes;
 
 public class Ingame_Interection : MonoBehaviour
 {
-    public GameObject tree;
-    public GameObject press_some_button_image;
-    public GameObject tree_log;
-    public GameObject tree_fruit;
-
-    [SerializeField]
-    private new Transform camera;
-
-    public LayerMask LayerMask;
-
-    private string[] key_custom_arry;
-    private DBAccess db;
-    private Setting_header sh;
 
     void Start()
     {
-        tree = GameObject.FindWithTag("Tree");
-        press_some_button_image = GameObject.FindWithTag("Press_Button_Image");
-        press_some_button_image.SetActive(false);
-        tree_log = GameObject.FindWithTag("Tree_Log");
-        tree_log.SetActive(false);
-        tree_fruit = GameObject.FindWithTag("Tree_Fruit");
-        tree_fruit.SetActive(false);
 
-        db = new DBAccess();
-        sh = new Setting_header(db);
-        key_custom_arry = sh.SyncKeyCustom();
     }
 
     void Update()
     {
-        RayCastTree();
+        
     }
 
-    private void RayCastTree()
+    public void RayCastTree(Transform camera, GameObject press_some_button_image, string[] key_custom_arry, GameObject tree, GameObject tree_log, GameObject tree_fruit, LayerMask laymask_tree)
     {
         RaycastHit hitinfo;
         Debug.DrawRay(camera.position, camera.forward.normalized * 8f, Color.red);
-        if (Physics.Raycast(camera.position, camera.forward.normalized, out hitinfo, 8f, LayerMask))
+        if (Physics.Raycast(camera.position, camera.forward.normalized, out hitinfo, 8f, laymask_tree))
         {
             press_some_button_image.SetActive(true);
             if(Input.GetKeyDown(key_custom_arry[1]))

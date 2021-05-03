@@ -9,112 +9,76 @@ using Assets.Scenes;
 
 public class pause_menu : MonoBehaviour
 {
-    public GameObject pause_panel;
-    public GameObject setting_panel;
-    public Slider mousedpi_slider;
-    public Slider gamemaster_sound_slider;
-    public AudioMixer master_mixer;
-    public GameObject keycustom_panel;
-    public GameObject keycustom_check_panel;
-    public Button key_custom_save_button;
-    public Button save_setting_value_button;
-
-    private string[] key_custom_arry;
-    private static int key_adr;
-    private DBAccess db;
-    private Setting_header sh;
-    private Player player;
+    private UKI_script uki;
+    public pause_menu()
+    {
+        uki = new UKI_script();
+    }
     void Start()
     {
-        db = new DBAccess();
-        sh = new Setting_header(db);
-        player = new Player();
 
-        gamemaster_sound_slider.onValueChanged.AddListener(delegate
-        {
-            SoundVolumeMaster();
-        });
-        key_custom_save_button.onClick.AddListener(delegate
-        {
-            SetKeyCustom(sh);
-        });
-        save_setting_value_button.onClick.AddListener(delegate
-        {
-            SaveSettingValue(sh);
-        });
-
-        pause_panel = GameObject.Find("Pause_Panel");
-        pause_panel.SetActive(false);
-        setting_panel = GameObject.Find("Setting_Panel");
-        setting_panel.SetActive(false);
-        keycustom_panel = GameObject.Find("KeyCustom_Panel");
-        keycustom_panel.SetActive(false);
-
-        ImportSettingValue(sh);
     }
 
     void Update()
     {
-        KeyCustomCheck(sh);
-        CheckKeyControl();
+
     }
 
-    private void CheckKeyControl()
+    public void CheckKeyControl(GameObject pause_panel)
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (pause_panel.activeSelf)
             {
                 pause_panel.SetActive(false);
-                player.GamePause(false);
+                uki.GamePause(false);
             }
             else
             {
                 pause_panel.SetActive(true);
-                player.GamePause(true);
+                uki.GamePause(true);
             }
         }
     }
-    public void ButtonClickGameContinue()
+    public void ButtonClickGameContinue(GameObject pause_panel)
     {
-        player = new Player();
         pause_panel.SetActive(false);
-        player.GamePause(false);
+        uki.GamePause(false);
     }
     public void ButtonClickMainMenu()
     {
         SceneManager.LoadScene("GameTitle");
     }
-    public void ButtonClickOpenSetting()
+    public void ButtonClickOpenSetting(GameObject setting_panel, GameObject pause_panel)
     {
         setting_panel.SetActive(true);
         pause_panel.SetActive(false);
     }
-    public void ButtonClickCloseSetting()
+    public void ButtonClickCloseSetting(GameObject setting_panel, GameObject pause_panel)
     {
         setting_panel.SetActive(false);
         pause_panel.SetActive(true);
     }
-    void SoundVolumeMaster()
+    public void SoundVolumeMaster(Slider gamemaster_sound_slider, AudioMixer master_mixer)
     {
         float volume = gamemaster_sound_slider.value;
         master_mixer.SetFloat("Master_Volume", volume);
     }
     //키 커스텀창 열기
-    public void ButtonClickKeyCustomOpen()
+    public void ButtonClickKeyCustomOpen(GameObject setting_panel, GameObject keycustom_panel)
     {
         setting_panel.SetActive(false);
         keycustom_panel.SetActive(true);
     }
     //키 커스텀창 닫기
-    public void ButtonClickKeyCustomClose()
+    public void ButtonClickKeyCustomClose(GameObject setting_panel, GameObject keycustom_panel)
     {
         keycustom_panel.SetActive(false);
         setting_panel.SetActive(true);
     }
 
     //키 커스텀 인지 아닌지 확인 해서 바꾼 키 값 반환 하는 함수
-    public void KeyCustomCheck(Setting_header sh)
+    public void KeyCustomCheck(Setting_header sh, GameObject keycustom_check_panel, int key_adr, string[] key_custom_arry)
     {
         if (keycustom_check_panel.activeSelf == true)
         {
@@ -141,32 +105,18 @@ public class pause_menu : MonoBehaviour
         }
     }
     //키 커스텀 설정값 저장 함수
-    public void SetKeyCustom(Setting_header sh)
+    public void SetKeyCustom(Setting_header sh, string[] key_custom_arry)
     {
         sh.SetKeyCustom(key_custom_arry);
     }
     //키 커스텀 모함수
-    public void KeyCustom(int i)
+    public void KeyCustom(int i, GameObject keycustom_check_panel)
     {
-        key_adr = i;
+        uki.SetKeyADR(i);
         keycustom_check_panel.SetActive(true);
     }
-
-    public void KeyCustomPointOfViewKey() { KeyCustom(0); }//인칭변환키 변경
-    public void KeyCustomInterectionKey() { KeyCustom(1); }//상호작용키 변경
-    public void KeyCustomInventoryKey() { KeyCustom(2); }//인벤토리키 변경
-
-    //설정값 동기화
-    private void ImportSettingValue(Setting_header sh)
-    {
-        float volume = sh.GetSoundMasterVolume();
-        gamemaster_sound_slider.value = volume;
-        master_mixer.SetFloat("Master_Volume", volume);
-        mousedpi_slider.value = sh.GetMouseDpi();
-        key_custom_arry = sh.SyncKeyCustom();
-    }
     //설정값 저장 함수
-    public void SaveSettingValue(Setting_header sh)
+    public void SaveSettingValue(Setting_header sh, Slider gamemaster_sound_slider, Slider mousedpi_slider)
     {
         sh.SetSoundMasterVolume(gamemaster_sound_slider.value);
         sh.SetMouseDpi(mousedpi_slider.value);

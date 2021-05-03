@@ -10,77 +10,19 @@ using System;
 
 public class Player : MonoBehaviour
 {
-  
-    Collision collision;
-    public float speed;
-    public float jumpPower;
-    Rigidbody rigid;
-    public bool jumpStatus;
-    public Transform characterTrasform;
-    private float camera_dstc;
-    private string[] key_custom_arry;
-    private DBAccess db;
-    private Setting_header sh;
-    private static bool game_puase_bool;
-    //키보드
-    float hAxis;
-    float vAxis;
-    bool wDown;
-    bool viewPoint;
-    private float mouse_dpi;
-
-    //flag
-    // 1 = 3인칭 0 = 1인칭
-    int viewPointFlag = 1;
-
-
-
-    Vector3 moveVec;
-
-    Animator animator;
-    [SerializeField]
-    private Transform cameraArm;
-    [SerializeField]
-    private Transform characterBody;
-    [SerializeField]
-    private Transform camera;
- 
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-
-    //}
+    
     void Awake()
     {
-        animator = GetComponentInChildren<Animator>();
-        jumpStatus = false;
-        rigid = GetComponentInChildren<Rigidbody>();
-        //Debug.Log(jumpStatus);
-        camera_dstc = Mathf.Sqrt(4 * 4);
-        game_puase_bool = false;
+        
     }
     void Start()
     {
-        db = new DBAccess();
-        sh = new Setting_header(db);
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 300;
-        ImportSetting(sh);
+        
     }
     // Update is called once per frame
     void Update()
     {
-        if (game_puase_bool)
-        {
-
-        }
-        else
-        {
-            LookAround();
-            Move();
-            //PointOfView();
-            //Debug.Log(jumpStatus);
-        }
+        
     }
     void FixedUpdate()
     {
@@ -97,7 +39,7 @@ public class Player : MonoBehaviour
 
 
     }
-    private void LookAround()
+    public void LookAround(Transform cameraArm, Transform camera, float camera_dstc, float mouse_dpi)
     {
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X") * mouse_dpi, Input.GetAxis("Mouse Y") * mouse_dpi);
         Vector3 camAngle = cameraArm.rotation.eulerAngles;
@@ -121,7 +63,7 @@ public class Player : MonoBehaviour
         }
 
     }
-    private void Move()
+    public void Move(Transform cameraArm, float hAxis, float vAxis, bool wDown, Transform characterBody, Animator animator, bool jumpStatus, float speed, Rigidbody rigid, float jumpPower)
     {
         Debug.DrawRay(cameraArm.position, new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized, Color.red);
 
@@ -142,7 +84,7 @@ public class Player : MonoBehaviour
 
             //캐릭터 카메라 주시방향
             characterBody.forward = moveDir;
-            transform.position += moveDir * speed * (wDown ? 1f : 0.3f) * Time.deltaTime;
+            characterBody.transform.position += moveDir * speed * (wDown ? 1f : 0.3f) * Time.deltaTime;
         }
 
         //moveVec = new Vector3(hAxis, 0, vAxis).normalized;
@@ -168,28 +110,14 @@ public class Player : MonoBehaviour
         //Debug.Log("호출여부");
         if (collision.gameObject.tag == "Floor")
         {
-            jumpStatus = false;
+            //jumpStatus = false;
         }
     }
     void LateUpdate()
     {
-        //cameraArm.position = characterBody.position;
-        Vector3 vector = characterBody.position;
-        vector.y = characterBody.position.y + 2.5f;
-        if(viewPointFlag == 1)
-        {
-            cameraArm.position = vector;
-        }
-        else
-        {
-            camera.position = characterBody.position;
-            
-        }
         
-        //Debug.Log("카메라"+cameraArm.position);
-        //Debug.Log("캐릭터"+ characterBody.position);
     }
-    private void PointOfView()
+    private void PointOfView(bool viewPoint, string[] key_custom_arry, int viewPointFlag)
     {
         viewPoint = Input.GetButtonDown(key_custom_arry[0]);
         if (viewPoint)
@@ -209,17 +137,6 @@ public class Player : MonoBehaviour
             Debug.Log(viewPointFlag);
         }
     }
-    //설정값 동기화
-    private void ImportSetting(Setting_header sh)
-    {
-        float f = sh.GetMouseDpi();
-        mouse_dpi = f / 50;
-        key_custom_arry = sh.SyncKeyCustom();
-    }
 
-    //게임 멈춤 상태인지 정해주는 함수
-    public void GamePause(bool bl)
-    {
-        game_puase_bool = bl;
-    }
+    
 }

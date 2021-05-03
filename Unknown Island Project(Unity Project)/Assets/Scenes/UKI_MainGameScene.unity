@@ -126,12 +126,12 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1676023479}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 89738db2dd7112241aeaee527b7ff722,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89738db2dd7112241aeaee527b7ff722,
         type: 3}
@@ -141,22 +141,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 89738db2dd7112241aeaee527b7ff722,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1
+      value: 0.10000001
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89738db2dd7112241aeaee527b7ff722,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1
+      value: 0.10000001
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89738db2dd7112241aeaee527b7ff722,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 124.92
+      value: -171.58
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89738db2dd7112241aeaee527b7ff722,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.54
+      value: -260.46
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89738db2dd7112241aeaee527b7ff722,
         type: 3}
@@ -176,7 +176,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 89738db2dd7112241aeaee527b7ff722,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89738db2dd7112241aeaee527b7ff722,
         type: 3}
@@ -223,25 +223,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 16491099}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &16491102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16491100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43e0b16488c21424d84130f9bf10f082, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  jumpPower: 10
-  jumpStatus: 0
-  characterTrasform: {fileID: 16491101}
-  cameraArm: {fileID: 219496827}
-  characterBody: {fileID: 16491101}
-  camera: {fileID: 312401633}
 --- !u!54 &16491103
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -451,13 +432,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 156424147}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 130.62187, y: 1.2838233, z: 183.76428}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -165.87813, y: -263.7162, z: 183.76428}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1478511414}
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_Father: {fileID: 1676023479}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &199770064
 GameObject:
@@ -684,13 +665,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 219496826}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 121.63, y: 4.897, z: 149}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -174.87, y: -260.103, z: 149}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 312401633}
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_Father: {fileID: 1676023479}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &241909827
 GameObject:
@@ -939,7 +920,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &295183619
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1628,7 +1609,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &505527110
 GameObject:
@@ -1796,7 +1777,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 565499899}
-  - component: {fileID: 565499900}
   m_Layer: 0
   m_Name: Trees
   m_TagString: Untagged
@@ -1811,35 +1791,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 565499898}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 124.75, y: 7.2952223, z: 208.3}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -171.75, y: -257.70477, z: 208.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1893849609}
   - {fileID: 1545117483}
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 1676023479}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &565499900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 565499898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cd9a6acfb185064e8f21564abd0cc9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tree: {fileID: 0}
-  press_some_button_image: {fileID: 0}
-  tree_log: {fileID: 0}
-  tree_fruit: {fileID: 0}
-  camera: {fileID: 312401633}
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!1 &609566934
 GameObject:
   m_ObjectHideFlags: 0
@@ -2077,9 +2037,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 706465898}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6a3793aeda7b347a6bf24c582c72ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 98d2764bdfd245948b1d8f485bfb80f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tree: {fileID: 0}
+  press_some_button_image: {fileID: 0}
+  tree_log: {fileID: 0}
+  tree_fruit: {fileID: 0}
   pause_panel: {fileID: 0}
   setting_panel: {fileID: 0}
   mousedpi_slider: {fileID: 0}
@@ -2089,6 +2053,15 @@ MonoBehaviour:
   keycustom_check_panel: {fileID: 295183618}
   key_custom_save_button: {fileID: 0}
   save_setting_value_button: {fileID: 0}
+  camera: {fileID: 0}
+  cameraArm: {fileID: 0}
+  characterBody: {fileID: 0}
+  laymask_tree:
+    serializedVersion: 2
+    m_Bits: 0
+  speed: 0
+  jumpPower: 0
+  jumpStatus: 0
 --- !u!114 &706465901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2398,9 +2371,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 828525482}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6a3793aeda7b347a6bf24c582c72ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 98d2764bdfd245948b1d8f485bfb80f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tree: {fileID: 0}
+  press_some_button_image: {fileID: 0}
+  tree_log: {fileID: 0}
+  tree_fruit: {fileID: 0}
   pause_panel: {fileID: 0}
   setting_panel: {fileID: 538991666}
   mousedpi_slider: {fileID: 0}
@@ -2410,6 +2387,15 @@ MonoBehaviour:
   keycustom_check_panel: {fileID: 0}
   key_custom_save_button: {fileID: 0}
   save_setting_value_button: {fileID: 0}
+  camera: {fileID: 0}
+  cameraArm: {fileID: 0}
+  characterBody: {fileID: 0}
+  laymask_tree:
+    serializedVersion: 2
+    m_Bits: 0
+  speed: 0
+  jumpPower: 0
+  jumpStatus: 0
 --- !u!1 &836612391
 GameObject:
   m_ObjectHideFlags: 0
@@ -2459,9 +2445,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 836612391}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6a3793aeda7b347a6bf24c582c72ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 98d2764bdfd245948b1d8f485bfb80f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tree: {fileID: 0}
+  press_some_button_image: {fileID: 0}
+  tree_log: {fileID: 0}
+  tree_fruit: {fileID: 0}
   pause_panel: {fileID: 0}
   setting_panel: {fileID: 0}
   mousedpi_slider: {fileID: 0}
@@ -2471,6 +2461,15 @@ MonoBehaviour:
   keycustom_check_panel: {fileID: 295183618}
   key_custom_save_button: {fileID: 0}
   save_setting_value_button: {fileID: 0}
+  camera: {fileID: 0}
+  cameraArm: {fileID: 0}
+  characterBody: {fileID: 0}
+  laymask_tree:
+    serializedVersion: 2
+    m_Bits: 0
+  speed: 0
+  jumpPower: 0
+  jumpStatus: 0
 --- !u!114 &836612394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2957,7 +2956,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1092793754}
-  - component: {fileID: 1092793753}
   m_Layer: 0
   m_Name: UI_Pause
   m_TagString: Untagged
@@ -2965,27 +2963,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1092793753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1092793752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6a3793aeda7b347a6bf24c582c72ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pause_panel: {fileID: 0}
-  setting_panel: {fileID: 0}
-  mousedpi_slider: {fileID: 415411102}
-  gamemaster_sound_slider: {fileID: 1743916106}
-  master_mixer: {fileID: 24100000, guid: daca31f939365a74983c8391661b7f5c, type: 2}
-  keycustom_panel: {fileID: 1438902140}
-  keycustom_check_panel: {fileID: 295183618}
-  key_custom_save_button: {fileID: 437379264}
-  save_setting_value_button: {fileID: 1743385399}
 --- !u!4 &1092793754
 Transform:
   m_ObjectHideFlags: 0
@@ -2993,13 +2970,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1092793752}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 124.96767, y: 4.6013985, z: 153.8218}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -171.53233, y: -260.3986, z: 153.8218}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1442936378}
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_Father: {fileID: 1676023479}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1186548731
 GameObject:
@@ -3295,9 +3272,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1312866290}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6a3793aeda7b347a6bf24c582c72ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 98d2764bdfd245948b1d8f485bfb80f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tree: {fileID: 0}
+  press_some_button_image: {fileID: 0}
+  tree_log: {fileID: 0}
+  tree_fruit: {fileID: 0}
   pause_panel: {fileID: 34517472}
   setting_panel: {fileID: 0}
   mousedpi_slider: {fileID: 0}
@@ -3307,6 +3288,15 @@ MonoBehaviour:
   keycustom_check_panel: {fileID: 0}
   key_custom_save_button: {fileID: 0}
   save_setting_value_button: {fileID: 0}
+  camera: {fileID: 0}
+  cameraArm: {fileID: 0}
+  characterBody: {fileID: 0}
+  laymask_tree:
+    serializedVersion: 2
+    m_Bits: 0
+  speed: 0
+  jumpPower: 0
+  jumpStatus: 0
 --- !u!1 &1410853539
 GameObject:
   m_ObjectHideFlags: 0
@@ -3869,9 +3859,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1600989207}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6a3793aeda7b347a6bf24c582c72ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 98d2764bdfd245948b1d8f485bfb80f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tree: {fileID: 0}
+  press_some_button_image: {fileID: 0}
+  tree_log: {fileID: 0}
+  tree_fruit: {fileID: 0}
   pause_panel: {fileID: 0}
   setting_panel: {fileID: 538991666}
   mousedpi_slider: {fileID: 0}
@@ -3881,6 +3875,85 @@ MonoBehaviour:
   keycustom_check_panel: {fileID: 0}
   key_custom_save_button: {fileID: 0}
   save_setting_value_button: {fileID: 0}
+  camera: {fileID: 0}
+  cameraArm: {fileID: 0}
+  characterBody: {fileID: 0}
+  laymask_tree:
+    serializedVersion: 2
+    m_Bits: 0
+  speed: 0
+  jumpPower: 0
+  jumpStatus: 0
+--- !u!1 &1676023477
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1676023479}
+  - component: {fileID: 1676023478}
+  m_Layer: 0
+  m_Name: UseScript
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1676023478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676023477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d2764bdfd245948b1d8f485bfb80f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tree: {fileID: 0}
+  press_some_button_image: {fileID: 285652090}
+  tree_log: {fileID: 0}
+  tree_fruit: {fileID: 0}
+  pause_panel: {fileID: 34517472}
+  setting_panel: {fileID: 538991666}
+  mousedpi_slider: {fileID: 415411102}
+  gamemaster_sound_slider: {fileID: 1743916106}
+  master_mixer: {fileID: 24100000, guid: daca31f939365a74983c8391661b7f5c, type: 2}
+  keycustom_panel: {fileID: 1438902140}
+  keycustom_check_panel: {fileID: 295183618}
+  key_custom_save_button: {fileID: 437379264}
+  save_setting_value_button: {fileID: 1743385399}
+  camera: {fileID: 312401633}
+  cameraArm: {fileID: 219496827}
+  characterBody: {fileID: 16491101}
+  laymask_tree:
+    serializedVersion: 2
+    m_Bits: 256
+  speed: 50
+  jumpPower: 30
+  jumpStatus: 0
+--- !u!4 &1676023479
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676023477}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 296.5, y: 265, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 565499899}
+  - {fileID: 219496827}
+  - {fileID: 16491101}
+  - {fileID: 156424148}
+  - {fileID: 1092793754}
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1715090553
 GameObject:
   m_ObjectHideFlags: 0
@@ -3930,9 +4003,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1715090553}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6a3793aeda7b347a6bf24c582c72ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 98d2764bdfd245948b1d8f485bfb80f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tree: {fileID: 0}
+  press_some_button_image: {fileID: 0}
+  tree_log: {fileID: 0}
+  tree_fruit: {fileID: 0}
   pause_panel: {fileID: 0}
   setting_panel: {fileID: 0}
   mousedpi_slider: {fileID: 0}
@@ -3942,6 +4019,15 @@ MonoBehaviour:
   keycustom_check_panel: {fileID: 295183618}
   key_custom_save_button: {fileID: 0}
   save_setting_value_button: {fileID: 0}
+  camera: {fileID: 0}
+  cameraArm: {fileID: 0}
+  characterBody: {fileID: 0}
+  laymask_tree:
+    serializedVersion: 2
+    m_Bits: 0
+  speed: 0
+  jumpPower: 0
+  jumpStatus: 0
 --- !u!114 &1715090556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4617,9 +4703,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1916446771}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6a3793aeda7b347a6bf24c582c72ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 98d2764bdfd245948b1d8f485bfb80f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tree: {fileID: 0}
+  press_some_button_image: {fileID: 0}
+  tree_log: {fileID: 0}
+  tree_fruit: {fileID: 0}
   pause_panel: {fileID: 34517472}
   setting_panel: {fileID: 538991666}
   mousedpi_slider: {fileID: 0}
@@ -4629,6 +4719,15 @@ MonoBehaviour:
   keycustom_check_panel: {fileID: 0}
   key_custom_save_button: {fileID: 0}
   save_setting_value_button: {fileID: 0}
+  camera: {fileID: 0}
+  cameraArm: {fileID: 0}
+  characterBody: {fileID: 0}
+  laymask_tree:
+    serializedVersion: 2
+    m_Bits: 0
+  speed: 0
+  jumpPower: 0
+  jumpStatus: 0
 --- !u!1 &1940301828
 GameObject:
   m_ObjectHideFlags: 0
@@ -4641,6 +4740,7 @@ GameObject:
   - component: {fileID: 1940301832}
   - component: {fileID: 1940301831}
   - component: {fileID: 1940301830}
+  - component: {fileID: 1940301833}
   m_Layer: 0
   m_Name: Exit_Button
   m_TagString: Untagged
@@ -4710,7 +4810,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1940301831}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1940301833}
+        m_MethodName: ButtonClickMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1940301831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4748,6 +4859,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1940301828}
   m_CullTransparentMesh: 0
+--- !u!114 &1940301833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940301828}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d2764bdfd245948b1d8f485bfb80f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tree: {fileID: 0}
+  press_some_button_image: {fileID: 0}
+  tree_log: {fileID: 0}
+  tree_fruit: {fileID: 0}
+  pause_panel: {fileID: 0}
+  setting_panel: {fileID: 0}
+  mousedpi_slider: {fileID: 0}
+  gamemaster_sound_slider: {fileID: 0}
+  master_mixer: {fileID: 0}
+  keycustom_panel: {fileID: 0}
+  keycustom_check_panel: {fileID: 0}
+  key_custom_save_button: {fileID: 0}
+  save_setting_value_button: {fileID: 0}
+  camera: {fileID: 0}
+  cameraArm: {fileID: 0}
+  characterBody: {fileID: 0}
+  laymask_tree:
+    serializedVersion: 2
+    m_Bits: 0
+  speed: 0
+  jumpPower: 0
+  jumpStatus: 0
 --- !u!1 &1947114561
 GameObject:
   m_ObjectHideFlags: 0
@@ -5381,9 +5526,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2144545407}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6a3793aeda7b347a6bf24c582c72ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 98d2764bdfd245948b1d8f485bfb80f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tree: {fileID: 0}
+  press_some_button_image: {fileID: 0}
+  tree_log: {fileID: 0}
+  tree_fruit: {fileID: 0}
   pause_panel: {fileID: 34517472}
   setting_panel: {fileID: 538991666}
   mousedpi_slider: {fileID: 0}
@@ -5393,6 +5542,15 @@ MonoBehaviour:
   keycustom_check_panel: {fileID: 0}
   key_custom_save_button: {fileID: 0}
   save_setting_value_button: {fileID: 0}
+  camera: {fileID: 0}
+  cameraArm: {fileID: 0}
+  characterBody: {fileID: 0}
+  laymask_tree:
+    serializedVersion: 2
+    m_Bits: 0
+  speed: 0
+  jumpPower: 0
+  jumpStatus: 0
 --- !u!1001 &1049723967970813443
 PrefabInstance:
   m_ObjectHideFlags: 0
