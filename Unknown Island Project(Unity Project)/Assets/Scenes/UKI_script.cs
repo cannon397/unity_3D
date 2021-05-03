@@ -35,11 +35,14 @@ public class UKI_script : MonoBehaviour
 
     public LayerMask laymask_tree;
 
+
     public float speed;
     public float jumpPower;
     public bool jumpStatus;
     private float camera_dstc;
     private static bool game_puase_bool;
+    public List<Vector3> tree_vector;
+    public List<GameObject> tree_list;
     //키보드
     float hAxis;
     float vAxis;
@@ -84,6 +87,9 @@ public class UKI_script : MonoBehaviour
         keycustom_panel = GameObject.Find("KeyCustom_Panel");
         keycustom_panel.SetActive(false);
 
+        tree_list = new List<GameObject>();
+        tree_list.Add(tree);
+
         db = new DBAccess();
         sh = new Setting_header(db);
         ii = new Ingame_Interection();
@@ -120,9 +126,10 @@ public class UKI_script : MonoBehaviour
             pl.Move(cameraArm, hAxis, vAxis, wDown, characterBody, animator, jumpStatus, speed, rigid, jumpPower);
             //PointOfView();
         }
-        ii.RayCastTree(camera, press_some_button_image, key_custom_arry, tree, tree_log, tree_fruit, laymask_tree);
+        ii.RayCastTree(camera, press_some_button_image, key_custom_arry, tree_log, tree_fruit, laymask_tree);
         pm.KeyCustomCheck(sh, keycustom_check_panel, key_adr, key_custom_arry);
         pm.CheckKeyControl(pause_panel);
+        StartCoroutine(ii.ResetTree(tree_list));
     }
     void LateUpdate()
     {

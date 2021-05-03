@@ -207,7 +207,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -3717191928477208872, guid: 9a5cca7247798e34eb01612c742b01fe,
+      objectReference: {fileID: 3766310924568959924, guid: 9a5cca7247798e34eb01612c742b01fe,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89738db2dd7112241aeaee527b7ff722, type: 3}
@@ -992,7 +992,7 @@ GameObject:
   - component: {fileID: 312401634}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2062,6 +2062,8 @@ MonoBehaviour:
   speed: 0
   jumpPower: 0
   jumpStatus: 0
+  tree_vector: []
+  tree_list: []
 --- !u!114 &706465901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2396,6 +2398,8 @@ MonoBehaviour:
   speed: 0
   jumpPower: 0
   jumpStatus: 0
+  tree_vector: []
+  tree_list: []
 --- !u!1 &836612391
 GameObject:
   m_ObjectHideFlags: 0
@@ -2470,6 +2474,8 @@ MonoBehaviour:
   speed: 0
   jumpPower: 0
   jumpStatus: 0
+  tree_vector: []
+  tree_list: []
 --- !u!114 &836612394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3297,6 +3303,8 @@ MonoBehaviour:
   speed: 0
   jumpPower: 0
   jumpStatus: 0
+  tree_vector: []
+  tree_list: []
 --- !u!1 &1410853539
 GameObject:
   m_ObjectHideFlags: 0
@@ -3884,6 +3892,8 @@ MonoBehaviour:
   speed: 0
   jumpPower: 0
   jumpStatus: 0
+  tree_vector: []
+  tree_list: []
 --- !u!1 &1676023477
 GameObject:
   m_ObjectHideFlags: 0
@@ -3935,6 +3945,8 @@ MonoBehaviour:
   speed: 50
   jumpPower: 30
   jumpStatus: 0
+  tree_vector: []
+  tree_list: []
 --- !u!4 &1676023479
 Transform:
   m_ObjectHideFlags: 0
@@ -4028,6 +4040,8 @@ MonoBehaviour:
   speed: 0
   jumpPower: 0
   jumpStatus: 0
+  tree_vector: []
+  tree_list: []
 --- !u!114 &1715090556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4728,6 +4742,8 @@ MonoBehaviour:
   speed: 0
   jumpPower: 0
   jumpStatus: 0
+  tree_vector: []
+  tree_list: []
 --- !u!1 &1940301828
 GameObject:
   m_ObjectHideFlags: 0
@@ -4893,6 +4909,8 @@ MonoBehaviour:
   speed: 0
   jumpPower: 0
   jumpStatus: 0
+  tree_vector: []
+  tree_list: []
 --- !u!1 &1947114561
 GameObject:
   m_ObjectHideFlags: 0
@@ -5551,6 +5569,8 @@ MonoBehaviour:
   speed: 0
   jumpPower: 0
   jumpStatus: 0
+  tree_vector: []
+  tree_list: []
 --- !u!1001 &1049723967970813443
 PrefabInstance:
   m_ObjectHideFlags: 0
