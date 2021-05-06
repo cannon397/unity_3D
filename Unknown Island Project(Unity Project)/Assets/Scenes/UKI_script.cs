@@ -10,7 +10,8 @@ using Assets.Scenes;
 public class UKI_script : MonoBehaviour
 {
     public GameObject tree;
-    public GameObject press_some_button_image;
+    public GameObject press_tree_image;
+    public GameObject press_treeitem_image;
     public GameObject tree_log;
     public GameObject tree_fruit;
     public GameObject pause_panel;
@@ -32,48 +33,58 @@ public class UKI_script : MonoBehaviour
     private Transform cameraArm;
     [SerializeField]
     private Transform characterBody;
+    private CharacterController controller;
 
     public LayerMask laymask_tree;
-
+    public LayerMask laymask_tree_item;
+    public LayerMask laymask_floor;
 
     public float speed;
     public float jumpPower;
-    public bool jumpStatus;
+    public float jumpheight;
     private float camera_dstc;
     private static bool game_puase_bool;
-    public List<Vector3> tree_vector;
+    public static bool jumpStatus;
     public List<GameObject> tree_list;
-    //키보드
-    float hAxis;
-    float vAxis;
-    bool wDown;
     bool viewPoint;
     private float mouse_dpi;
     //flag
     // 1 = 3인칭 0 = 1인칭
     int viewPointFlag = 1;
     private string[] key_custom_arry;
-    private static int key_adr; public void SetKeyADR(int i) { key_adr = i; }
+    private static int key_adr; 
+    public void SetKeyADR(int i) { key_adr = i; }
+    static WaitForSeconds wait;
     private DBAccess db;
     private Setting_header sh;
     private Player pl;
     private Ingame_Interection ii;
     private pause_menu pm;
+    private Tree_Dispancer td;
     void Awake()
     {
         animator = GameObject.Find("Player").GetComponentInChildren<Animator>();
-        jumpStatus = false;
-        rigid = GameObject.Find("Player").GetComponentInChildren<Rigidbody>();
-        //Debug.Log(jumpStatus);
+        controller = GameObject.Find("Player").GetComponentInChildren<CharacterController>();
         camera_dstc = Mathf.Sqrt(4 * 4);
         game_puase_bool = false;
     }
     void Start()
     {
+        db = new DBAccess();
+        sh = new Setting_header(db);
+        ii = new Ingame_Interection();
+        pl = new Player();
+        pm = new pause_menu();
+        td = new Tree_Dispancer();
+
         key_adr = 9999;
-        tree = GameObject.FindWithTag("Tree");
-        press_some_button_image = GameObject.FindWithTag("Press_Button_Image");
-        press_some_button_image.SetActive(false);
+
+        tree_list = new List<GameObject>();
+        tree_list = td.TreeDispanceList();
+        press_tree_image = GameObject.Find("Press_Tree_Image");
+        press_tree_image.SetActive(false);
+        press_treeitem_image = GameObject.Find("Press_TreeItem_Image");
+        press_treeitem_image.SetActive(false);
         tree_log = GameObject.FindWithTag("Tree_Log");
         tree_log.SetActive(false);
         tree_fruit = GameObject.FindWithTag("Tree_Fruit");
@@ -87,14 +98,6 @@ public class UKI_script : MonoBehaviour
         keycustom_panel = GameObject.Find("KeyCustom_Panel");
         keycustom_panel.SetActive(false);
 
-        tree_list = new List<GameObject>();
-        tree_list.Add(tree);
-
-        db = new DBAccess();
-        sh = new Setting_header(db);
-        ii = new Ingame_Interection();
-        pl = new Player();
-        pm = new pause_menu();
 
         gamemaster_sound_slider.onValueChanged.AddListener(delegate
         {
@@ -111,6 +114,7 @@ public class UKI_script : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 300;
         ImportSettingValue();
+        wait = new WaitForSeconds(300.0f);//나무 리스폰 시간 조정
     }
 
     
@@ -123,17 +127,20 @@ public class UKI_script : MonoBehaviour
         else
         {
             pl.LookAround(cameraArm, camera, camera_dstc, mouse_dpi);
-            pl.Move(cameraArm, hAxis, vAxis, wDown, characterBody, animator, jumpStatus, speed, rigid, jumpPower);
+            pl.Move(cameraArm, characterBody, controller, animator, speed, rigid, jumpPower, laymask_floor);
+            StartCoroutine(pl.JumpAndMove(cameraArm, characterBody, controller, animator, speed, rigid, jumpPower, laymask_floor, jumpheight));
             //PointOfView();
         }
-        ii.RayCastTree(camera, press_some_button_image, key_custom_arry, tree_log, tree_fruit, laymask_tree);
+        pl.JumpStatusOn(characterBody, laymask_floor);
+        ii.RayCastTree(camera, press_tree_image, key_custom_arry, tree_log, tree_fruit, laymask_tree);
+        ii.TayCastTreeItem(camera, press_treeitem_image, key_custom_arry, laymask_tree_item);
         pm.KeyCustomCheck(sh, keycustom_check_panel, key_adr, key_custom_arry);
         pm.CheckKeyControl(pause_panel);
-        StartCoroutine(ii.ResetTree(tree_list));
+        StartCoroutine(ii.ResetTree(tree_list, wait, 0));
     }
     void LateUpdate()
     {
-        //cameraArm.position = characterBody.position;
+        cameraArm.position = characterBody.position;
         Vector3 vector = characterBody.position;
         vector.y = characterBody.position.y + 2.5f;
         if (viewPointFlag == 1)
@@ -145,9 +152,6 @@ public class UKI_script : MonoBehaviour
             camera.position = characterBody.position;
 
         }
-
-        //Debug.Log("카메라"+cameraArm.position);
-        //Debug.Log("캐릭터"+ characterBody.position);
     }
 
     public void ButtonClickGameContinue()

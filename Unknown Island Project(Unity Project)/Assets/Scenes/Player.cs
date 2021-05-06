@@ -10,7 +10,20 @@ using System;
 
 public class Player : MonoBehaviour
 {
+    UKI_script uki;
+
+    //키보드
+    float hAxis;
+    float vAxis;
+    bool wDown;
+
+    public static bool jumpStatus;
     
+    public Player()
+    {
+        uki = new UKI_script();
+        jumpStatus = false;
+    }
     void Awake()
     {
         
@@ -63,7 +76,8 @@ public class Player : MonoBehaviour
         }
 
     }
-    public void Move(Transform cameraArm, float hAxis, float vAxis, bool wDown, Transform characterBody, Animator animator, bool jumpStatus, float speed, Rigidbody rigid, float jumpPower)
+    //점프 하지 않았을때 move 함수
+    public void Move(Transform cameraArm, Transform characterBody, CharacterController controller, Animator animator, float speed, Rigidbody rigid, float jumpPower, LayerMask floor)
     {
         Debug.DrawRay(cameraArm.position, new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized, Color.red);
 
@@ -75,43 +89,23 @@ public class Player : MonoBehaviour
 
         Vector2 moveInput = new Vector2(hAxis, vAxis);
         bool isMove = moveInput.magnitude != 0;
+        //카메라 전면
+        Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
+        Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
+        Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
         if (isMove)
         {
-            //카메라 전면
-            Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
-            Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
-            Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
 
             //캐릭터 카메라 주시방향
             characterBody.forward = moveDir;
-            characterBody.transform.position += moveDir * speed * (wDown ? 1f : 0.3f) * Time.deltaTime;
+            moveDir = moveDir.normalized * speed * (wDown ? 1f : 0.3f);
         }
-
-        //moveVec = new Vector3(hAxis, 0, vAxis).normalized;
-
-        //transform.position += moveVec * speed * (wDown ? 1f : 0.3f) * Time.deltaTime;
-
         animator.SetBool("isWalk", moveInput != Vector2.zero);
         animator.SetBool("isRun", wDown);
-        //카메라
-        
-        //transform.LookAt(transform.position + moveVec);
-
-        if (Input.GetButtonDown("Jump") && !jumpStatus)
-        {
-            jumpStatus = true;
-            rigid.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
-        }
-    }
-    //충돌
-    public void CollisionFromChild(Collision collision)
-    {
-       
-        //Debug.Log("호출여부");
-        if (collision.gameObject.tag == "Floor")
-        {
-            //jumpStatus = false;
-        }
+        // 캐릭터에 중력 적용.
+        moveDir.y -= 2000f * Time.deltaTime;
+        // 캐릭터 움직임.
+        controller.Move(moveDir * Time.deltaTime);
     }
     void LateUpdate()
     {
@@ -137,6 +131,53 @@ public class Player : MonoBehaviour
             Debug.Log(viewPointFlag);
         }
     }
+    //점프 가능한 상태인지 판단하는 함수
+    public void JumpStatusOn(Transform charactor, LayerMask floor)
+    {
+        RaycastHit hitinfo;
+        Debug.DrawRay(charactor.position, -charactor.up * 1.5f, Color.yellow);
+        if (Physics.Raycast(charactor.position, -charactor.up, out hitinfo, 1.5f, floor))//레이케스트 성공시
+        {
+            jumpStatus = false;
+        }
+        else
+        {
+            jumpStatus = true;
+        }
+    }
+    //점프 할때 쓰는 move 함수
+    public IEnumerator JumpAndMove(Transform cameraArm, Transform characterBody, CharacterController controller, Animator animator, float speed, Rigidbody rigid, float jumpPower, LayerMask floor, float jumpheight)
+    {
+        if (Input.GetButtonDown("Jump") && !jumpStatus)
+        {
+            float time = 0f;
+            while(time < 0.15f)
+            {
+                hAxis = Input.GetAxisRaw("Horizontal");
+                vAxis = Input.GetAxisRaw("Vertical");
+                wDown = Input.GetButton("Run");
 
-    
+
+
+                Vector2 moveInput = new Vector2(hAxis, vAxis);
+                bool isMove = moveInput.magnitude != 0;
+                //카메라 전면
+                Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
+                Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
+                Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
+
+                if (isMove)
+                {
+                    //캐릭터 카메라 주시방향
+                    characterBody.forward = moveDir;
+                    moveDir = moveDir.normalized * speed * (wDown ? 1f : 0.3f);
+                }
+                moveDir.y += jumpPower;
+                // 캐릭터 움직임.
+                controller.Move(moveDir * Time.deltaTime);
+                time += Time.deltaTime;
+                yield return null;
+            }
+        }
+    }
 }
