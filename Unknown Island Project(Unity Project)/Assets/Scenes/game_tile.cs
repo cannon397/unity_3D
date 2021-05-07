@@ -113,7 +113,7 @@ public class game_tile : MonoBehaviour
     //해상도 설정
     void MonitorSize(Setting_header sh)
     {
-        if (fullscreen_toggle.isOn == true)
+        if (fullscreen_toggle.isOn)
         {
             switch (monitorsize_dropdown.value)
             {
@@ -167,7 +167,7 @@ public class game_tile : MonoBehaviour
     //키 커스텀 인지 아닌지 확인 해서 바꾼 키 값 반환 하는 함수
     public void KeyCustomCheck(Setting_header sh)
     {
-        if (keycustom_check_panel.activeSelf == true)
+        if (keycustom_check_panel.activeSelf)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {

@@ -80,7 +80,7 @@ public class pause_menu : MonoBehaviour
     //키 커스텀 인지 아닌지 확인 해서 바꾼 키 값 반환 하는 함수
     public void KeyCustomCheck(Setting_header sh, GameObject keycustom_check_panel, int key_adr, string[] key_custom_arry)
     {
-        if (keycustom_check_panel.activeSelf == true)
+        if (keycustom_check_panel.activeSelf)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {

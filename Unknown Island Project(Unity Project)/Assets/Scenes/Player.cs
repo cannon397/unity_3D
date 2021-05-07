@@ -103,7 +103,7 @@ public class Player : MonoBehaviour
         animator.SetBool("isWalk", moveInput != Vector2.zero);
         animator.SetBool("isRun", wDown);
         // 캐릭터에 중력 적용.
-        moveDir.y -= 2000f * Time.deltaTime;
+        moveDir.y -= 1000f * Time.deltaTime;
         // 캐릭터 움직임.
         controller.Move(moveDir * Time.deltaTime);
     }
@@ -132,11 +132,15 @@ public class Player : MonoBehaviour
         }
     }
     //점프 가능한 상태인지 판단하는 함수
-    public void JumpStatusOn(Transform charactor, LayerMask floor)
+    public void JumpStatusOn(Transform charactor, LayerMask floor, LayerMask rock)
     {
         RaycastHit hitinfo;
         Debug.DrawRay(charactor.position, -charactor.up * 1.5f, Color.yellow);
         if (Physics.Raycast(charactor.position, -charactor.up, out hitinfo, 1.5f, floor))//레이케스트 성공시
+        {
+            jumpStatus = false;
+        }
+        else if (Physics.Raycast(charactor.position, -charactor.up, out hitinfo, 1.5f, rock))
         {
             jumpStatus = false;
         }

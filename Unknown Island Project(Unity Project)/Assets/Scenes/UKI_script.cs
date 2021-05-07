@@ -10,17 +10,27 @@ using Assets.Scenes;
 public class UKI_script : MonoBehaviour
 {
     public GameObject tree;
+
     public GameObject press_tree_image;
     public GameObject press_treeitem_image;
+    public GameObject press_water_image;
+    public GameObject press_fishtrap_image;
+    public GameObject press_rock_image;
+
     public GameObject tree_log;
     public GameObject tree_fruit;
+    public GameObject fish_trap;
+    public GameObject rock_stone;
+
     public GameObject pause_panel;
     public GameObject setting_panel;
+    public GameObject keycustom_panel;
+    public GameObject keycustom_check_panel;
+
     public Slider mousedpi_slider;
     public Slider gamemaster_sound_slider;
     public AudioMixer master_mixer;
-    public GameObject keycustom_panel;
-    public GameObject keycustom_check_panel;
+
     public Button key_custom_save_button;
     public Button save_setting_value_button;
 
@@ -38,6 +48,9 @@ public class UKI_script : MonoBehaviour
     public LayerMask laymask_tree;
     public LayerMask laymask_tree_item;
     public LayerMask laymask_floor;
+    public LayerMask laymask_water;
+    public LayerMask laymask_fishtrap;
+    public LayerMask laymask_rock;
 
     public float speed;
     public float jumpPower;
@@ -45,22 +58,27 @@ public class UKI_script : MonoBehaviour
     private float camera_dstc;
     private static bool game_puase_bool;
     public static bool jumpStatus;
-    public List<GameObject> tree_list;
     bool viewPoint;
     private float mouse_dpi;
+
+    public List<GameObject> tree_list;
     //flag
     // 1 = 3인칭 0 = 1인칭
     int viewPointFlag = 1;
     private string[] key_custom_arry;
     private static int key_adr; 
     public void SetKeyADR(int i) { key_adr = i; }
-    static WaitForSeconds wait;
+
+    static WaitForSeconds wait_treereset;
+    static AsyncOperation wait_settingtrap;
+    static WaitForSeconds wait_fishtrap;
+
     private DBAccess db;
     private Setting_header sh;
     private Player pl;
     private Ingame_Interection ii;
     private pause_menu pm;
-    private Tree_Dispancer td;
+    private Dispancer ds;
     void Awake()
     {
         animator = GameObject.Find("Player").GetComponentInChildren<Animator>();
@@ -75,20 +93,29 @@ public class UKI_script : MonoBehaviour
         ii = new Ingame_Interection();
         pl = new Player();
         pm = new pause_menu();
-        td = new Tree_Dispancer();
+        ds = new Dispancer();
 
         key_adr = 9999;
 
         tree_list = new List<GameObject>();
-        tree_list = td.TreeDispanceList();
+        tree_list = ds.TreeDispanceList();
+
         press_tree_image = GameObject.Find("Press_Tree_Image");
         press_tree_image.SetActive(false);
         press_treeitem_image = GameObject.Find("Press_TreeItem_Image");
         press_treeitem_image.SetActive(false);
+        press_water_image = GameObject.Find("Press_Water_Image");
+        press_water_image.SetActive(false);
+        press_fishtrap_image = GameObject.Find("Press_Fishtrap_Image");
+        press_fishtrap_image.SetActive(false);
+        press_rock_image = GameObject.Find("Press_Rock_Image");
+        press_rock_image.SetActive(false);
+
         tree_log = GameObject.FindWithTag("Tree_Log");
-        tree_log.SetActive(false);
         tree_fruit = GameObject.FindWithTag("Tree_Fruit");
-        tree_fruit.SetActive(false);
+        fish_trap = GameObject.Find("Fish_trap");
+        rock_stone = GameObject.Find("Rock_stone");
+
         pause_panel = GameObject.Find("Pause_Panel");
         pause_panel.SetActive(false);
         setting_panel = GameObject.Find("Setting_Panel");
@@ -114,7 +141,9 @@ public class UKI_script : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 300;
         ImportSettingValue();
-        wait = new WaitForSeconds(300.0f);//나무 리스폰 시간 조정
+        wait_treereset = new WaitForSeconds(300.0f);//나무 리스폰 시간 조정
+        wait_settingtrap = new AsyncOperation();
+        wait_fishtrap = new WaitForSeconds(5f);//통발에 물고기 잡히길 기다리는 시간 조정
     }
 
     
@@ -131,12 +160,15 @@ public class UKI_script : MonoBehaviour
             StartCoroutine(pl.JumpAndMove(cameraArm, characterBody, controller, animator, speed, rigid, jumpPower, laymask_floor, jumpheight));
             //PointOfView();
         }
-        pl.JumpStatusOn(characterBody, laymask_floor);
+        pl.JumpStatusOn(characterBody, laymask_floor, laymask_rock);
         ii.RayCastTree(camera, press_tree_image, key_custom_arry, tree_log, tree_fruit, laymask_tree);
-        ii.TayCastTreeItem(camera, press_treeitem_image, key_custom_arry, laymask_tree_item);
+        ii.RayCastTreeItem(camera, press_treeitem_image, key_custom_arry, laymask_tree_item);
+        ii.RayCastWaterFishTrap(camera, press_water_image, press_fishtrap_image, key_custom_arry, fish_trap, laymask_water, laymask_fishtrap);
+        ii.RayCastRock(camera, press_rock_image, key_custom_arry, rock_stone, laymask_rock);
         pm.KeyCustomCheck(sh, keycustom_check_panel, key_adr, key_custom_arry);
         pm.CheckKeyControl(pause_panel);
-        StartCoroutine(ii.ResetTree(tree_list, wait, 0));
+        StartCoroutine(ii.ResetTree(tree_list, wait_treereset, 0));
+        StartCoroutine(ii.CountFishTrap(wait_fishtrap, wait_settingtrap, 0));
     }
     void LateUpdate()
     {

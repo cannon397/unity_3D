@@ -9,7 +9,7 @@ using Assets.Scenes;
 
 namespace Assets.Scenes
 {
-    class Tree_Dispancer
+    class Dispancer
     {
         public List<GameObject> TreeDispanceList()
         {
@@ -25,10 +25,6 @@ namespace Assets.Scenes
                 i++;
             }
             return list;
-        }
-        public void TreeRandomSetter(List<GameObject> list)
-        {
-
         }
     }
 }
