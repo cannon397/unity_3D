@@ -18,11 +18,13 @@ public class Player : MonoBehaviour
     bool wDown;
 
     public static bool jumpStatus;
+    private static float gravity;
     
     public Player()
     {
         uki = new UKI_script();
         jumpStatus = false;
+        gravity = 1000f;
     }
     void Awake()
     {
@@ -77,7 +79,7 @@ public class Player : MonoBehaviour
 
     }
     //점프 하지 않았을때 move 함수
-    public void Move(Transform cameraArm, Transform characterBody, CharacterController controller, Animator animator, float speed, Rigidbody rigid, float jumpPower, LayerMask floor)
+    public void Move(Transform cameraArm, Transform characterBody, CharacterController controller, Animator animator, float speed)
     {
         Debug.DrawRay(cameraArm.position, new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized, Color.red);
 
@@ -103,7 +105,15 @@ public class Player : MonoBehaviour
         animator.SetBool("isWalk", moveInput != Vector2.zero);
         animator.SetBool("isRun", wDown);
         // 캐릭터에 중력 적용.
-        moveDir.y -= 1000f * Time.deltaTime;
+        moveDir.y += -gravity * Time.deltaTime;
+        if (!jumpStatus)
+        {
+            gravity = 1000f;
+        }
+        else
+        {
+            gravity += 100f;
+        }
         // 캐릭터 움직임.
         controller.Move(moveDir * Time.deltaTime);
     }
@@ -150,7 +160,7 @@ public class Player : MonoBehaviour
         }
     }
     //점프 할때 쓰는 move 함수
-    public IEnumerator JumpAndMove(Transform cameraArm, Transform characterBody, CharacterController controller, Animator animator, float speed, Rigidbody rigid, float jumpPower, LayerMask floor, float jumpheight)
+    public IEnumerator JumpAndMove(Transform cameraArm, Transform characterBody, CharacterController controller, Animator animator, float speed, float jumpPower)
     {
         if (Input.GetButtonDown("Jump") && !jumpStatus)
         {
@@ -174,7 +184,7 @@ public class Player : MonoBehaviour
                 {
                     //캐릭터 카메라 주시방향
                     characterBody.forward = moveDir;
-                    moveDir = moveDir.normalized * speed * (wDown ? 1f : 0.3f);
+                    moveDir = moveDir.normalized * speed / jumpPower;
                 }
                 moveDir.y += jumpPower;
                 // 캐릭터 움직임.

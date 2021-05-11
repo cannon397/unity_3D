@@ -37,8 +37,10 @@ namespace Assets.Scenes
         {
 
         }
-
-        //모니터 해상도값
+        /// <summary>
+        /// 모니터 해상도 Get
+        /// </summary>
+        /// <returns></returns>
         public int GetMonitorDV()
         {
 
@@ -49,13 +51,20 @@ namespace Assets.Scenes
 
             return m_reader.GetInt16(0);
         }
+        /// <summary>
+        /// 모니터 해상도 Set
+        /// </summary>
+        /// <param name="i"></param>
         public void SetMonitorDV(int i)
         {
             String[] db_monitor_dv_value = { i.ToString() };
             String[] db_cols = { "monitor_dropdown_value" };
             db.UpdateInto(settings_table, db_cols, db_monitor_dv_value, "no", "1");
         }
-        //전체화면 유무 값
+        /// <summary>
+        /// 전체화면 유뮤 값 Get
+        /// </summary>
+        /// <returns></returns>
         public bool GetFullscreenBool()
         {
             String[] db_cols = { "fullscreen" };
@@ -72,6 +81,10 @@ namespace Assets.Scenes
             }
             return (fullscreen_bool);
         }
+        /// <summary>
+        /// 전체화면 유뮤값 Set
+        /// </summary>
+        /// <param name="b"></param>
         public void SetFullscreenBool(bool b)
         {
             string i;
@@ -88,7 +101,10 @@ namespace Assets.Scenes
             db.UpdateInto(settings_table, db_cols, db_fullscreen_bool, "no", "1");
             fullscreen_bool = b;
         }
-        //마스터 볼륨 값
+        /// <summary>
+        /// 마스터 볼륨 값 Get
+        /// </summary>
+        /// <returns></returns>
         public float GetSoundMasterVolume()
         {
 
@@ -99,6 +115,10 @@ namespace Assets.Scenes
 
             return m_reader.GetFloat(0);
         }
+        /// <summary>
+        /// 마스터 볼륨 값 Set
+        /// </summary>
+        /// <param name="f"></param>
         public void SetSoundMasterVolume(float f)
         {
             String[] db_master_volume_value = { f.ToString() };
@@ -106,7 +126,10 @@ namespace Assets.Scenes
             db.UpdateInto(settings_table, db_cols, db_master_volume_value, "no", "1");
             //db.CloseSqlConnection();
         }
-        //마우스 감도 값
+        /// <summary>
+        /// 마우스 감도 값 Get
+        /// </summary>
+        /// <returns></returns>
         public float GetMouseDpi()
         {
             String[] db_cols = { "mouse_dpi" };
@@ -121,13 +144,20 @@ namespace Assets.Scenes
             return m_reader.GetFloat(0);
 
         }
+        /// <summary>
+        /// 마우스 감도 값 Set
+        /// </summary>
+        /// <param name="f"></param>
         public void SetMouseDpi(float f)
         {
             String[] db_mouse_dp_value = { f.ToString() };
             String[] db_cols = { "mouse_dpi" };
             db.UpdateInto(settings_table, db_cols, db_mouse_dp_value, "no", "1");
         }
-        //키 커스텀 
+        /// <summary>
+        /// 키 커스텀 데이터 베이스에 문자열로 저장
+        /// </summary>
+        /// <param name="st_arry"></param>
         public void SetKeyCustom(string[] st_arry)
         {
             string st = "'";
@@ -147,7 +177,10 @@ namespace Assets.Scenes
             String[] db_cols = { "key_custom_value_arry" };
             db.UpdateInto(keycustom_table, db_cols, db_key_custom, "no", "1");
         }
-        //키 커스텀 배열 동기화
+        /// <summary>
+        /// 키 커스텀 배열 데이터 베이스에서 받아와서 string[] 로 반환
+        /// </summary>
+        /// <returns></returns>
         public string[] SyncKeyCustom()
         {
             String[] db_cols = { "key_custom_value_arry" };
@@ -179,7 +212,11 @@ namespace Assets.Scenes
             key_custom_array = ZeroErase(key_custom_array);
             return key_custom_array;
         }
-        //키 커스텀 가능한 키 입력인지 확인
+        /// <summary>
+        /// 키 커스텀 가능한 키 입력인지 확인
+        /// </summary>
+        /// <param name="st"></param>
+        /// <returns></returns>
         public bool CheckKeyCustomAvble(string st)
         {
             for (int i = 0; i < key_custom_availble_arry.Length; i++)
@@ -191,7 +228,11 @@ namespace Assets.Scenes
             }
             return false;
         }
-        //string[] 에서 null값 없애주는 함수
+        /// <summary>
+        /// 배열에서 null값 확인해서 없애주는 함수
+        /// </summary>
+        /// <param name="ary"></param>
+        /// <returns></returns>
         private string[] ZeroErase(string[] ary)
         {
             var temp = new List<string>();

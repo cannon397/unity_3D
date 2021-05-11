@@ -16,6 +16,7 @@ public class UKI_script : MonoBehaviour
     public GameObject press_water_image;
     public GameObject press_fishtrap_image;
     public GameObject press_rock_image;
+    public GameObject press_stone_image;
 
     public GameObject tree_log;
     public GameObject tree_fruit;
@@ -51,6 +52,7 @@ public class UKI_script : MonoBehaviour
     public LayerMask laymask_water;
     public LayerMask laymask_fishtrap;
     public LayerMask laymask_rock;
+    public LayerMask laymask_stone;
 
     public float speed;
     public float jumpPower;
@@ -60,6 +62,7 @@ public class UKI_script : MonoBehaviour
     public static bool jumpStatus;
     bool viewPoint;
     private float mouse_dpi;
+    static private bool isinwater;
 
     public List<GameObject> tree_list;
     //flag
@@ -72,6 +75,8 @@ public class UKI_script : MonoBehaviour
     static WaitForSeconds wait_treereset;
     static AsyncOperation wait_settingtrap;
     static WaitForSeconds wait_fishtrap;
+    static WaitForSeconds wait_fishtrapisfull;
+    static WaitForFixedUpdate wait_fix;
 
     private DBAccess db;
     private Setting_header sh;
@@ -110,6 +115,8 @@ public class UKI_script : MonoBehaviour
         press_fishtrap_image.SetActive(false);
         press_rock_image = GameObject.Find("Press_Rock_Image");
         press_rock_image.SetActive(false);
+        press_stone_image = GameObject.Find("Press_Stone_Image");
+        press_stone_image.SetActive(false);
 
         tree_log = GameObject.FindWithTag("Tree_Log");
         tree_fruit = GameObject.FindWithTag("Tree_Fruit");
@@ -143,7 +150,9 @@ public class UKI_script : MonoBehaviour
         ImportSettingValue();
         wait_treereset = new WaitForSeconds(300.0f);//나무 리스폰 시간 조정
         wait_settingtrap = new AsyncOperation();
-        wait_fishtrap = new WaitForSeconds(5f);//통발에 물고기 잡히길 기다리는 시간 조정
+        wait_fishtrap = new WaitForSeconds(120f);//통발에 물고기 잡히길 기다리는 시간 조정
+        wait_fishtrapisfull = new WaitForSeconds(5f);
+        wait_fix = new WaitForFixedUpdate();
     }
 
     
@@ -156,19 +165,20 @@ public class UKI_script : MonoBehaviour
         else
         {
             pl.LookAround(cameraArm, camera, camera_dstc, mouse_dpi);
-            pl.Move(cameraArm, characterBody, controller, animator, speed, rigid, jumpPower, laymask_floor);
-            StartCoroutine(pl.JumpAndMove(cameraArm, characterBody, controller, animator, speed, rigid, jumpPower, laymask_floor, jumpheight));
+            pl.Move(cameraArm, characterBody, controller, animator, speed);
+            StartCoroutine(pl.JumpAndMove(cameraArm, characterBody, controller, animator, speed, jumpPower));
             //PointOfView();
         }
         pl.JumpStatusOn(characterBody, laymask_floor, laymask_rock);
-        ii.RayCastTree(camera, press_tree_image, key_custom_arry, tree_log, tree_fruit, laymask_tree);
-        ii.RayCastTreeItem(camera, press_treeitem_image, key_custom_arry, laymask_tree_item);
-        ii.RayCastWaterFishTrap(camera, press_water_image, press_fishtrap_image, key_custom_arry, fish_trap, laymask_water, laymask_fishtrap);
-        ii.RayCastRock(camera, press_rock_image, key_custom_arry, rock_stone, laymask_rock);
+        ii.RayCastTree(characterBody, press_tree_image, key_custom_arry, tree_log, tree_fruit, laymask_tree);
+        ii.RayCastTreeItem(characterBody, press_treeitem_image, key_custom_arry, laymask_tree_item);
+        ii.RayCastWaterFishTrap(characterBody, press_water_image, press_fishtrap_image, key_custom_arry, fish_trap, laymask_water, laymask_fishtrap);
+        ii.RayCastRock(camera, press_rock_image, press_stone_image, key_custom_arry, rock_stone, laymask_rock, laymask_stone);
         pm.KeyCustomCheck(sh, keycustom_check_panel, key_adr, key_custom_arry);
         pm.CheckKeyControl(pause_panel);
         StartCoroutine(ii.ResetTree(tree_list, wait_treereset, 0));
         StartCoroutine(ii.CountFishTrap(wait_fishtrap, wait_settingtrap, 0));
+        StartCoroutine(ii.FishtrapIsfull(wait_fishtrapisfull, wait_fix));
     }
     void LateUpdate()
     {
@@ -233,5 +243,9 @@ public class UKI_script : MonoBehaviour
     public void GamePause(bool bl)
     {
         game_puase_bool = bl;
+    }
+    public void IsinWater(bool _bool)
+    {
+        isinwater = _bool;
     }
 }

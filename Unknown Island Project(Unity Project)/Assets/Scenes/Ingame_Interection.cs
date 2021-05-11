@@ -15,6 +15,10 @@ public class Ingame_Interection : MonoBehaviour
     static private List<GameObject> fishtrap_list;
     static private List<int> fishtrap_waitcount_list;//통발이 기다린 시간에 따라 +1 씩 증가하니까 그에 따른 물고기 양도 확률 적으로 증가하게 하셈
     static private List<bool> fishtrap_wait_bool_list;
+
+    public GameObject fishtrap_text;
+    public GameObject setting_point;
+
     private UKI_script uki;
     public Ingame_Interection()
     {
@@ -23,6 +27,9 @@ public class Ingame_Interection : MonoBehaviour
         fishtrap_list = new List<GameObject>();
         fishtrap_waitcount_list = new List<int>();
         fishtrap_wait_bool_list = new List<bool>();
+        fishtrap_text = GameObject.Find("Fishtrap_isFull_Text");
+        fishtrap_text.SetActive(false);
+        setting_point = GameObject.Find("Setting_point");
         uki = new UKI_script();
     }
 
@@ -33,13 +40,15 @@ public class Ingame_Interection : MonoBehaviour
 
     void Update()
     {
-        
+
     }
-    //유저가 나무를 향해 화면을 보고 있는지 판단해서 press E 이미지를 띄우고 그 상태에서 E 누르면 나무를 캐고(비활성화) 하위 아이템을 해당 좌표에 활성화 후 순간이동 시키는 함수
-    public void RayCastTree(Transform camera, GameObject press_tree_image, string[] key_custom_arry, GameObject tree_log, GameObject tree_fruit, LayerMask laymask_tree)
+    ///<summary>
+    ///유저가 나무를 향해 화면을 보고 있는지 판단해서 press E 이미지를 띄우고 그 상태에서 E 누르면 나무를 캐고(비활성화) 하위 아이템을 해당 좌표에 활성화 후 순간이동 시키는 함수
+    ///</summary>
+    public void RayCastTree(Transform charactor, GameObject press_tree_image, string[] key_custom_arry, GameObject tree_log, GameObject tree_fruit, LayerMask laymask_tree)
     {
         RaycastHit hitinfo;
-        if (Physics.Raycast(camera.position, camera.forward.normalized, out hitinfo, 8f, laymask_tree))
+        if (Physics.SphereCast(charactor.position - new Vector3(0, 0.5f, 0), 1f, charactor.forward, out hitinfo, 2f, laymask_tree))
         {
             //if(도끼를 장착 했는지 확인)
             {
@@ -47,6 +56,7 @@ public class Ingame_Interection : MonoBehaviour
                 if (Input.GetKeyDown(key_custom_arry[1]))
                 {
                     //나무 패는 에니메이션
+
                     TreeItemCreate(hitinfo.collider.gameObject.transform, tree_log, tree_fruit);
 
 
@@ -59,11 +69,14 @@ public class Ingame_Interection : MonoBehaviour
             press_tree_image.SetActive(false);
         }
     }
-    //유저가 나무하위 아이템을 향해 화면을 보고 있는지 판단해서 press E 이미지를 띄우고 그 상태에서 E 누르면 아이템을 줍고(비활성화) 아이템을 저장하는 함수
-    public void RayCastTreeItem(Transform camera, GameObject press_treeitem_image, string[] key_custom_arry, LayerMask laymask_tree_item)
+    ///<summary>
+    ///유저가 나무하위 아이템을 향해 화면을 보고 있는지 판단해서 press E 이미지를 띄우고 그 상태에서 E 누르면 아이템을 줍고(비활성화) 아이템을 저장하는 함수
+    ///</summary>
+    public void RayCastTreeItem(Transform charactor, GameObject press_treeitem_image, string[] key_custom_arry, LayerMask laymask_tree_item)
     {
         RaycastHit hitinfo;
-        if (Physics.Raycast(camera.position, camera.forward.normalized, out hitinfo, 8f, laymask_tree_item))
+        Debug.DrawRay(charactor.position - new Vector3(0, 0.5f, 0), charactor.forward.normalized, Color.green);
+        if (Physics.SphereCast(charactor.position - new Vector3(0, 0.5f, 0), 1f, charactor.forward, out hitinfo, 2f, laymask_tree_item))
         {
             press_treeitem_image.SetActive(true);
             if (Input.GetKeyDown(key_custom_arry[1]))
@@ -88,7 +101,9 @@ public class Ingame_Interection : MonoBehaviour
             press_treeitem_image.SetActive(false);
         }
     }
-    // 나무 재생성 하는 함수
+    ///<summary>
+    ///나무 재생성 하는 함수
+    ///</summary>
     public IEnumerator ResetTree(List<GameObject> tree_list, WaitForSeconds wait, int i)
     {
         i = UnityEngine.Random.Range(0, tree_list.Count);
@@ -107,7 +122,9 @@ public class Ingame_Interection : MonoBehaviour
             }
         }
     }
-    // 나무가 카메라에 보이는지 확인 하는 함수 보이면 true
+    ///<summary>
+    ///나무가 카메라에 보이는지 확인 하는 함수 보이면 true
+    ///</summary>
     private bool CheckScreenOut(GameObject tree)
     {
         Vector3 targetScreenPos = Camera.main.WorldToViewportPoint(tree.transform.position);
@@ -120,30 +137,125 @@ public class Ingame_Interection : MonoBehaviour
             return false;
         }
     }
-    //나무 하위 아이템 생성 하는 함수
+    ///<summary>
+    ///나무 하위 아이템 생성 하는 함수
+    ///</summary>
     private void TreeItemCreate(Transform target, GameObject tree_log, GameObject tree_fruit)
     {
-        GameObject log = Instantiate(tree_log, target.position, Quaternion.identity);
-        GameObject fruit = Instantiate(tree_fruit, target.position + new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 2.0f, UnityEngine.Random.Range(-1.0f, 1.0f)), Quaternion.identity);
+        GameObject log = Instantiate(tree_log, target.position + new Vector3(0, 2.5f, 0), Quaternion.identity);
+        GameObject fruit = Instantiate(tree_fruit, target.position + new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f), 3.0f, UnityEngine.Random.Range(-1.0f, 1.0f)), Quaternion.identity);
         tree_log_list.Add(log);
         tree_fruit_list.Add(fruit);
         Destroy(log, 30f);
         Destroy(fruit, 30f);
     }
-    //물인지 판단해서 통발 설치 및 회수
-    public void RayCastWaterFishTrap(Transform camera, GameObject press_water_image, GameObject press_fishtrap_image, string[] key_custom_arry, GameObject fish_trap, LayerMask laymask_water, LayerMask laymask_fishtrap)
+    ///<summary>
+    ///물인지 판단해서 통발 설치 및 회수
+    ///</summary>
+    public void RayCastWaterFishTrap(Transform charactor, GameObject press_water_image, GameObject press_fishtrap_image, string[] key_custom_arry, GameObject fish_trap, LayerMask laymask_water, LayerMask laymask_fishtrap)
     {
         RaycastHit hitinfo_trap;
         RaycastHit hitinfo_water;
         //통발 회수
-        if (Physics.Raycast(camera.position, camera.forward.normalized, out hitinfo_trap, 8f, laymask_fishtrap))
+        if (Physics.SphereCast(charactor.position - new Vector3(0, 0.5f, 0), 1f, charactor.forward, out hitinfo_trap, 2f, laymask_fishtrap))
         {
             press_fishtrap_image.SetActive(true);
             if (Input.GetKeyDown(key_custom_arry[1]))
             {
                 //통발 줍는 애니메이션
                 //인벤토리에 통발과 물고기 저장
-                //fishtrap_waitcount_list[fishtrap_list.IndexOf(hitinfo_trap.collider.gameObject)] 현재 회수한 통발의 기다린 시간에 따른 카운트 값
+                int rnd = UnityEngine.Random.Range(1, 101);
+                switch (fishtrap_waitcount_list[fishtrap_list.IndexOf(hitinfo_trap.collider.gameObject)])
+                {//통발 시간에 따른 물고기 회수량 확률 적용
+                    case 0:
+                        if(rnd < 95)
+                        {
+                            //물고기 0개
+                        }
+                        else
+                        {
+                            //물고기 1개
+                        }
+                        break;
+                    case 1:
+                        if (rnd < 50)
+                        {
+                            //물고기 1개
+                        }
+                        else
+                        {
+                            //물고기 2개
+                        }
+                        break;
+                    case 2:
+                        if (rnd < 15)
+                        {
+                            //물고기 1개
+                        }
+                        else if (rnd < 50)
+                        {
+                            //물고기 2개
+                        }
+                        else
+                        {
+                            //물고기 3개
+                        }
+                        break;
+                    case 3:
+                        if (rnd < 5)
+                        {
+                            //물고기 1개
+                        }
+                        else if (rnd < 30)
+                        {
+                            //물고기 2개
+                        }
+                        else if (rnd < 60)
+                        {
+                            //물고기 3개
+                        }
+                        else
+                        {
+                            //물고기 4개
+                        }
+                        break;
+                    case 4:
+                        if (rnd < 5)
+                        {
+                            //물고기 2개
+                        }
+                        else if (rnd < 30)
+                        {
+                            //물고기 3개
+                        }
+                        else if (rnd < 60)
+                        {
+                            //물고기 4개
+                        }
+                        else
+                        {
+                            //물고기 5개
+                        }
+                        break;
+                    default:
+                        if (rnd < 5)
+                        {
+                            //물고기 3개
+                        }
+                        else if (rnd < 30)
+                        {
+                            //물고기 4개
+                        }
+                        else if (rnd < 60)
+                        {
+                            //물고기 5개
+                        }
+                        else
+                        {
+                            //물고기 6개
+                        }
+                        break;
+                }
                 fishtrap_waitcount_list.RemoveAt(fishtrap_list.IndexOf(hitinfo_trap.collider.gameObject));
                 fishtrap_wait_bool_list.RemoveAt(fishtrap_list.IndexOf(hitinfo_trap.collider.gameObject));
                 fishtrap_list.Remove(hitinfo_trap.collider.gameObject);
@@ -155,14 +267,21 @@ public class Ingame_Interection : MonoBehaviour
             press_fishtrap_image.SetActive(false);
         }
         //통발 설치
-        else if (Physics.Raycast(camera.position, camera.forward.normalized, out hitinfo_water, 8f, laymask_water))
+        else if (Physics.Raycast(charactor.position + charactor.up.normalized, -charactor.up, 1f, laymask_water))
         {
             //if(통발을 장착 했는지 확인)
             {
                 press_water_image.SetActive(true);
                 if (Input.GetKeyDown(key_custom_arry[1]))
                 {
-                    FishTrapCreate(hitinfo_water.point, fish_trap);
+                    if (fishtrap_list.Count < 4)
+                    {
+                        FishTrapCreate(setting_point.transform.position, fish_trap);
+                    }
+                    else
+                    {
+                        fishtrap_text.SetActive(true);
+                    }
                 }
             }
         }
@@ -171,7 +290,21 @@ public class Ingame_Interection : MonoBehaviour
             press_water_image.SetActive(false);
         }
     }
-    //통발 클론 생성 함수
+    ///<summary>
+    ///통발 최대 갯수 텍스트 체크 해서 시간 지나면 해제 하는 함수
+    ///</summary>
+    public IEnumerator FishtrapIsfull(WaitForSeconds wait, WaitForFixedUpdate wait_fix)
+    {
+        yield return wait_fix;
+        if (fishtrap_text.activeSelf)
+        {
+            yield return wait;
+            fishtrap_text.SetActive(false);
+        }
+    }
+    ///<summary>
+    ///통발 클론 생성 함수
+    ///</summary>
     private void FishTrapCreate(Vector3 tr_point, GameObject fish_trap)
     {
         GameObject ft = Instantiate(fish_trap, tr_point, Quaternion.identity);
@@ -179,7 +312,9 @@ public class Ingame_Interection : MonoBehaviour
         fishtrap_waitcount_list.Add(0);
         fishtrap_wait_bool_list.Add(false);
     }
-    //통발 설치 한지 얼마나 지났는지 확인 해주는 함수
+    ///<summary>
+    ///통발 설치 한지 얼마나 지났는지 확인 해주는 함수
+    ///</summary>
     public IEnumerator CountFishTrap(WaitForSeconds wait, AsyncOperation wait_settingtrap, int i)
     {
         yield return wait_settingtrap;
@@ -203,8 +338,10 @@ public class Ingame_Interection : MonoBehaviour
             }
         }
     }
-    //돌 캐는 함수
-    public void RayCastRock(Transform camera, GameObject press_rock_image, string[] key_custom_arry, GameObject rock_stone, LayerMask laymask_rock)
+    ///<summary>
+    ///돌 캐는 함수
+    ///</summary>
+    public void RayCastRock(Transform camera, GameObject press_rock_image, GameObject press_stone_image, string[] key_custom_arry, GameObject rock_stone, LayerMask laymask_rock, LayerMask laymask_stone)
     {
         RaycastHit hitinfo;
         if (Physics.Raycast(camera.position, camera.forward.normalized, out hitinfo, 8f, laymask_rock))
@@ -214,7 +351,7 @@ public class Ingame_Interection : MonoBehaviour
                 press_rock_image.SetActive(true);
                 if (Input.GetKeyDown(key_custom_arry[1]))
                 {
-                    //나무 패는 에니메이션
+                    //곡괭이질 애니메이션
                     RockItemCreate(camera, hitinfo.point, hitinfo.collider.gameObject.transform.position, rock_stone);
                 }
             }
@@ -223,9 +360,24 @@ public class Ingame_Interection : MonoBehaviour
         {
             press_rock_image.SetActive(false);
         }
+        else if (Physics.Raycast(camera.position, camera.forward.normalized, out hitinfo, 8f, laymask_stone))
+        {
+            press_stone_image.SetActive(true);
+            if (Input.GetKeyDown(key_custom_arry[1]))
+            {
+                //줍는 애니메이션 및 줍기 구현
+            }
+        }
+        else if(press_stone_image.activeSelf)
+        {
+            press_stone_image.SetActive(false);
+        }
     }
+    ///<summary>
+    ///돌 하위 아이템 생성 함수
+    ///</summary>
     private void RockItemCreate(Transform camera, Vector3 item_point, Vector3  tr_point, GameObject rock_stone)
     {
-        Instantiate(rock_stone, item_point - tr_point.normalized, Quaternion.identity);
+        Destroy(Instantiate(rock_stone, item_point - tr_point.normalized, Quaternion.identity), 30f);
     }
 }

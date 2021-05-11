@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scenes\Player_Camera.cs" />
     <Compile Include="Assets\Scenes\Setting_header.cs" />
     <Compile Include="Assets\Scenes\UKI_script.cs" />
+    <Compile Include="Assets\Scenes\WindowsInput.cs" />
     <Compile Include="Assets\Scenes\game_tile.cs" />
     <Compile Include="Assets\Scenes\pause_menu.cs" />
     <Compile Include="Assets\Stylized Water For URP\Demos\Buoyancy\BuoyantObject.cs" />

@@ -11,6 +11,10 @@ namespace Assets.Scenes
 {
     class Dispancer
     {
+        /// <summary>
+        /// 나무 오브젝트들 받아서 리스트로 반환하는 함수
+        /// </summary>
+        /// <returns>List<GameObject></returns>
         public List<GameObject> TreeDispanceList()
         {
             List<GameObject> list = new List<GameObject>();
