@@ -19,64 +19,47 @@ public class Player : MonoBehaviour
 
     public static bool jumpStatus;
     private static float gravity;
+    private static bool viewpoint_bool;//ture = 3rd
     
     public Player()
     {
         uki = new UKI_script();
         jumpStatus = false;
         gravity = 1000f;
+        viewpoint_bool = true;
     }
-    void Awake()
-    {
-        
-    }
-    void Start()
-    {
-        
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    void FixedUpdate()
-    {
-        
-        // rigid.AddForce(new Vector3(Input.GetAxis("Horizontal"),
-        //0,
-        //Input.GetAxis("Vertical")), ForceMode.Impulse);
-
-
-    }
-    void OnCollisionEnter(Collision collision)
-    {
-
-
-
-    }
-    public void LookAround(Transform cameraArm, Transform camera, float camera_dstc, float mouse_dpi)
+    public IEnumerator LookAround(Transform cameraArm, Transform camera, float camera_dstc, float mouse_dpi, WaitForEndOfFrame wait)
     {
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X") * mouse_dpi, Input.GetAxis("Mouse Y") * mouse_dpi);
         Vector3 camAngle = cameraArm.rotation.eulerAngles;
 
         float x = camAngle.x - mouseDelta.y;
 
-        if (x < 180f) {x = Mathf.Clamp(x, -1f, 70f);}
-        else {x = Mathf.Clamp(x, 290f, 361f);}
+        if (x < 180f) { x = Mathf.Clamp(x, -1f, 70f); }
+        else { x = Mathf.Clamp(x, 300f, 361f); }
 
         cameraArm.rotation = Quaternion.Euler(x, camAngle.y + mouseDelta.x, camAngle.z);
 
-        RaycastHit hitinfo;
-        if (Physics.Linecast(cameraArm.position, camera.position, out hitinfo))//레이케스트 성공시
+        if (viewpoint_bool == true)
         {
-            //point로 옮긴다.
-            camera.transform.position = hitinfo.point;
+            RaycastHit hitinfo;
+            if (Physics.Linecast(cameraArm.position, camera.position, out hitinfo))//레이케스트 성공시
+            {
+                //point로 옮긴다.
+                yield return wait;
+                camera.position = Vector3.Lerp(camera.position, hitinfo.point, Time.deltaTime * 15);
+            }
+            else
+            {
+                yield return wait;
+                camera.localPosition = Vector3.Lerp(camera.localPosition, new Vector3(0, 0, -4f).normalized * camera_dstc, Time.deltaTime * 2);
+            }
+            yield return wait;
         }
         else
         {
-            camera.localPosition = Vector3.Lerp(camera.localPosition, new Vector3(0, -1f, -4f).normalized * camera_dstc, Time.deltaTime * 3);
+            camera.position = cameraArm.position + cameraArm.up.normalized * 0.2f + cameraArm.forward.normalized * 0.1f;
         }
-
     }
     //점프 하지 않았을때 move 함수
     public void Move(Transform cameraArm, Transform characterBody, CharacterController controller, Animator animator, float speed)
@@ -100,7 +83,7 @@ public class Player : MonoBehaviour
 
             //캐릭터 카메라 주시방향
             characterBody.forward = moveDir;
-            moveDir = moveDir.normalized * speed * (wDown ? 1f : 0.3f);
+            moveDir = moveDir.normalized * speed * (wDown ? 0.8f : 0.3f);
         }
         animator.SetBool("isWalk", moveInput != Vector2.zero);
         animator.SetBool("isRun", wDown);
@@ -117,40 +100,29 @@ public class Player : MonoBehaviour
         // 캐릭터 움직임.
         controller.Move(moveDir * Time.deltaTime);
     }
-    void LateUpdate()
+    public void PointOfView(string[] key_custom_arry)
     {
-        
-    }
-    private void PointOfView(bool viewPoint, string[] key_custom_arry, int viewPointFlag)
-    {
-        viewPoint = Input.GetButtonDown(key_custom_arry[0]);
-        if (viewPoint)
+        if (Input.GetKeyDown(key_custom_arry[0]))
         {
-            if(viewPointFlag == 1)
+            if(viewpoint_bool == true)
             {
-                
-                viewPointFlag = 0;
+                viewpoint_bool = false;
             }
             else 
             {
-                viewPointFlag = 1;
+                viewpoint_bool = true;
             }
-            //viewPointFlag == 1 ? viewPointFlag = 0 : viewPointFlag = 1;
-            
-            Debug.Log("v 누름");
-            Debug.Log(viewPointFlag);
         }
     }
     //점프 가능한 상태인지 판단하는 함수
     public void JumpStatusOn(Transform charactor, LayerMask floor, LayerMask rock)
     {
         RaycastHit hitinfo;
-        Debug.DrawRay(charactor.position, -charactor.up * 1.5f, Color.yellow);
-        if (Physics.Raycast(charactor.position, -charactor.up, out hitinfo, 1.5f, floor))//레이케스트 성공시
+        if (Physics.Raycast(charactor.position + charactor.up * 5f, -charactor.up, out hitinfo, 5.2f, floor))//레이케스트 성공시
         {
             jumpStatus = false;
         }
-        else if (Physics.Raycast(charactor.position, -charactor.up, out hitinfo, 1.5f, rock))
+        else if (Physics.Raycast(charactor.position + charactor.up * 5f, -charactor.up, out hitinfo, 5.2f, rock))
         {
             jumpStatus = false;
         }
@@ -160,7 +132,7 @@ public class Player : MonoBehaviour
         }
     }
     //점프 할때 쓰는 move 함수
-    public IEnumerator JumpAndMove(Transform cameraArm, Transform characterBody, CharacterController controller, Animator animator, float speed, float jumpPower)
+    public IEnumerator JumpAndMove(Transform cameraArm, Transform characterBody, CharacterController controller, Animator animator, float speed, float jumpPower, WaitForFixedUpdate wait)
     {
         if (Input.GetButtonDown("Jump") && !jumpStatus)
         {
@@ -190,7 +162,7 @@ public class Player : MonoBehaviour
                 // 캐릭터 움직임.
                 controller.Move(moveDir * Time.deltaTime);
                 time += Time.deltaTime;
-                yield return null;
+                yield return wait;
             }
         }
     }

@@ -77,6 +77,7 @@ public class UKI_script : MonoBehaviour
     static WaitForSeconds wait_fishtrap;
     static WaitForSeconds wait_fishtrapisfull;
     static WaitForFixedUpdate wait_fix;
+    static WaitForEndOfFrame wait_end;
 
     private DBAccess db;
     private Setting_header sh;
@@ -164,35 +165,45 @@ public class UKI_script : MonoBehaviour
         }
         else
         {
-            pl.LookAround(cameraArm, camera, camera_dstc, mouse_dpi);
-            pl.Move(cameraArm, characterBody, controller, animator, speed);
-            StartCoroutine(pl.JumpAndMove(cameraArm, characterBody, controller, animator, speed, jumpPower));
-            //PointOfView();
+            StartCoroutine(pl.JumpAndMove(cameraArm, characterBody, controller, animator, speed, jumpPower, wait_fix));
+            StartCoroutine(pl.LookAround(cameraArm, camera, camera_dstc, mouse_dpi, wait_end));
+            pl.PointOfView(key_custom_arry);
         }
         pl.JumpStatusOn(characterBody, laymask_floor, laymask_rock);
         ii.RayCastTree(characterBody, press_tree_image, key_custom_arry, tree_log, tree_fruit, laymask_tree);
         ii.RayCastTreeItem(characterBody, press_treeitem_image, key_custom_arry, laymask_tree_item);
         ii.RayCastWaterFishTrap(characterBody, press_water_image, press_fishtrap_image, key_custom_arry, fish_trap, laymask_water, laymask_fishtrap);
-        ii.RayCastRock(camera, press_rock_image, press_stone_image, key_custom_arry, rock_stone, laymask_rock, laymask_stone);
+        ii.RayCastRock(characterBody, press_rock_image, press_stone_image, key_custom_arry, rock_stone, laymask_rock, laymask_stone);
         pm.KeyCustomCheck(sh, keycustom_check_panel, key_adr, key_custom_arry);
         pm.CheckKeyControl(pause_panel);
         StartCoroutine(ii.ResetTree(tree_list, wait_treereset, 0));
         StartCoroutine(ii.CountFishTrap(wait_fishtrap, wait_settingtrap, 0));
         StartCoroutine(ii.FishtrapIsfull(wait_fishtrapisfull, wait_fix));
     }
+    private void FixedUpdate()
+    {
+        if (game_puase_bool)
+        {
+
+        }
+        else
+        {
+            //pl.LookAround(cameraArm, camera, camera_dstc, mouse_dpi);
+            pl.Move(cameraArm, characterBody, controller, animator, speed);
+            //PointOfView();
+        }
+    }
     void LateUpdate()
     {
-        cameraArm.position = characterBody.position;
         Vector3 vector = characterBody.position;
-        vector.y = characterBody.position.y + 2.5f;
+        vector.y = characterBody.position.y + 1.5f;
         if (viewPointFlag == 1)
         {
             cameraArm.position = vector;
         }
         else
         {
-            camera.position = characterBody.position;
-
+            camera.position = cameraArm.position;
         }
     }
 
