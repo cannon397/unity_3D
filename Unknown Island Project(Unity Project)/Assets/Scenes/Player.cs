@@ -18,8 +18,12 @@ public class Player : MonoBehaviour
     bool wDown;
 
     public static bool jumpStatus;
-    private static float gravity;
     private static bool viewpoint_bool;//ture = 3rd
+
+    private static float gravity;
+    private static float jump;
+
+    Camera Camera;
     
     public Player()
     {
@@ -27,6 +31,7 @@ public class Player : MonoBehaviour
         jumpStatus = false;
         gravity = 1000f;
         viewpoint_bool = true;
+        Camera = FindObjectOfType<Camera>();
     }
     public IEnumerator LookAround(Transform cameraArm, Transform camera, float camera_dstc, float mouse_dpi, WaitForEndOfFrame wait)
     {
@@ -42,6 +47,7 @@ public class Player : MonoBehaviour
 
         if (viewpoint_bool == true)
         {
+            Camera.fieldOfView = 60f;
             RaycastHit hitinfo;
             if (Physics.Linecast(cameraArm.position, camera.position, out hitinfo))//레이케스트 성공시
             {
@@ -58,6 +64,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            Camera.fieldOfView = 50f;
             camera.position = cameraArm.position + cameraArm.up.normalized * 0.2f + cameraArm.forward.normalized * 0.1f;
         }
     }
@@ -78,15 +85,24 @@ public class Player : MonoBehaviour
         Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
         Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
         Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
+        Vector3 moveDir_1 = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
+
         if (isMove)
         {
 
             //캐릭터 카메라 주시방향
-            characterBody.forward = moveDir;
+            if (viewpoint_bool == true)
+            {
+                characterBody.forward = moveDir;
+            }
+            else
+            {
+                characterBody.forward = moveDir_1;
+            }
             moveDir = moveDir.normalized * speed * (wDown ? 0.8f : 0.3f);
         }
         animator.SetBool("isWalk", moveInput != Vector2.zero);
-        animator.SetBool("isRun", wDown);
+        animator.SetBool("isRun", wDown && moveInput != Vector2.zero);
         // 캐릭터에 중력 적용.
         moveDir.y += -gravity * Time.deltaTime;
         if (!jumpStatus)
@@ -134,6 +150,7 @@ public class Player : MonoBehaviour
     //점프 할때 쓰는 move 함수
     public IEnumerator JumpAndMove(Transform cameraArm, Transform characterBody, CharacterController controller, Animator animator, float speed, float jumpPower, WaitForFixedUpdate wait)
     {
+        jump = jumpPower;
         if (Input.GetButtonDown("Jump") && !jumpStatus)
         {
             float time = 0f;
@@ -151,14 +168,30 @@ public class Player : MonoBehaviour
                 Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
                 Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
                 Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
+                Vector3 moveDir_1 = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
 
                 if (isMove)
                 {
                     //캐릭터 카메라 주시방향
-                    characterBody.forward = moveDir;
+                    if (viewpoint_bool == true)
+                    {
+                        characterBody.forward = moveDir;
+                    }
+                    else
+                    {
+                        characterBody.forward = moveDir_1;
+                    }
                     moveDir = moveDir.normalized * speed / jumpPower;
                 }
-                moveDir.y += jumpPower;
+                moveDir.y += jump * Time.deltaTime;
+                if (jumpStatus)
+                {
+                    jump -= 1f;
+                }
+                else
+                {
+                    jump = jumpPower;
+                }
                 // 캐릭터 움직임.
                 controller.Move(moveDir * Time.deltaTime);
                 time += Time.deltaTime;

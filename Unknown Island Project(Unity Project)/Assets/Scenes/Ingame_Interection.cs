@@ -18,6 +18,8 @@ public class Ingame_Interection : MonoBehaviour
 
     static private bool fishtrap_count_already;
 
+    private float time;
+
     public GameObject fishtrap_text;
     public GameObject setting_point;
     public GameObject fishtrap_overlap;
@@ -110,21 +112,32 @@ public class Ingame_Interection : MonoBehaviour
     ///<summary>
     ///나무 재생성 하는 함수
     ///</summary>
-    public IEnumerator ResetTree(List<GameObject> tree_list, WaitForSeconds wait, int i)
+    public IEnumerator ResetTree(List<GameObject> tree_list, WaitForSeconds wait, WaitForFixedUpdate wait_fix)
     {
-        i = UnityEngine.Random.Range(0, tree_list.Count);
-        if (tree_list[i].activeSelf) { }
-        else
+        while (true)
         {
-            yield return wait;
-            if (CheckScreenOut(tree_list[i]))
-            {
-                //나무가 크는 에니메이션 넣고
-                tree_list[i].SetActive(true);
-            }
+            yield return wait_fix;
+            int i = UnityEngine.Random.Range(0, tree_list.Count);
+            if (tree_list[i].activeSelf) { }
             else
             {
-                tree_list[i].SetActive(true);
+                yield return wait;
+                if (CheckScreenOut(tree_list[i]))
+                {
+                    tree_list[i].transform.localScale = new Vector3(0, 0, 0);
+                    tree_list[i].SetActive(true);
+                    time = 0f;
+                    while (time < 3f)
+                    {
+                        yield return wait_fix;
+                        tree_list[i].transform.localScale += new Vector3(Time.deltaTime/3, Time.deltaTime/3, Time.deltaTime/3);
+                        time += Time.deltaTime;
+                    }
+                }
+                else
+                {
+                    tree_list[i].SetActive(true);
+                }
             }
         }
     }
@@ -165,6 +178,8 @@ public class Ingame_Interection : MonoBehaviour
         if (Physics.SphereCast(charactor.position - charactor.forward, 1f, charactor.forward, out hitinfo_trap, 2f, laymask_fishtrap))
         {
             press_fishtrap_image.SetActive(true);
+            press_water_image.SetActive(false);
+            fishtrap_overlap.SetActive(false);
             if (Input.GetKeyDown(key_custom_arry[1]))
             {
                 //통발 줍는 애니메이션
@@ -270,6 +285,7 @@ public class Ingame_Interection : MonoBehaviour
         else if (press_fishtrap_image.activeSelf)
         {
             press_fishtrap_image.SetActive(false);
+            press_water_image.SetActive(true);
         }
         //통발 설치
         //if(통발을 장착 했는지 확인)

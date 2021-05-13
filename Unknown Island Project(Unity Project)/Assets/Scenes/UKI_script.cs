@@ -78,6 +78,10 @@ public class UKI_script : MonoBehaviour
     static WaitForSeconds wait_fishtrapisfull;
     static WaitForFixedUpdate wait_fix;
     static WaitForEndOfFrame wait_end;
+    static WaitForSeconds wait_hungthir;
+    static WaitForSeconds wait_poison;
+    static WaitForSeconds wait_bleed;
+    static WaitForSeconds wait_cold;
 
     private DBAccess db;
     private Setting_header sh;
@@ -85,6 +89,7 @@ public class UKI_script : MonoBehaviour
     private Ingame_Interection ii;
     private pause_menu pm;
     private Dispancer ds;
+    private Setting_Status ss;
     void Awake()
     {
         animator = GameObject.Find("Player").GetComponentInChildren<Animator>();
@@ -100,6 +105,7 @@ public class UKI_script : MonoBehaviour
         pl = new Player();
         pm = new pause_menu();
         ds = new Dispancer();
+        ss = new Setting_Status();
 
         key_adr = 9999;
 
@@ -149,11 +155,21 @@ public class UKI_script : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 300;
         ImportSettingValue();
-        wait_treereset = new WaitForSeconds(300.0f);//나무 리스폰 시간 조정
+        wait_treereset = new WaitForSeconds(4.0f);//나무 리스폰 시간 조정
         wait_settingtrap = new AsyncOperation();
         wait_fishtrap = new WaitForSeconds(120f);//통발에 물고기 잡히길 기다리는 시간 조정
         wait_fishtrapisfull = new WaitForSeconds(5f);
         wait_fix = new WaitForFixedUpdate();
+        wait_hungthir = new WaitForSeconds(60f);//배고픔이랑 목마름 수치 내려가는 주기
+        wait_poison = new WaitForSeconds(10f);//중독시 채력 닳는 주기
+        wait_bleed = new WaitForSeconds(10f);//출혈시 채력 닳는 주기
+        wait_cold = new WaitForSeconds(10f);//저체온증시 채력 닳는 주기
+
+        StartCoroutine(ss.HungerAndThirst(wait_hungthir, 1, 2));
+        StartCoroutine(ss.StatusPoison(wait_poison, wait_fix, 5, 10));
+        StartCoroutine(ss.StatusBleed(wait_bleed, wait_fix, 7, 10));
+        StartCoroutine(ss.StatusCold(wait_cold, wait_fix, 3, 10));
+        StartCoroutine(ii.ResetTree(tree_list, wait_treereset, wait_fix));
     }
 
     
@@ -176,7 +192,6 @@ public class UKI_script : MonoBehaviour
         ii.RayCastRock(characterBody, press_rock_image, press_stone_image, key_custom_arry, rock_stone, laymask_rock, laymask_stone);
         pm.KeyCustomCheck(sh, keycustom_check_panel, key_adr, key_custom_arry);
         pm.CheckKeyControl(pause_panel);
-        StartCoroutine(ii.ResetTree(tree_list, wait_treereset, 0));
         StartCoroutine(ii.CountFishTrap(wait_fishtrap, wait_settingtrap, 0));
         StartCoroutine(ii.FishtrapIsfull(wait_fishtrapisfull, wait_fix));
     }
