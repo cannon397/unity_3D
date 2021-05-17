@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
         else
         {
             Camera.fieldOfView = 50f;
-            camera.position = cameraArm.position + cameraArm.up.normalized * 0.2f + cameraArm.forward.normalized * 0.1f;
+            camera.position = cameraArm.position + cameraArm.up.normalized * 0.3f + cameraArm.forward.normalized * -0.1f;
         }
     }
     //점프 하지 않았을때 move 함수
