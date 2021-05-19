@@ -90,28 +90,27 @@ public class Player : MonoBehaviour
         if (isMove)
         {
 
-            //캐릭터 카메라 주시방향
-            if (viewpoint_bool == true)
+            characterBody.forward = moveDir_1;
+            if(moveInput.y > 0)
             {
-                characterBody.forward = moveDir;
+                moveDir = moveDir.normalized * speed * (wDown ? 0.8f : 0.3f);
             }
             else
             {
-                characterBody.forward = moveDir_1;
+                moveDir = moveDir.normalized * speed * 0.3f;
             }
-            moveDir = moveDir.normalized * speed * (wDown ? 0.8f : 0.3f);
         }
         animator.SetBool("isWalk", moveInput != Vector2.zero);
-        animator.SetBool("isRun", wDown && moveInput != Vector2.zero);
+        animator.SetBool("isRun", wDown && moveInput != Vector2.zero && moveInput.y > 0);
         // 캐릭터에 중력 적용.
         moveDir.y += -gravity * Time.deltaTime;
         if (!jumpStatus)
         {
-            gravity = 1000f;
+            gravity = 500f;
         }
         else
         {
-            gravity += 100f;
+            gravity += 10f;
         }
         // 캐릭터 움직임.
         controller.Move(moveDir * Time.deltaTime);
@@ -154,7 +153,7 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Jump") && !jumpStatus)
         {
             float time = 0f;
-            while(time < 0.15f)
+            while(time < 0.35f)
             {
                 hAxis = Input.GetAxisRaw("Horizontal");
                 vAxis = Input.GetAxisRaw("Vertical");
@@ -173,20 +172,13 @@ public class Player : MonoBehaviour
                 if (isMove)
                 {
                     //캐릭터 카메라 주시방향
-                    if (viewpoint_bool == true)
-                    {
-                        characterBody.forward = moveDir;
-                    }
-                    else
-                    {
-                        characterBody.forward = moveDir_1;
-                    }
+                    characterBody.forward = moveDir_1;
                     moveDir = moveDir.normalized * speed / jumpPower;
                 }
                 moveDir.y += jump * Time.deltaTime;
                 if (jumpStatus)
                 {
-                    jump -= 1f;
+                    jump -= 2f;
                 }
                 else
                 {

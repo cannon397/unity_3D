@@ -514,7 +514,7 @@ MonoBehaviour:
   fullscreen_toggle: {fileID: 1580089613}
   setting_panel: {fileID: 917177080}
   gamemaster_sound_slider: {fileID: 2140825726}
-  master_mixer: {fileID: 24100000, guid: daca31f939365a74983c8391661b7f5c, type: 2}
+  master_mixer: {fileID: 24100000, guid: b168f0c0cdcf79c4992aa203b49f7e11, type: 2}
   monitorsize_dropdown: {fileID: 2075711577}
   mousedpi_slider: {fileID: 1165846956}
   keycustom_panel: {fileID: 1357936970}

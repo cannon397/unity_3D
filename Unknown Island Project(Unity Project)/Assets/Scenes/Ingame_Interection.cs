@@ -63,7 +63,7 @@ public class Ingame_Interection : MonoBehaviour
         if (Physics.SphereCast(charactor.position - charactor.forward, 1f, charactor.forward, out hitinfo, 2f, laymask_tree))
         {
             press_tree_image.SetActive(true);
-            if (Input.GetKeyDown(key_custom_arry[1]))
+            if (Input.GetButtonDown("Fire1"))
             {
                 //나무 패는 에니메이션
 
@@ -301,7 +301,7 @@ public class Ingame_Interection : MonoBehaviour
             {
                 fishtrap_overlap.SetActive(false);
             }
-            if (Input.GetKeyDown(key_custom_arry[1]))
+            if (Input.GetButtonDown("Fire1"))
             {
                 if (fishtrap_list.Count < 4)
                 {
@@ -383,7 +383,7 @@ public class Ingame_Interection : MonoBehaviour
         if (Physics.SphereCast(charactor.position - charactor.forward, 1f, charactor.forward, out hitinfo, 2f, laymask_rock))
         {
             press_rock_image.SetActive(true);
-            if (Input.GetKeyDown(key_custom_arry[1]))
+            if (Input.GetButtonDown("Fire1"))
             {
                 //곡괭이질 애니메이션
                 RockItemCreate(hitinfo.point, hitinfo.collider.gameObject.transform.position, rock_stone);

@@ -39,7 +39,7 @@ public class game_tile : MonoBehaviour
 
         gamemaster_sound_slider.onValueChanged.AddListener(delegate
         {
-            SoundVolumeMaster(sh);
+            SoundVolumeMaster();
         });
         fullscreen_toggle.onValueChanged.AddListener(delegate
         {
@@ -146,7 +146,7 @@ public class game_tile : MonoBehaviour
     }
 
     //볼륨 조절
-    void SoundVolumeMaster(Setting_header sh)
+    void SoundVolumeMaster()
     {
         master_mixer.SetFloat("Master_Volume", gamemaster_sound_slider.value);
     }
