@@ -1,1 +1,511 @@
-[{"item_id":10001,"item_name":"\uB3C4\uB07C","item_description":"\uB3C4\uB07C\uB2E4. \uB098\uBB34\uB97C \uBCA8 \uC218 \uC788\uC744 \uAC83 \uAC19\uB2E4.","item_type":1,"item_status":{"atk":10,"durability":30,"decoding":0,"hp":0,"misture":0,"hunger":0},"item_combiation_formula":{"data":{"30001":1,"30002":1,"30003":1}}},{"item_id":10002,"item_name":"\uACE1\uAD2D\uC774","item_description":"\uACE1\uAD2D\uC774\uB2E4. \uB098\uBB34\uB97C \uBCA8 \uC218 \uC788\uC744 \uAC83 \uAC19\uB2E4.","item_type":1,"item_status":{"atk":5,"durability":30,"decoding":0,"hp":0,"misture":0,"hunger":0},"item_combiation_formula":{"data":{"30001":1,"30002":1,"30003":2}}},{"item_id":10003,"item_name":"\uCC3D","item_description":"\uCC3D\uC774\uB2E4. \uC774\uC81C \uC2F8\uC6B8 \uC218 \uC788\uB2E4.","item_type":1,"item_status":{"atk":20,"durability":30,"decoding":0,"hp":0,"misture":0,"hunger":0},"item_combiation_formula":{"data":{"30001":1,"30002":1,"30003":1}}},{"item_id":10004,"item_name":"\uB09A\uC2DC\uB300","item_description":"\uB09A\uC2DC\uB300\uC774\uB2E4. \uBC14\uB2E4\uC5D0\uC11C \uC0AC\uC6A9\uD574\uBCF4\uC790.","item_type":1,"item_status":{"atk":0,"durability":30,"decoding":0,"hp":0,"misture":0,"hunger":0},"item_combiation_formula":{"data":{"30001":1,"30002":1}}},{"item_id":10005,"item_name":"\uD1B5\uBC1C","item_description":"\uD1B5\uBC1C\uC774\uB2E4. \uD574\uBCC0\uAC00\uC5D0 \uC124\uCE58\uD574\uBCF4\uC790.","item_type":1,"item_status":{"atk":0,"durability":15,"decoding":0,"hp":0,"misture":0,"hunger":0},"item_combiation_formula":{"data":{"30002":3,"30005":8}}},{"item_id":10006,"item_name":"\uCF54\uCF54\uB11B \uADF8\uB987","item_description":"\uCF54\uCF54\uB11B \uADF8\uB987\uC774\uB2E4.\uC5EC\uB7EC\uAC00\uC9C0\uB97C \uB2F4\uC744 \uC218 \uC788\uC744 \uAC83 \uAC19\uB2E4.","item_type":1,"item_status":{"atk":0,"durability":0,"decoding":0,"hp":0,"misture":0,"hunger":0},"item_combiation_formula":{"data":{"20003":1}}},{"item_id":10007,"item_name":"\uD683\uBD88","item_description":"\uD683\uBD88\uC774\uB2E4. \uC8FC\uBCC0\uC744 \uBC1D\uD600\uBCF4\uC790.","item_type":1,"item_status":{"atk":0,"durability":50,"decoding":0,"hp":0,"misture":0,"hunger":0},"item_combiation_formula":{"data":{"30001":1,"30006":1}}},{"item_id":10008,"item_name":"\uAC00\uBC29","item_description":"","item_type":1,"item_status":{"atk":0,"durability":0,"decoding":0,"hp":0,"misture":0,"hunger":0},"item_combiation_formula":{"data":{"30002":2,"30006":4}}},{"item_id":20001,"item_name":"\uD574\uB3C5\uC81C","item_description":"\uB3C5\uC744 \uCE58\uB8CC\uD560 \uC218 \uC788\uC744 \uAC83 \uAC19\uB2E4.","item_type":2,"item_status":{"atk":0,"durability":0,"decoding":1,"hp":0,"misture":0,"hunger":0},"item_combiation_formula":{"data":{"30002":1,"10006":1,"30004":1}}},{"item_id":20002,"item_name":"\uC0C1\uCC98\uC57D","item_description":"\uC0C1\uCC98\uB97C \uCE58\uB8CC\uD560 \uC218 \uC788\uC744 \uAC83 \uAC19\uB2E4.","item_type":2,"item_status":{"atk":0,"durability":0,"decoding":0,"hp":30,"misture":0,"hunger":0},"item_combiation_formula":{"data":{"30006":1,"10006":1,"30004":1}}},{"item_id":20003,"item_name":"\uCF54\uCF54\uB11B","item_description":"\uCF54\uCF54\uB11B\uC774\uB2E4. \uBB34\uC778\uB3C4\uC758 \uC88B\uC740 \uC2DD\uB7C9.","item_type":2,"item_status":{"atk":0,"durability":0,"decoding":0,"hp":5,"misture":10,"hunger":5},"item_combiation_formula":{"data":null}},{"item_id":20004,"item_name":"\uC815\uC5B4\uB9AC","item_description":"\uC815\uC5B4\uB9AC\uB2E4. \uC791\uACE0 \uC18C\uC911\uD574.","item_type":2,"item_status":{"atk":0,"durability":0,"decoding":0,"hp":5,"misture":0,"hunger":5},"item_combiation_formula":{"data":null}},{"item_id":20005,"item_name":"\uBB3C\uC774\uB2F4\uAE34\uB098\uBB34\uADF8\uB987","item_description":"\uBAA9\uC774 \uB9D0\uB77C\uB3C4 \uBB38\uC81C\uC5C6\uC5B4.","item_type":2,"item_status":{"atk":0,"durability":0,"decoding":0,"hp":5,"misture":30,"hunger":5},"item_combiation_formula":{"data":null}},{"item_id":20006,"item_name":"\uBCF5\uC5B4","item_description":"\uBCF5\uC5B4\uB2E4. \uB3C5 \uC870\uC2EC!","item_type":2,"item_status":{"atk":0,"durability":0,"decoding":1,"hp":-10,"misture":0,"hunger":10},"item_combiation_formula":{"data":null}},{"item_id":20007,"item_name":"\uB119\uCE58","item_description":"\uB119\uCE58\uB2E4. \uBABB\uC0DD\uACBC\uC5B4!","item_type":2,"item_status":{"atk":0,"durability":0,"decoding":0,"hp":10,"misture":0,"hunger":20},"item_combiation_formula":{"data":null}},{"item_id":20008,"item_name":"\uB3C4\uBBF8","item_description":"\uB3C4\uBBF8\uB2E4. \uACE0\uAE09 \uC0DD\uC120!","item_type":2,"item_status":{"atk":0,"durability":0,"decoding":0,"hp":15,"misture":0,"hunger":30},"item_combiation_formula":{"data":null}},{"item_id":20009,"item_name":"\uB2E4\uB791\uC5B4","item_description":"\uB2E4\uB791\uC5B4\uB2E4. \uC774\uAC78 \uC7A1\uC558\uB2E4\uACE0!?","item_type":2,"item_status":{"atk":0,"durability":0,"decoding":0,"hp":50,"misture":0,"hunger":25},"item_combiation_formula":{"data":null}},{"item_id":20010,"item_name":"\uAD6C\uC6B4 \uC815\uC5B4\uB9AC","item_description":"\uAD6C\uC6B4 \uC815\uC5B4\uB9AC\uB2E4. \uC791\uACE0 \uC18C\uC911\uD574.","item_type":2,"item_status":{"atk":0,"durability":0,"decoding":0,"hp":10,"misture":0,"hunger":10},"item_combiation_formula":{"data":null}},{"item_id":20010,"item_name":"\uAD6C\uC6B4 \uBCF5\uC5B4","item_description":"\uAD6C\uC6B4 \uBCF5\uC5B4\uB2E4. \uC548\uC2EC\uC740 \uAE08\uBB3C!","item_type":2,"item_status":{"atk":0,"durability":0,"decoding":0,"hp":10,"misture":0,"hunger":15},"item_combiation_formula":{"data":null}},{"item_id":20012,"item_name":"\uAD6C\uC6B4 \uB119\uCE58","item_description":"\uAD6C\uC6B4 \uB119\uCE58\uB2E4. \uBABB\uC0DD\uAE34\uAC74 \uC5EC\uC804\uD574.","item_type":2,"item_status":{"atk":0,"durability":0,"decoding":0,"hp":25,"misture":0,"hunger":15},"item_combiation_formula":{"data":null}},{"item_id":20013,"item_name":"\uAD6C\uC6B4 \uB3C4\uBBF8","item_description":"\uAD6C\uC6B4 \uB3C4\uBBF8\uB2E4. \uB354 \uACE0\uAE09\uC838\uC84C\uC5B4.","item_type":2,"item_status":{"atk":0,"durability":0,"decoding":0,"hp":20,"misture":0,"hunger":35},"item_combiation_formula":{"data":null}},{"item_id":20014,"item_name":"\uAD6C\uC6B4 \uB2E4\uB791\uC5B4","item_description":"\uAD6C\uC6B4 \uB2E4\uB791\uC5B4\uB2E4. \uAD6C\uC6CC\uB3C4 \uB9DB\uC788\uC5B4!","item_type":2,"item_status":{"atk":0,"durability":0,"decoding":0,"hp":30,"misture":0,"hunger":55},"item_combiation_formula":{"data":null}},{"item_id":30001,"item_name":"\uD1B5\uB098\uBB34","item_description":"\uD1B5\uB098\uBB34\uC774\uB2E4. \uC4F0\uC784\uC774 \uB9CE\uC744 \uAC83 \uAC19\uB2E4.","item_type":3,"item_status":null,"item_combiation_formula":{"data":null}},{"item_id":30002,"item_name":"\uB369\uAD74","item_description":"\uB369\uAD74\uC774\uB2E4. \uBB36\uC744 \uB54C \uC6A9\uC774\uD558\uB2E4.","item_type":3,"item_status":null,"item_combiation_formula":{"data":null}},{"item_id":30003,"item_name":"\uB3CC","item_description":"\uB3CC\uC774\uB2E4. \uC88B\uC740 \uB3C4\uAD6C\uC758 \uCCAB\uAC78\uC74C\uC774 \uB420 \uAC83 \uAC19\uB2E4.","item_type":3,"item_status":null,"item_combiation_formula":{"data":null}},{"item_id":30004,"item_name":"\uAF43","item_description":"\uAF43\uC774\uB2E4. \uC88B\uC740 \uD6A8\uB2A5\uC744 \uAC00\uC9C0\uACE0 \uC788\uB294 \uAC83 \uAC19\uB2E4.","item_type":3,"item_status":null,"item_combiation_formula":{"data":null}},{"item_id":30005,"item_name":"\uB098\uBB47\uAC00\uC9C0","item_description":"\uB098\uBB47\uAC00\uC9C0\uB2E4. \uC788\uC73C\uBA74 \uC88B\uC9C0.","item_type":3,"item_status":null,"item_combiation_formula":{"data":null}},{"item_id":30006,"item_name":"\uC57C\uC790\uC218 \uC78E","item_description":"\uC57C\uC790\uC218 \uC78E\uC774\uB2E4. \uB36E\uACE0\uC790\uBA74 \uB530\uB4EF\uD560 \uAC83 \uAC19\uB2E4.","item_type":3,"item_status":null,"item_combiation_formula":{"data":null}},{"item_id":40001,"item_name":"\uC0C1\uC790","item_description":"5X5\uB85C \uCD1D 25\uCE78\uC758 \uC544\uC774\uD15C\uCE78\uC744 \uB354 \uC0AC\uC6A9\uD560 \uC218 \uC788\uB2E4.","item_type":4,"item_status":null,"item_combiation_formula":{"data":{"30001":3,"30002":1}}},{"item_id":40002,"item_name":"\uC9D1","item_description":"","item_type":4,"item_status":null,"item_combiation_formula":{"data":{"30001":6,"30002":4,"30006":4}}},{"item_id":40003,"item_name":"\uBAA8\uB2E5\uBD88","item_description":"","item_type":4,"item_status":null,"item_combiation_formula":{"data":{"30001":2,"30006":1,"30003":3}}}]
+[
+  {
+    "item_id": 10001,
+    "item_name": "도끼",
+    "item_description": "도끼다. 나무를 벨 수 있을 것 같다.",
+    "item_type": 1,
+    "item_status": {
+      "atk": 10,
+      "durability": 30,
+      "decoding": 0,
+      "hp": 0,
+      "misture": 0,
+      "hunger": 0
+    },
+    "item_combiation_formula": {
+      "data": {
+        "30001": 1,
+        "30002": 1,
+        "30003": 1
+      }
+    }
+  },
+  {
+    "item_id": 10002,
+    "item_name": "곡괭이",
+    "item_description": "곡괭이다. 나무를 벨 수 있을 것 같다.",
+    "item_type": 1,
+    "item_status": {
+      "atk": 5,
+      "durability": 30,
+      "decoding": 0,
+      "hp": 0,
+      "misture": 0,
+      "hunger": 0
+    },
+    "item_combiation_formula": {
+      "data": {
+        "30001": 1,
+        "30002": 1,
+        "30003": 2
+      }
+    }
+  },
+  {
+    "item_id": 10003,
+    "item_name": "창",
+    "item_description": "창이다. 이제 싸울 수 있다.",
+    "item_type": 1,
+    "item_status": {
+      "atk": 20,
+      "durability": 30,
+      "decoding": 0,
+      "hp": 0,
+      "misture": 0,
+      "hunger": 0
+    },
+    "item_combiation_formula": {
+      "data": {
+        "30001": 1,
+        "30002": 1,
+        "30003": 1
+      }
+    }
+  },
+  {
+    "item_id": 10004,
+    "item_name": "낚시대",
+    "item_description": "낚시대이다. 바다에서 사용해보자.",
+    "item_type": 1,
+    "item_status": {
+      "atk": 0,
+      "durability": 30,
+      "decoding": 0,
+      "hp": 0,
+      "misture": 0,
+      "hunger": 0
+    },
+    "item_combiation_formula": {
+      "data": {
+        "30001": 1,
+        "30002": 1
+      }
+    }
+  },
+  {
+    "item_id": 10005,
+    "item_name": "통발",
+    "item_description": "통발이다. 해변가에 설치해보자.",
+    "item_type": 1,
+    "item_status": {
+      "atk": 0,
+      "durability": 15,
+      "decoding": 0,
+      "hp": 0,
+      "misture": 0,
+      "hunger": 0
+    },
+    "item_combiation_formula": {
+      "data": {
+        "30002": 3,
+        "30005": 8
+      }
+    }
+  },
+  {
+    "item_id": 10006,
+    "item_name": "코코넛 그릇",
+    "item_description": "코코넛 그릇이다.여러가지를 담을 수 있을 것 같다.",
+    "item_type": 1,
+    "item_status": {
+      "atk": 0,
+      "durability": 0,
+      "decoding": 0,
+      "hp": 0,
+      "misture": 0,
+      "hunger": 0
+    },
+    "item_combiation_formula": {
+      "data": {
+        "20003": 1
+      }
+    }
+  },
+  {
+    "item_id": 10007,
+    "item_name": "횃불",
+    "item_description": "횃불이다. 주변을 밝혀보자.",
+    "item_type": 1,
+    "item_status": {
+      "atk": 0,
+      "durability": 50,
+      "decoding": 0,
+      "hp": 0,
+      "misture": 0,
+      "hunger": 0
+    },
+    "item_combiation_formula": {
+      "data": {
+        "30001": 1,
+        "30006": 1
+      }
+    }
+  },
+  {
+    "item_id": 10008,
+    "item_name": "가방",
+    "item_description": "",
+    "item_type": 1,
+    "item_status": {
+      "atk": 0,
+      "durability": 0,
+      "decoding": 0,
+      "hp": 0,
+      "misture": 0,
+      "hunger": 0
+    },
+    "item_combiation_formula": {
+      "data": {
+        "30002": 2,
+        "30006": 4
+      }
+    }
+  },
+  {
+    "item_id": 20001,
+    "item_name": "해독제",
+    "item_description": "독을 치료할 수 있을 것 같다.",
+    "item_type": 2,
+    "item_status": {
+      "atk": 0,
+      "durability": 0,
+      "decoding": 1,
+      "hp": 0,
+      "misture": 0,
+      "hunger": 0
+    },
+    "item_combiation_formula": {
+      "data": {
+        "30002": 1,
+        "10006": 1,
+        "30004": 1
+      }
+    }
+  },
+  {
+    "item_id": 20002,
+    "item_name": "상처약",
+    "item_description": "상처를 치료할 수 있을 것 같다.",
+    "item_type": 2,
+    "item_status": {
+      "atk": 0,
+      "durability": 0,
+      "decoding": 0,
+      "hp": 30,
+      "misture": 0,
+      "hunger": 0
+    },
+    "item_combiation_formula": {
+      "data": {
+        "30006": 1,
+        "10006": 1,
+        "30004": 1
+      }
+    }
+  },
+  {
+    "item_id": 20003,
+    "item_name": "코코넛",
+    "item_description": "코코넛이다. 무인도의 좋은 식량.",
+    "item_type": 2,
+    "item_status": {
+      "atk": 0,
+      "durability": 0,
+      "decoding": 0,
+      "hp": 5,
+      "misture": 10,
+      "hunger": 5
+    },
+    "item_combiation_formula": {
+      "data": null
+    }
+  },
+  {
+    "item_id": 20004,
+    "item_name": "정어리",
+    "item_description": "정어리다. 작고 소중해.",
+    "item_type": 2,
+    "item_status": {
+      "atk": 0,
+      "durability": 0,
+      "decoding": 0,
+      "hp": 5,
+      "misture": 0,
+      "hunger": 5
+    },
+    "item_combiation_formula": {
+      "data": null
+    }
+  },
+  {
+    "item_id": 20005,
+    "item_name": "물이담긴나무그릇",
+    "item_description": "목이 말라도 문제없어.",
+    "item_type": 2,
+    "item_status": {
+      "atk": 0,
+      "durability": 0,
+      "decoding": 0,
+      "hp": 5,
+      "misture": 30,
+      "hunger": 5
+    },
+    "item_combiation_formula": {
+      "data": null
+    }
+  },
+  {
+    "item_id": 20006,
+    "item_name": "복어",
+    "item_description": "복어다. 독 조심!",
+    "item_type": 2,
+    "item_status": {
+      "atk": 0,
+      "durability": 0,
+      "decoding": 1,
+      "hp": -10,
+      "misture": 0,
+      "hunger": 10
+    },
+    "item_combiation_formula": {
+      "data": null
+    }
+  },
+  {
+    "item_id": 20007,
+    "item_name": "넙치",
+    "item_description": "넙치다. 못생겼어!",
+    "item_type": 2,
+    "item_status": {
+      "atk": 0,
+      "durability": 0,
+      "decoding": 0,
+      "hp": 10,
+      "misture": 0,
+      "hunger": 20
+    },
+    "item_combiation_formula": {
+      "data": null
+    }
+  },
+  {
+    "item_id": 20008,
+    "item_name": "도미",
+    "item_description": "도미다. 고급 생선!",
+    "item_type": 2,
+    "item_status": {
+      "atk": 0,
+      "durability": 0,
+      "decoding": 0,
+      "hp": 15,
+      "misture": 0,
+      "hunger": 30
+    },
+    "item_combiation_formula": {
+      "data": null
+    }
+  },
+  {
+    "item_id": 20009,
+    "item_name": "다랑어",
+    "item_description": "다랑어다. 이걸 잡았다고!?",
+    "item_type": 2,
+    "item_status": {
+      "atk": 0,
+      "durability": 0,
+      "decoding": 0,
+      "hp": 50,
+      "misture": 0,
+      "hunger": 25
+    },
+    "item_combiation_formula": {
+      "data": null
+    }
+  },
+  {
+    "item_id": 20010,
+    "item_name": "구운 정어리",
+    "item_description": "구운 정어리다. 작고 소중해.",
+    "item_type": 2,
+    "item_status": {
+      "atk": 0,
+      "durability": 0,
+      "decoding": 0,
+      "hp": 10,
+      "misture": 0,
+      "hunger": 10
+    },
+    "item_combiation_formula": {
+      "data": null
+    }
+  },
+  {
+    "item_id": 20010,
+    "item_name": "구운 복어",
+    "item_description": "구운 복어다. 안심은 금물!",
+    "item_type": 2,
+    "item_status": {
+      "atk": 0,
+      "durability": 0,
+      "decoding": 0,
+      "hp": 10,
+      "misture": 0,
+      "hunger": 15
+    },
+    "item_combiation_formula": {
+      "data": null
+    }
+  },
+  {
+    "item_id": 20012,
+    "item_name": "구운 넙치",
+    "item_description": "구운 넙치다. 못생긴건 여전해.",
+    "item_type": 2,
+    "item_status": {
+      "atk": 0,
+      "durability": 0,
+      "decoding": 0,
+      "hp": 25,
+      "misture": 0,
+      "hunger": 15
+    },
+    "item_combiation_formula": {
+      "data": null
+    }
+  },
+  {
+    "item_id": 20013,
+    "item_name": "구운 도미",
+    "item_description": "구운 도미다. 더 고급져졌어.",
+    "item_type": 2,
+    "item_status": {
+      "atk": 0,
+      "durability": 0,
+      "decoding": 0,
+      "hp": 20,
+      "misture": 0,
+      "hunger": 35
+    },
+    "item_combiation_formula": {
+      "data": null
+    }
+  },
+  {
+    "item_id": 20014,
+    "item_name": "구운 다랑어",
+    "item_description": "구운 다랑어다. 구워도 맛있어!",
+    "item_type": 2,
+    "item_status": {
+      "atk": 0,
+      "durability": 0,
+      "decoding": 0,
+      "hp": 30,
+      "misture": 0,
+      "hunger": 55
+    },
+    "item_combiation_formula": {
+      "data": null
+    }
+  },
+  {
+    "item_id": 30001,
+    "item_name": "통나무",
+    "item_description": "통나무이다. 쓰임이 많을 것 같다.",
+    "item_type": 3,
+    "item_status": null,
+    "item_combiation_formula": {
+      "data": null
+    }
+  },
+  {
+    "item_id": 30002,
+    "item_name": "덩굴",
+    "item_description": "덩굴이다. 묶을 때 용이하다.",
+    "item_type": 3,
+    "item_status": null,
+    "item_combiation_formula": {
+      "data": null
+    }
+  },
+  {
+    "item_id": 30003,
+    "item_name": "돌",
+    "item_description": "돌이다. 좋은 도구의 첫걸음이 될 것 같다.",
+    "item_type": 3,
+    "item_status": null,
+    "item_combiation_formula": {
+      "data": null
+    }
+  },
+  {
+    "item_id": 30004,
+    "item_name": "꽃",
+    "item_description": "꽃이다. 좋은 효능을 가지고 있는 것 같다.",
+    "item_type": 3,
+    "item_status": null,
+    "item_combiation_formula": {
+      "data": null
+    }
+  },
+  {
+    "item_id": 30005,
+    "item_name": "나뭇가지",
+    "item_description": "나뭇가지다. 있으면 좋지.",
+    "item_type": 3,
+    "item_status": null,
+    "item_combiation_formula": {
+      "data": null
+    }
+  },
+  {
+    "item_id": 30006,
+    "item_name": "야자수 잎",
+    "item_description": "야자수 잎이다. 덮고자면 따듯할 것 같다.",
+    "item_type": 3,
+    "item_status": null,
+    "item_combiation_formula": {
+      "data": null
+    }
+  },
+  {
+    "item_id": 40001,
+    "item_name": "상자",
+    "item_description": "5X5로 총 25칸의 아이템칸을 더 사용할 수 있다.",
+    "item_type": 4,
+    "item_status": null,
+    "item_combiation_formula": {
+      "data": {
+        "30001": 3,
+        "30002": 1
+      }
+    }
+  },
+  {
+    "item_id": 40002,
+    "item_name": "집",
+    "item_description": "",
+    "item_type": 4,
+    "item_status": null,
+    "item_combiation_formula": {
+      "data": {
+        "30001": 6,
+        "30002": 4,
+        "30006": 4
+      }
+    }
+  },
+  {
+    "item_id": 40003,
+    "item_name": "모닥불",
+    "item_description": "",
+    "item_type": 4,
+    "item_status": null,
+    "item_combiation_formula": {
+      "data": {
+        "30001": 2,
+        "30006": 1,
+        "30003": 3
+      }
+    }
+  }
+]

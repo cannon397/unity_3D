@@ -4,6 +4,8 @@ using System;
 using LitJson;
 using UnityEngine;
 using System.IO;
+using System.Text;
+using Newtonsoft.Json;
 
 public class Item
 {
@@ -137,9 +139,13 @@ public class ItemJson
         item_list.Add(new Item(40002, "집", "", Item.ItemType.build, new ItemCombinationFormula(new Dictionary<string, int>() { { "30001", 6 }, { "30002", 4 }, { "30006", 4 } })));
         item_list.Add(new Item(40003, "모닥불", "", Item.ItemType.build,  new ItemCombinationFormula(new Dictionary<string, int>() { { "30001", 2 }, { "30006", 1 }, { "30003", 3 } })));
 
-        JsonData item_json = JsonMapper.ToJson(item_list).ToString();
-        File.WriteAllText(Application.dataPath + "/Scenes/Item/ItemData.json", item_json.ToString());
 
+
+
+        string item_json = JsonConvert.SerializeObject(item_list,Formatting.Indented);
+        File.WriteAllText(Application.dataPath + "/Scenes/Item/ItemData.json", item_json);
+        
+        
         string json_string = File.ReadAllText(Application.dataPath + "/Scenes/Item/ItemData.json");
         JsonData item_data = JsonMapper.ToObject(json_string);
 
