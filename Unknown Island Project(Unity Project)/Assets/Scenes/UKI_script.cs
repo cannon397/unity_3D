@@ -105,6 +105,7 @@ public class UKI_script : MonoBehaviour
     private pause_menu pm;
     private Dispancer ds;
     private Setting_Status ss;
+    private ItemJson ij;
     void Start()
     {
         db = new DBAccess();
@@ -114,7 +115,7 @@ public class UKI_script : MonoBehaviour
         pm = new pause_menu(sh);
         ds = new Dispancer();
         ss = new Setting_Status();
-
+        ij = new ItemJson();
         animator = GameObject.Find("Player").GetComponentInChildren<Animator>();
         controller = GameObject.Find("Player").GetComponentInChildren<CharacterController>();
         camera_dstc = Mathf.Sqrt(4 * 4);
