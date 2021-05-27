@@ -10,15 +10,17 @@ namespace Assets.Scenes
 {
     public class Setting_header
     {
-        private bool fullscreen_bool = true;
         private string[] key_custom_array = new string[60];
+        private float[] volume_arry = new float[10];
         private string[] key_custom_availble_arry = new string[] { "Alpha1", "Alpha2", "Alpha3", "Alpha4", "Alpha5", "Alpha6", "Alpha7", "Alpha8", "Alpha9", "Alpha0", "Comma", "Period", "Slash",
-            "Semicolon", "BackQuote", "LeftCurlyBracket", "RightCurlyBracket", "Mouse3", "Mouse4", "Quote", "Equals", "Minus", "LeftShift", "RightShift", "RightControl", "LeftControl",
+            "Semicolon", "BackQuote", "LeftBracket", "RightBracket", "Mouse3", "Mouse4", "Quote", "Equals", "Minus", "LeftShift", "RightShift", "RightControl", "LeftControl", "Backslash", 
             "RightAlt", "LeftAlt", "Tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m"};
         /* 키 바인딩
          * 0 : 인칭 변환         (기본값 : v)
-         * 1 : 상호작용          (기본값 : e)
-         * 2 : 인벤토리          (기본값 : i)
+         * 1 : 아이템 줍기       (기본값 : e)
+         * 2 : 아이템 버리기     (기본값 : q)
+         * 3 : 시계 확인         (기본값 : C)
+         * 4 : 가방/제작         (기본값 : Tab)
          */
         private DBAccess db;
         private String settings_table = "settings";
@@ -62,69 +64,85 @@ namespace Assets.Scenes
             db.UpdateInto(settings_table, db_cols, db_monitor_dv_value, "no", "1");
         }
         /// <summary>
-        /// 전체화면 유뮤 값 Get
+        /// 전체화면 값 Get
         /// </summary>
         /// <returns></returns>
-        public bool GetFullscreenBool()
+        public int GetFullscreen()
         {
             String[] db_cols = { "fullscreen" };
             String[] operation = { "=" };
             m_reader = db.SelectWhere(settings_table, db_cols, where, operation, where_value);
             m_reader.Read();
-            if (m_reader.GetInt16(0) == 1)
-            {
-                fullscreen_bool = true;
-            }
-            else
-            {
-                fullscreen_bool = false;
-            }
-            return (fullscreen_bool);
+            return m_reader.GetInt32(0);
         }
         /// <summary>
-        /// 전체화면 유뮤값 Set
+        /// 전체화면 값 Set
         /// </summary>
         /// <param name="b"></param>
-        public void SetFullscreenBool(bool b)
+        public void SetFullscreen(int i)
         {
-            string i;
-            if (b == true)
-            {
-                i = "1";
-            }
-            else
-            {
-                i = "0";
-            }
-            String[] db_fullscreen_bool = { i };
+            string st;
+            st = i.ToString();
+            String[] db_fullscreen_bool = { st };
             String[] db_cols = { "fullscreen" };
             db.UpdateInto(settings_table, db_cols, db_fullscreen_bool, "no", "1");
-            fullscreen_bool = b;
         }
         /// <summary>
         /// 마스터 볼륨 값 Get
         /// </summary>
         /// <returns></returns>
-        public float GetSoundMasterVolume()
+        public float[] GetSoundMasterVolume()
         {
-
             String[] db_cols = { "sound_master_volume" };
             String[] operation = { "=" };
             m_reader = db.SelectWhere(settings_table, db_cols, where, operation, where_value);
             m_reader.Read();
+            string st = null;
+            int i = 0;
+            int a = 0;
+            foreach (char c in m_reader.GetString(0))
+            {
+                if (c == '_')
+                {
+                    volume_arry[i] = float.Parse(st);
+                    st = null;
+                }
+                else
+                {
+                    st += c;
+                    if (a == m_reader.GetString(0).Length - 1)
+                    {
+                        volume_arry[i] = float.Parse(st);
+                    }
+                }
+                a++;
+            }
+            volume_arry = ZeroErase(volume_arry);
 
-            return m_reader.GetFloat(0);
+            return volume_arry;
         }
         /// <summary>
         /// 마스터 볼륨 값 Set
         /// </summary>
         /// <param name="f"></param>
-        public void SetSoundMasterVolume(float f)
+        public void SetSoundMasterVolume(float[] arr)
         {
-            String[] db_master_volume_value = { f.ToString() };
+            string st = "'";
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (i == arr.Length - 1)
+                {
+                    st += arr[i].ToString();
+                }
+                else
+                {
+                    st += arr[i].ToString() + "_";
+                }
+            }
+            st += "'";
+            String[] db_master_volume_value = { st };
             String[] db_cols = { "sound_master_volume" };
             db.UpdateInto(settings_table, db_cols, db_master_volume_value, "no", "1");
-            //db.CloseSqlConnection();
         }
         /// <summary>
         /// 마우스 감도 값 Get
@@ -239,6 +257,21 @@ namespace Assets.Scenes
             foreach (var s in ary)
             {
                 if (!string.IsNullOrEmpty(s))
+                    temp.Add(s);
+            }
+            return temp.ToArray();
+        }
+        /// <summary>
+        /// 배열에서 null값 확인해서 없애주는 함수
+        /// </summary>
+        /// <param name="ary"></param>
+        /// <returns></returns>
+        private float[] ZeroErase(float[] ary)
+        {
+            var temp = new List<float>();
+            foreach (var s in ary)
+            {
+                if (!string.IsNullOrEmpty(s.ToString()))
                     temp.Add(s);
             }
             return temp.ToArray();

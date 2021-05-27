@@ -21,12 +21,14 @@ public class game_tile : MonoBehaviour
     public GameObject keycustom_check_panel;
     public Button key_custom_save_button;
     public Button save_setting_value_button;
+    public Dropdown fullscreen_dropdown;
 
     private Setting_header sh;
     private DBAccess db;
 
     private string[] key_custom_arry;
     private static int key_adr;
+    private static float[] volume_arry;
 
     void Start()
     {
@@ -113,7 +115,7 @@ public class game_tile : MonoBehaviour
     //해상도 설정
     void MonitorSize(Setting_header sh)
     {
-        if (fullscreen_toggle.isOn)
+        if (fullscreen_dropdown.value == 0)
         {
             switch (monitorsize_dropdown.value)
             {
@@ -127,10 +129,27 @@ public class game_tile : MonoBehaviour
                     Screen.SetResolution(1920, 1080, true);
                     break;
             }
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        else if (fullscreen_dropdown.value == 1)
+        {
+            switch (monitorsize_dropdown.value)
+            {
+                case 0:
+                    Screen.SetResolution(960, 540, true);
+                    break;
+                case 1:
+                    Screen.SetResolution(1280, 720, true);
+                    break;
+                case 2:
+                    Screen.SetResolution(1920, 1080, true);
+                    break;
+            }
+            Cursor.lockState = CursorLockMode.None;
         }
         else
         {
-            switch (sh.GetMonitorDV())
+            switch (monitorsize_dropdown.value)
             {
                 case 0:
                     Screen.SetResolution(960, 540, false);
@@ -142,6 +161,7 @@ public class game_tile : MonoBehaviour
                     Screen.SetResolution(1920, 1080, false);
                     break;
             }
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 
@@ -211,11 +231,12 @@ public class game_tile : MonoBehaviour
     //설정값 동기화
     private void ImportSettingValue(Setting_header sh)
     {
-        float volume = sh.GetSoundMasterVolume();
+        volume_arry = sh.GetSoundMasterVolume();
+        float volume = volume_arry[0];
         gamemaster_sound_slider.value = volume;
         master_mixer.SetFloat("Master_Volume", volume);
         monitorsize_dropdown.value = sh.GetMonitorDV();
-        fullscreen_toggle.isOn = sh.GetFullscreenBool();
+        fullscreen_dropdown.value = sh.GetFullscreen();
         MonitorSize(sh);
         mousedpi_slider.value = sh.GetMouseDpi();
         key_custom_arry = sh.SyncKeyCustom();
@@ -223,11 +244,11 @@ public class game_tile : MonoBehaviour
     //설정값 저장 함수
     public void SaveSettingValue(Setting_header sh)
     {
-        float volume = gamemaster_sound_slider.value;
-        sh.SetSoundMasterVolume(volume);
+        sh.SetSoundMasterVolume(volume_arry);
         sh.SetMonitorDV(monitorsize_dropdown.value);
-        sh.SetFullscreenBool(fullscreen_toggle.isOn);
+        sh.SetFullscreen(fullscreen_dropdown.value);
         sh.SetMouseDpi(mousedpi_slider.value);
+        sh.SetKeyCustom(key_custom_arry);
     }
      void OnDestroy()
     {

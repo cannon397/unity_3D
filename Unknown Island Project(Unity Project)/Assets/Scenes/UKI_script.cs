@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Audio;
-using Mono.Data.Sqlite;
 using Assets.Scenes;
+using System;
 
 public class UKI_script : MonoBehaviour
 {
@@ -21,32 +21,56 @@ public class UKI_script : MonoBehaviour
     public GameObject fish_trap;
     public GameObject rock_stone;
 
-    public GameObject notsaved_panel;
-    public Button notsaved_yes_button;
-    public Button notsaved_no_button;
 
-    public Slider mousedpi_slider;
-    public Slider gamemaster_sound_slider;
-    public AudioMixer master_mixer;
+    public GameObject pause_panel;
 
-    public Button key_custom_save_button;
-    public Button save_setting_value_button;
     public Button open_setting_button;
     public Button save_game_button;
     public Button exit_tomain_button;
     public Button quit_game_button;
     public Button resume_game_button;
-    public Button close_setting_button;
-    public Button open_keycustom_button;
-    public Button close_keycustom_button;
-    public Button keycustom_pointofview_button;
-    public Button keycustom_interection_button;
-    public Button keycustom_inventory_button;
 
-    public GameObject pause_panel;
-    public GameObject setting_panel;
-    public GameObject keycustom_panel;
+    public AudioMixer master_mixer;
+
+    public GameObject setting_window_panel;
+    public GameObject setting_gameplay_panel;
+    public GameObject setting_sound_panel;
+    public GameObject setting_control_panel;
+    public GameObject setting_confirm_panel;
+
+    public Button save_setting_button;
+    public Button exit_setting_button;
+    public Toggle setting_gameplay_toggle;
+    public Toggle setting_sound_toggle;
+    public Toggle setting_control_toggle;
+    public Button quit_setting_button;
+    public Button setting_confirm_button;
+    public Button setting_cancle_button;
+
+    public Button reset_graphic_button;
+    public Dropdown screenmod_dropdown;
+    public Dropdown resolution_dropdown;
+    public Slider mouse_dpi_slider;
+    public Text mouse_dpi_text;
+
+    public Button reset_sound_button;
+    public Slider master_volume_slider;
+    public Slider bgm_volume_slider;
+    public Slider fx_volume_slider;
+    public Toggle master_volume_toggle;
+    public Toggle bgm_volume_toggle;
+    public Toggle fx_volume_toggle;
+
+    public Button reset_keycustom_button;
+    public Button keycustom_switchingview_button;
+    public Button keycustom_getitem_button;
+    public Button keycustom_dropitem_button;
+    public Button keycustom_checkwatch_button;
+    public Button keycustom_openinventory_button;
     public GameObject keycustom_check_panel;
+
+    public GameObject nowon_setting_panel;
+
 
 
 
@@ -80,10 +104,12 @@ public class UKI_script : MonoBehaviour
     static private bool isinwater;
 
     public List<GameObject> tree_list;
+    public static Sprite[] keycab_list;
     //flag
     // 1 = 3인칭 0 = 1인칭
     int viewPointFlag = 1;
     public static string[] key_custom_arry;
+    public static float[] volume_arry;
     private static int key_adr; 
     public void SetKeyADR(int i) { key_adr = i; }
 
@@ -124,6 +150,7 @@ public class UKI_script : MonoBehaviour
 
         tree_list = new List<GameObject>();
         tree_list = ds.TreeDispanceList();
+        keycab_list = ds.KeyDispanceList();
 
         press_tree_image = GameObject.Find("Press_Tree_Image");
         press_tree_image.SetActive(false);
@@ -142,63 +169,79 @@ public class UKI_script : MonoBehaviour
         tree_log = GameObject.FindWithTag("Tree_Log");
         tree_fruit = GameObject.FindWithTag("Tree_Fruit");
         fish_trap = GameObject.Find("Fish_trap");
-        rock_stone = GameObject.Find("Rock_stone"); notsaved_panel = GameObject.Find("NotSaved_Panel");
-        notsaved_yes_button = GameObject.Find("NotSaved_Yes_Button").GetComponent<Button>();
-        notsaved_no_button = GameObject.Find("NotSaved_No_Button").GetComponent<Button>();
-        notsaved_panel.SetActive(false);
+        rock_stone = GameObject.Find("Rock_stone"); 
 
-        mousedpi_slider = GameObject.Find("MouseDpi_Slider").GetComponent<Slider>();
-        gamemaster_sound_slider = GameObject.Find("Sound_Master_Slider").GetComponent<Slider>();
+
+
+        pause_panel = GameObject.Find("Pause_Panel");
         open_setting_button = GameObject.Find("Option_Button").GetComponent<Button>();
         save_game_button = GameObject.Find("Save_Button").GetComponent<Button>();
         exit_tomain_button = GameObject.Find("Exit_Button").GetComponent<Button>();
         quit_game_button = GameObject.Find("Quit_Button").GetComponent<Button>();
         resume_game_button = GameObject.Find("Resume_Button").GetComponent<Button>();
-        close_setting_button = GameObject.Find("ExitSetting_Button").GetComponent<Button>();
-        open_keycustom_button = GameObject.Find("KeyCustom_Button").GetComponent<Button>();
-        close_keycustom_button = GameObject.Find("ExitKeyCustom_Button").GetComponent<Button>();
-        save_setting_value_button = GameObject.Find("SaveSetting_Button").GetComponent<Button>();
-        key_custom_save_button = GameObject.Find("SaveKeyCustom_Button").GetComponent<Button>();
-        keycustom_pointofview_button = GameObject.Find("KeyCustom_PointOfView_Button").GetComponent<Button>();
-        keycustom_interection_button = GameObject.Find("KeyCustom_Interection_Button").GetComponent<Button>();
-        keycustom_inventory_button = GameObject.Find("KeyCustom_InventoryButton").GetComponent<Button>();
-
-        pause_panel = GameObject.Find("Pause_Panel");
         pause_panel.SetActive(false);
-        setting_panel = GameObject.Find("Setting_Panel");
-        setting_panel.SetActive(false);
-        keycustom_check_panel = GameObject.Find("KeyCustomCheck_Panel");
-        keycustom_check_panel.SetActive(false);
-        keycustom_panel = GameObject.Find("KeyCustom_Panel");
-        keycustom_panel.SetActive(false);
 
-        notsaved_yes_button.onClick.AddListener(delegate
+        setting_window_panel = GameObject.Find("Setting_Window(Image)");
         {
-            pm.ButtonClickNotSavedYes(keycustom_panel, key_custom_arry, setting_panel, gamemaster_sound_slider, mousedpi_slider, notsaved_panel, pause_panel);
-        });
-        notsaved_no_button.onClick.AddListener(delegate
-        {
-            pm.ButtonClickNotSavedNo(keycustom_panel, pause_panel, notsaved_panel, setting_panel, gamemaster_sound_slider, mousedpi_slider, master_mixer);
-        });
-        mousedpi_slider.onValueChanged.AddListener(delegate
-        {
-            pm.IsNotSaved();
-        });
-        gamemaster_sound_slider.onValueChanged.AddListener(delegate
-        {
-            pm.SoundVolumeMaster(gamemaster_sound_slider, master_mixer);
-        });
-        key_custom_save_button.onClick.AddListener(delegate
-        {
-            pm.SetKeyCustom(key_custom_arry);
-        });
-        save_setting_value_button.onClick.AddListener(delegate
-        {
-            pm.SaveSettingValue(gamemaster_sound_slider, mousedpi_slider);
-        });
+            setting_gameplay_panel = setting_window_panel.transform.Find("SettingContent(Panel)").Find("Setting_GamePlay(Panel)").gameObject;
+            {
+                reset_graphic_button = setting_gameplay_panel.transform.Find("ResetSetting_Gameplay(Button)").GetComponent<Button>();
+                screenmod_dropdown = setting_gameplay_panel.transform.Find("ScreenMod_DropDown").GetComponent<Dropdown>();
+                resolution_dropdown = setting_gameplay_panel.transform.Find("Resolution_DropDown").GetComponent<Dropdown>();
+                mouse_dpi_slider = setting_gameplay_panel.transform.Find("MouseDpi_Slider").GetComponent<Slider>();
+                mouse_dpi_text = setting_gameplay_panel.transform.Find("MouseDpi_Input(Imgae)").gameObject.GetComponentInChildren<Text>();
+                setting_gameplay_panel.SetActive(false);
+            }
+
+            setting_sound_panel = setting_window_panel.transform.Find("SettingContent(Panel)").Find("Setting_Sound(Panel)").gameObject;
+            {
+                reset_sound_button = setting_sound_panel.transform.Find("ResetSetting_Gameplay(Button)").GetComponent<Button>();
+                master_volume_slider = setting_sound_panel.transform.Find("Master_Volume(Slider)").GetComponent<Slider>();
+                bgm_volume_slider = setting_sound_panel.transform.Find("Backgounrd_Volume(Slider)").GetComponent<Slider>();
+                fx_volume_slider = setting_sound_panel.transform.Find("SoundEffect_Volume(Slider)").GetComponent<Slider>();
+                master_volume_toggle = setting_sound_panel.transform.Find("Master_Volume_Mute(Toggle)").GetComponent<Toggle>();
+                bgm_volume_toggle = setting_sound_panel.transform.Find("Background_Volume_Mute(Toggle)").GetComponent<Toggle>();
+                fx_volume_toggle = setting_sound_panel.transform.Find("SoundEffect_Volume_Mute(Toggle)").GetComponent<Toggle>();
+                setting_sound_panel.SetActive(false);
+            }
+
+            setting_control_panel = setting_window_panel.transform.Find("SettingContent(Panel)").Find("Setting_Control(Panel)").gameObject;
+            {
+                keycustom_check_panel = setting_control_panel.transform.Find("KeyCustom_Check_Panel").gameObject;
+                keycustom_check_panel.SetActive(false);
+                reset_keycustom_button = setting_control_panel.transform.Find("ResetSetting_Gameplay(Button)").GetComponent<Button>();
+                keycustom_switchingview_button = GameObject.Find("Key_SwitchingView(Text)").GetComponentInChildren<Button>();
+                keycustom_getitem_button = GameObject.Find("Key_GetItem(Text)").GetComponentInChildren<Button>();
+                keycustom_dropitem_button = GameObject.Find("Key_DropItem(Text)").GetComponentInChildren<Button>();
+                keycustom_checkwatch_button = GameObject.Find("Key_CheckWatch(Text)").GetComponentInChildren<Button>();
+                keycustom_openinventory_button = GameObject.Find("Key_OpenInventory(Text)").GetComponentInChildren<Button>();
+                setting_control_panel.SetActive(false);
+            }
+
+            save_setting_button = setting_window_panel.transform.Find("SaveSetting_Button").GetComponent<Button>();
+            exit_setting_button = setting_window_panel.transform.Find("ExitSetting_Button").GetComponent<Button>();
+            setting_gameplay_toggle = setting_window_panel.transform.Find("Subject_Button(Group)").Find("Setting_GamePlay(Button)").GetComponent<Toggle>();
+            setting_sound_toggle = setting_window_panel.transform.Find("Subject_Button(Group)").Find("Setting_Sound(Button)").GetComponent<Toggle>();
+            setting_control_toggle = setting_window_panel.transform.Find("Subject_Button(Group)").Find("Setting_Control(Button)").GetComponent<Toggle>();
+            quit_setting_button = setting_window_panel.transform.Find("Quit(Button)").GetComponent<Button>();
+
+            setting_confirm_panel = GameObject.Find("Confirm_Background(Image)");
+            {
+                setting_cancle_button = setting_confirm_panel.transform.Find("Cancel(Button)").GetComponent<Button>();
+                setting_confirm_button = setting_confirm_panel.transform.Find("Confirm(Button)").GetComponent<Button>();
+                setting_confirm_panel.SetActive(false);
+            }
+
+            setting_window_panel.SetActive(false);
+        }
+
+        
+
         open_setting_button.onClick.AddListener(delegate
         {
-            pm.ButtonClickOpenSetting(pause_panel, setting_panel);
+            pm.ChangePanel(pause_panel, setting_window_panel);
+            setting_gameplay_panel.SetActive(true);
+            nowon_setting_panel = setting_gameplay_panel;
         });
         save_game_button.onClick.AddListener(delegate
         {
@@ -216,32 +259,101 @@ public class UKI_script : MonoBehaviour
         {
             pm.ButtonClickGameContinue(pause_panel);
         });
-        close_setting_button.onClick.AddListener(delegate
+        setting_gameplay_toggle.onValueChanged.AddListener(delegate
         {
-            pm.ButtonClickCloseSetting(pause_panel, setting_panel, notsaved_panel);
+            pm.ChangePanel(nowon_setting_panel, setting_gameplay_panel);
+            nowon_setting_panel = setting_gameplay_panel;
         });
-        open_keycustom_button.onClick.AddListener(delegate
+        setting_sound_toggle.onValueChanged.AddListener(delegate
         {
-            pm.ButtonClickKeyCustomOpen(setting_panel, keycustom_panel);
+            pm.ChangePanel(nowon_setting_panel, setting_sound_panel);
+            nowon_setting_panel = setting_sound_panel;
         });
-        close_keycustom_button.onClick.AddListener(delegate
+        setting_control_toggle.onValueChanged.AddListener(delegate
         {
-            pm.ButtonClickKeyCustomClose(setting_panel, keycustom_panel, notsaved_panel);
+            pm.ChangePanel(nowon_setting_panel, setting_control_panel);
+            nowon_setting_panel = setting_control_panel;
         });
-        //키 커스텀
-        keycustom_pointofview_button.onClick.AddListener(delegate
+        save_setting_button.onClick.AddListener(delegate
         {
-            pm.KeyCustom(keycustom_check_panel, 0);
+            SaveSetting();
         });
-        keycustom_interection_button.onClick.AddListener(delegate
+        exit_setting_button.onClick.AddListener(delegate
         {
-            pm.KeyCustom(keycustom_check_panel, 1);
+            pm.ButtonClickCloseSetting(pause_panel, setting_window_panel, setting_confirm_panel);
         });
-        keycustom_inventory_button.onClick.AddListener(delegate
+        quit_setting_button.onClick.AddListener(delegate
         {
-            pm.KeyCustom(keycustom_check_panel, 2);
+            pm.ChangePanel(setting_window_panel, pause_panel);
         });
-
+        screenmod_dropdown.onValueChanged.AddListener(delegate
+        {
+            pm.MonitorSize(screenmod_dropdown, resolution_dropdown);
+        });
+        resolution_dropdown.onValueChanged.AddListener(delegate
+        {
+            pm.MonitorSize(screenmod_dropdown, resolution_dropdown);
+        });
+        mouse_dpi_slider.onValueChanged.AddListener(delegate
+        {
+            mouse_dpi_text.text = Mathf.Round(mouse_dpi_slider.value).ToString();
+        });
+        reset_graphic_button.onClick.AddListener(delegate
+        {
+            ImportSettingValue();
+        });
+        reset_sound_button.onClick.AddListener(delegate
+        {
+            ImportSettingValue();
+        }); 
+        reset_keycustom_button.onClick.AddListener(delegate
+        {
+            ImportSettingValue();
+        });
+        master_volume_slider.onValueChanged.AddListener(delegate
+        {
+            pm.VolumeChange("Master", master_volume_slider, master_mixer);
+        });
+        bgm_volume_slider.onValueChanged.AddListener(delegate
+        {
+            pm.VolumeChange("BGM", bgm_volume_slider, master_mixer);
+        });
+        fx_volume_slider.onValueChanged.AddListener(delegate
+        {
+            pm.VolumeChange("FX", fx_volume_slider, master_mixer);
+        });
+        master_volume_toggle.onValueChanged.AddListener(delegate
+        {
+            pm.MuteVolume("Master", master_volume_slider, master_volume_toggle, master_mixer);
+        });
+        bgm_volume_toggle.onValueChanged.AddListener(delegate
+        {
+            pm.MuteVolume("BGM", bgm_volume_slider, bgm_volume_toggle, master_mixer);
+        });
+        fx_volume_toggle.onValueChanged.AddListener(delegate
+        {
+            pm.MuteVolume("FX", fx_volume_slider, fx_volume_toggle, master_mixer);
+        });
+        keycustom_switchingview_button.onClick.AddListener(delegate
+        {
+            pm.KeyCustom(keycustom_check_panel, keycustom_switchingview_button, 0);
+        });
+        keycustom_getitem_button.onClick.AddListener(delegate
+        {
+            pm.KeyCustom(keycustom_check_panel, keycustom_getitem_button, 1);
+        });
+        keycustom_dropitem_button.onClick.AddListener(delegate
+        {
+            pm.KeyCustom(keycustom_check_panel, keycustom_dropitem_button, 2);
+        });
+        keycustom_checkwatch_button.onClick.AddListener(delegate
+        {
+            pm.KeyCustom(keycustom_check_panel, keycustom_checkwatch_button, 3);
+        });
+        keycustom_openinventory_button.onClick.AddListener(delegate
+        {
+            pm.KeyCustom(keycustom_check_panel, keycustom_openinventory_button, 4);
+        });
 
 
 
@@ -265,7 +377,7 @@ public class UKI_script : MonoBehaviour
         StartCoroutine(ii.ResetTree(tree_list, wait_treereset, wait_fix));
     }
 
-    
+
     void Update()
     {
         if (game_puase_bool)
@@ -316,25 +428,26 @@ public class UKI_script : MonoBehaviour
     }
     public void ImportSettingValue()
     {
-        float volume = sh.GetSoundMasterVolume();
-        gamemaster_sound_slider.value = volume;
+        volume_arry = sh.GetSoundMasterVolume();
+        float volume = volume_arry[0];
+        master_volume_slider.value = volume;
         master_mixer.SetFloat("Master_Volume", volume);
-        mousedpi_slider.value = sh.GetMouseDpi();
-        mouse_dpi = mousedpi_slider.value / 50;
+        volume = volume_arry[1];
+        bgm_volume_slider.value = volume;
+        master_mixer.SetFloat("BGM_Volume", volume);
+        volume = volume_arry[2];
+        fx_volume_slider.value = volume;
+        master_mixer.SetFloat("FX_Volume", volume);
+        mouse_dpi_slider.value = sh.GetMouseDpi();
+        mouse_dpi = mouse_dpi_slider.value / 50;
         key_custom_arry = sh.SyncKeyCustom();
+        resolution_dropdown.value = sh.GetMonitorDV();
+        screenmod_dropdown.value = sh.GetFullscreen();
     }
     //플레이어 움직임 멈춤 상태인지 정해주는 함수
     public void GamePause(bool bl)
     {
         game_puase_bool = bl;
-    }
-    public void IsinWater(bool _bool)
-    {
-        isinwater = _bool;
-    }
-    public AudioMixer GetMixer()
-    {
-        return master_mixer;
     }
     public void SetDPI(float f)
     {
@@ -343,5 +456,22 @@ public class UKI_script : MonoBehaviour
     public void SetKeyArr(string[] st_arr)
     {
         key_custom_arry = st_arr;
+    }
+    public float[] GetVolumeArry()
+    {
+        return volume_arry;
+    }
+    public Sprite[] GetSpriteKeyCab()
+    {
+        return keycab_list;
+    }
+    public void SaveSetting()
+    {
+        sh.SetFullscreen(screenmod_dropdown.value);
+        sh.SetKeyCustom(key_custom_arry);
+        sh.SetMonitorDV(resolution_dropdown.value);
+        sh.SetMouseDpi(mouse_dpi_slider.value);
+        sh.SetSoundMasterVolume(volume_arry);
+        pm.IsSaved();
     }
 }

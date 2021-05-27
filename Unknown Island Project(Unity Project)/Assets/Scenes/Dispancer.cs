@@ -30,5 +30,19 @@ namespace Assets.Scenes
             }
             return list;
         }
+        public Sprite[] KeyDispanceList()
+        {
+            Sprite[] arry;
+            List<Sprite> list = new List<Sprite>();
+            arry = Resources.LoadAll<Sprite>("Icon_Key(Atlas)");
+            for(int i = 0; i < arry.Length; i++)
+            {
+                list.Add(arry[i]);
+            }
+            list.Add(Resources.Load<Sprite>("Icon_Key(Atlas)_Tab"));
+            list.Add(Resources.Load<Sprite>("Icon_Key(Atlas)_Shift"));
+            arry = list.ToArray();
+            return arry;
+        }
     }
 }
