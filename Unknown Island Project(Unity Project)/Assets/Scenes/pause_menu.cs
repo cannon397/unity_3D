@@ -231,7 +231,7 @@ public class pause_menu : MonoBehaviour
     {
         issaved = false;
     }
-    public void ButtonClickNotSavedYes(GameObject keycustom_panel, string[] key_custom_arry, GameObject setting_panel, Slider gamemaster_sound_slider, Slider mousedpi_slider, GameObject notsaved_panel, GameObject pause_panel)
+    public void ButtonClickNotSavedYes(GameObject keycustom_panel, string[] key_custom_arry, GameObject setting_panel, GameObject notsaved_panel, GameObject pause_panel)
     {
         if (keycustom_panel.activeSelf)
         {
@@ -252,9 +252,11 @@ public class pause_menu : MonoBehaviour
             ButtonClickCloseSetting(pause_panel, setting_panel, notsaved_panel);
         }
     }
-    public void ButtonClickNotSavedNo(GameObject keycustom_panel, GameObject pause_panel, GameObject notsaved_panel, GameObject setting_panel, Slider gamemaster_sound_slider, Slider mousedpi_slider, AudioMixer master_mixer)
+    public void ButtonClickNotSavedNo(GameObject keycustom_panel, GameObject setting_panel, GameObject notsaved_panel, GameObject pause_panel, Setting_header sh, 
+        Slider master_volume_slider, Slider bgm_volume_slider, Slider fx_volume_slider, AudioMixer master_mixer,
+        Slider mouse_dpi_slider, Dropdown resolution_dropdown, Dropdown screenmod_dropdown)
     {
-        uki.ImportSettingValue();
+        uki.ImportSettingValue(sh, master_volume_slider, bgm_volume_slider, fx_volume_slider, master_mixer, mouse_dpi_slider, resolution_dropdown, screenmod_dropdown);
         IsSaved();
         if (keycustom_panel.activeSelf)
         {
@@ -332,6 +334,11 @@ public class pause_menu : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
     }
+    /// <summary>
+    /// 키커스텀 바뀐 이미지 넣어주는 함수
+    /// </summary>
+    /// <param name="button"></param>
+    /// <param name="st"></param>
     public void KeyCustomChangeImage(Button button, string st)
     {
         if (keycab_list == null)

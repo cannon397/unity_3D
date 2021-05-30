@@ -250,8 +250,4 @@ public class game_tile : MonoBehaviour
         sh.SetMouseDpi(mousedpi_slider.value);
         sh.SetKeyCustom(key_custom_arry);
     }
-     void OnDestroy()
-    {
-        //db.CloseSqlConnection();
-    }
 }

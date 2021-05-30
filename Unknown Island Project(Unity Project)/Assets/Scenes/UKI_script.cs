@@ -104,7 +104,7 @@ public class UKI_script : MonoBehaviour
     static private bool isinwater;
 
     public List<GameObject> tree_list;
-    public static Sprite[] keycab_list;
+    public Sprite[] keycab_list;
     //flag
     // 1 = 3인칭 0 = 1인칭
     int viewPointFlag = 1;
@@ -281,10 +281,18 @@ public class UKI_script : MonoBehaviour
         exit_setting_button.onClick.AddListener(delegate
         {
             pm.ButtonClickCloseSetting(pause_panel, setting_window_panel, setting_confirm_panel);
+            if (nowon_setting_panel.activeSelf)
+            {
+                nowon_setting_panel.SetActive(false);
+            }
         });
         quit_setting_button.onClick.AddListener(delegate
         {
             pm.ChangePanel(setting_window_panel, pause_panel);
+            if (nowon_setting_panel.activeSelf)
+            {
+                nowon_setting_panel.SetActive(false);
+            }
         });
         screenmod_dropdown.onValueChanged.AddListener(delegate
         {
@@ -300,15 +308,15 @@ public class UKI_script : MonoBehaviour
         });
         reset_graphic_button.onClick.AddListener(delegate
         {
-            ImportSettingValue();
+            ImportSettingValue(sh, master_volume_slider, bgm_volume_slider, fx_volume_slider, master_mixer, mouse_dpi_slider, resolution_dropdown, screenmod_dropdown);
         });
         reset_sound_button.onClick.AddListener(delegate
         {
-            ImportSettingValue();
+            ImportSettingValue(sh, master_volume_slider, bgm_volume_slider, fx_volume_slider, master_mixer, mouse_dpi_slider, resolution_dropdown, screenmod_dropdown);
         }); 
         reset_keycustom_button.onClick.AddListener(delegate
         {
-            ImportSettingValue();
+            ImportSettingValue(sh, master_volume_slider, bgm_volume_slider, fx_volume_slider, master_mixer, mouse_dpi_slider, resolution_dropdown, screenmod_dropdown);
         });
         master_volume_slider.onValueChanged.AddListener(delegate
         {
@@ -354,12 +362,21 @@ public class UKI_script : MonoBehaviour
         {
             pm.KeyCustom(keycustom_check_panel, keycustom_openinventory_button, 4);
         });
+        setting_confirm_button.onClick.AddListener(delegate
+        {
+            pm.ButtonClickNotSavedYes(setting_control_panel, key_custom_arry, setting_window_panel, setting_confirm_panel, pause_panel);
+        });
+        setting_cancle_button.onClick.AddListener(delegate
+        {
+            pm.ButtonClickNotSavedNo(setting_control_panel, setting_window_panel, setting_confirm_panel, pause_panel, sh, master_volume_slider, 
+                bgm_volume_slider, fx_volume_slider, master_mixer, mouse_dpi_slider, resolution_dropdown, screenmod_dropdown);
+        });
 
 
 
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 300;
-        ImportSettingValue();
+        ImportSettingValue(sh, master_volume_slider, bgm_volume_slider, fx_volume_slider, master_mixer, mouse_dpi_slider, resolution_dropdown, screenmod_dropdown);
         wait_treereset = new WaitForSeconds(4.0f);//나무 리스폰 시간 조정
         wait_settingtrap = new AsyncOperation();
         wait_fishtrap = new WaitForSeconds(120f);//통발에 물고기 잡히길 기다리는 시간 조정
@@ -426,7 +443,8 @@ public class UKI_script : MonoBehaviour
             camera.position = cameraArm.position;
         }
     }
-    public void ImportSettingValue()
+    public void ImportSettingValue(Setting_header sh, Slider master_volume_slider, Slider bgm_volume_slider, Slider fx_volume_slider, AudioMixer master_mixer, 
+        Slider mouse_dpi_slider, Dropdown resolution_dropdown, Dropdown screenmod_dropdown)
     {
         volume_arry = sh.GetSoundMasterVolume();
         float volume = volume_arry[0];
