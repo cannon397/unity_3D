@@ -9,12 +9,6 @@ using System;
 
 public class UKI_script : MonoBehaviour
 {
-    public GameObject press_tree_image;
-    public GameObject press_treeitem_image;
-    public GameObject press_water_image;
-    public GameObject press_fishtrap_image;
-    public GameObject press_rock_image;
-    public GameObject press_stone_image;
 
     public GameObject tree_log;
     public GameObject tree_fruit;
@@ -86,12 +80,10 @@ public class UKI_script : MonoBehaviour
     private CharacterController controller;
 
     public LayerMask laymask_tree;
-    public LayerMask laymask_tree_item;
     public LayerMask laymask_floor;
     public LayerMask laymask_water;
-    public LayerMask laymask_fishtrap;
     public LayerMask laymask_rock;
-    public LayerMask laymask_stone;
+    public LayerMask laymask_pickup;
 
     public float speed;
     public float jumpPower;
@@ -105,9 +97,6 @@ public class UKI_script : MonoBehaviour
 
     public List<GameObject> tree_list;
     public Sprite[] keycab_list;
-    //flag
-    // 1 = 3인칭 0 = 1인칭
-    int viewPointFlag = 1;
     public static string[] key_custom_arry;
     public static float[] volume_arry;
     private static int key_adr; 
@@ -132,6 +121,7 @@ public class UKI_script : MonoBehaviour
     private Dispancer ds;
     private Setting_Status ss;
     private ItemJson ij;
+
     void Start()
     {
         db = new DBAccess();
@@ -152,22 +142,10 @@ public class UKI_script : MonoBehaviour
         tree_list = ds.TreeDispanceList();
         keycab_list = ds.KeyDispanceList();
 
-        press_tree_image = GameObject.Find("Press_Tree_Image");
-        press_tree_image.SetActive(false);
-        press_treeitem_image = GameObject.Find("Press_TreeItem_Image");
-        press_treeitem_image.SetActive(false);
-        press_water_image = GameObject.Find("Press_Water_Image");
-        press_water_image.SetActive(false);
-        press_fishtrap_image = GameObject.Find("Press_Fishtrap_Image");
-        press_fishtrap_image.SetActive(false);
-        press_rock_image = GameObject.Find("Press_Rock_Image");
-        press_rock_image.SetActive(false);
-        press_stone_image = GameObject.Find("Press_Stone_Image");
-        press_stone_image.SetActive(false);
 
 
-        tree_log = GameObject.FindWithTag("Tree_Log");
-        tree_fruit = GameObject.FindWithTag("Tree_Fruit");
+        tree_log = GameObject.Find("Tree_Log");
+        tree_fruit = GameObject.Find("Tree_Fruit");
         fish_trap = GameObject.Find("Fish_trap");
         rock_stone = GameObject.Find("Rock_stone"); 
 
@@ -405,13 +383,13 @@ public class UKI_script : MonoBehaviour
         {
             StartCoroutine(pl.JumpAndMove(cameraArm, characterBody, controller, animator, speed, jumpPower, wait_fix));
             StartCoroutine(pl.LookAround(cameraArm, camera, camera_dstc, mouse_dpi, wait_end));
-            pl.PointOfView(key_custom_arry);
+            pl.PointOfView(characterBody, key_custom_arry);
         }
         pl.JumpStatusOn(characterBody, laymask_floor, laymask_rock);
-        ii.RayCastTree(characterBody, press_tree_image, key_custom_arry, tree_log, tree_fruit, laymask_tree);
-        ii.RayCastTreeItem(characterBody, press_treeitem_image, key_custom_arry, laymask_tree_item);
-        ii.RayCastWaterFishTrap(characterBody, press_water_image, press_fishtrap_image, key_custom_arry, fish_trap, laymask_water, laymask_fishtrap);
-        ii.RayCastRock(characterBody, press_rock_image, press_stone_image, key_custom_arry, rock_stone, laymask_rock, laymask_stone);
+        ii.RayCastTree(characterBody, tree_log, tree_fruit, laymask_tree);
+        ii.RayCastWaterFishTrap(characterBody, fish_trap, laymask_water);
+        ii.RayCastRock(characterBody, rock_stone, laymask_rock);
+        ii.PickUpItem(characterBody, laymask_pickup, key_custom_arry);
         pm.KeyCustomCheck(keycustom_check_panel, key_adr, key_custom_arry);
         pm.CheckKeyControl(pause_panel);
         StartCoroutine(ii.CountFishTrap(wait_fishtrap, wait_settingtrap, 0));
@@ -433,15 +411,8 @@ public class UKI_script : MonoBehaviour
     void LateUpdate()
     {
         Vector3 vector = characterBody.position;
-        vector.y = characterBody.position.y + 1.5f;
-        if (viewPointFlag == 1)
-        {
-            cameraArm.position = vector;
-        }
-        else
-        {
-            camera.position = cameraArm.position;
-        }
+        vector.y = characterBody.position.y + 1.8f;
+        cameraArm.position = vector;
     }
     public void ImportSettingValue(Setting_header sh, Slider master_volume_slider, Slider bgm_volume_slider, Slider fx_volume_slider, AudioMixer master_mixer, 
         Slider mouse_dpi_slider, Dropdown resolution_dropdown, Dropdown screenmod_dropdown)

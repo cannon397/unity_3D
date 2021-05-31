@@ -24,6 +24,13 @@ public class Ingame_Interection : MonoBehaviour
     public GameObject setting_point;
     public GameObject fishtrap_overlap;
 
+    public static GameObject press_tree_image;
+    public static GameObject press_treeitem_image;
+    public static GameObject press_water_image;
+    public static GameObject press_fishtrap_image;
+    public static GameObject press_rock_image;
+    public static GameObject press_stone_image;
+
     private UKI_script uki;
     public Ingame_Interection()
     {
@@ -32,6 +39,20 @@ public class Ingame_Interection : MonoBehaviour
         fishtrap_list = new List<GameObject>();
         fishtrap_waitcount_list = new List<int>();
         fishtrap_wait_bool_list = new List<bool>();
+
+        press_tree_image = GameObject.Find("Press_Tree_Image");
+        press_tree_image.SetActive(false);
+        press_treeitem_image = GameObject.Find("Press_TreeItem_Image");
+        press_treeitem_image.SetActive(false);
+        press_water_image = GameObject.Find("Press_Water_Image");
+        press_water_image.SetActive(false);
+        press_fishtrap_image = GameObject.Find("Press_Fishtrap_Image");
+        press_fishtrap_image.SetActive(false);
+        press_rock_image = GameObject.Find("Press_Rock_Image");
+        press_rock_image.SetActive(false);
+        press_stone_image = GameObject.Find("Press_Stone_Image");
+        press_stone_image.SetActive(false);
+
         fishtrap_text = GameObject.Find("Fishtrap_isFull_Text");
         fishtrap_text.SetActive(false);
         setting_point = GameObject.Find("Setting_point");
@@ -55,7 +76,7 @@ public class Ingame_Interection : MonoBehaviour
     ///<summary>
     ///유저가 나무를 향해 화면을 보고 있는지 판단해서 press E 이미지를 띄우고 그 상태에서 E 누르면 나무를 캐고(비활성화) 하위 아이템을 해당 좌표에 활성화 후 순간이동 시키는 함수
     ///</summary>
-    public void RayCastTree(Transform charactor, GameObject press_tree_image, string[] key_custom_arry, GameObject tree_log, GameObject tree_fruit, LayerMask laymask_tree)
+    public void RayCastTree(Transform charactor, GameObject tree_log, GameObject tree_fruit, LayerMask laymask_tree)
     {
         //if(도끼를 장착 했는지 확인)
         RaycastHit hitinfo;
@@ -76,37 +97,6 @@ public class Ingame_Interection : MonoBehaviour
         else if(press_tree_image.activeSelf)
         {
             press_tree_image.SetActive(false);
-        }
-    }
-    ///<summary>
-    ///유저가 나무하위 아이템을 향해 화면을 보고 있는지 판단해서 press E 이미지를 띄우고 그 상태에서 E 누르면 아이템을 줍고(비활성화) 아이템을 저장하는 함수
-    ///</summary>
-    public void RayCastTreeItem(Transform charactor, GameObject press_treeitem_image, string[] key_custom_arry, LayerMask laymask_tree_item)
-    {
-        RaycastHit hitinfo;
-        if (Physics.SphereCast(charactor.position - charactor.forward, 1f, charactor.forward, out hitinfo, 2f, laymask_tree_item))
-        {
-            press_treeitem_image.SetActive(true);
-            if (Input.GetKeyDown(key_custom_arry[1]))
-            {
-                if(hitinfo.collider.gameObject.tag == "Tree_Log")
-                {
-                    //줍는 에니메이션
-                    //인벤토리 데이터 베이스에 통나무 저장
-                    Destroy(hitinfo.collider.gameObject);
-                }
-                else if (hitinfo.collider.gameObject.tag == "Tree_Fruit")
-                {
-                    //줍는 에니메이션
-                    //인벤토리 데이터 베이스에 과일 저장
-                    Destroy(hitinfo.collider.gameObject);
-                }
-                hitinfo.collider.gameObject.SetActive(false);
-            }
-        }
-        else if (press_treeitem_image.activeSelf)
-        {
-            press_treeitem_image.SetActive(false);
         }
     }
     ///<summary>
@@ -171,156 +161,46 @@ public class Ingame_Interection : MonoBehaviour
     ///<summary>
     ///물인지 판단해서 통발 설치 및 회수
     ///</summary>
-    public void RayCastWaterFishTrap(Transform charactor, GameObject press_water_image, GameObject press_fishtrap_image, string[] key_custom_arry, GameObject fish_trap, LayerMask laymask_water, LayerMask laymask_fishtrap)
+    public void RayCastWaterFishTrap(Transform charactor, GameObject fish_trap, LayerMask laymask_water)
     {
         RaycastHit hitinfo_trap;
-        //통발 회수
-        if (Physics.SphereCast(charactor.position - charactor.forward, 1f, charactor.forward, out hitinfo_trap, 2f, laymask_fishtrap))
-        {
-            press_fishtrap_image.SetActive(true);
-            press_water_image.SetActive(false);
-            fishtrap_overlap.SetActive(false);
-            if (Input.GetKeyDown(key_custom_arry[1]))
-            {
-                //통발 줍는 애니메이션
-                //인벤토리에 통발과 물고기 저장
-                int rnd = UnityEngine.Random.Range(1, 101);
-                switch (fishtrap_waitcount_list[fishtrap_list.IndexOf(hitinfo_trap.collider.gameObject)])
-                {//통발 시간에 따른 물고기 회수량 확률 적용
-                    case 0:
-                        if(rnd < 95)
-                        {
-                            //물고기 0개
-                        }
-                        else
-                        {
-                            //물고기 1개
-                        }
-                        break;
-                    case 1:
-                        if (rnd < 50)
-                        {
-                            //물고기 1개
-                        }
-                        else
-                        {
-                            //물고기 2개
-                        }
-                        break;
-                    case 2:
-                        if (rnd < 15)
-                        {
-                            //물고기 1개
-                        }
-                        else if (rnd < 50)
-                        {
-                            //물고기 2개
-                        }
-                        else
-                        {
-                            //물고기 3개
-                        }
-                        break;
-                    case 3:
-                        if (rnd < 5)
-                        {
-                            //물고기 1개
-                        }
-                        else if (rnd < 30)
-                        {
-                            //물고기 2개
-                        }
-                        else if (rnd < 60)
-                        {
-                            //물고기 3개
-                        }
-                        else
-                        {
-                            //물고기 4개
-                        }
-                        break;
-                    case 4:
-                        if (rnd < 5)
-                        {
-                            //물고기 2개
-                        }
-                        else if (rnd < 30)
-                        {
-                            //물고기 3개
-                        }
-                        else if (rnd < 60)
-                        {
-                            //물고기 4개
-                        }
-                        else
-                        {
-                            //물고기 5개
-                        }
-                        break;
-                    default:
-                        if (rnd < 5)
-                        {
-                            //물고기 3개
-                        }
-                        else if (rnd < 30)
-                        {
-                            //물고기 4개
-                        }
-                        else if (rnd < 60)
-                        {
-                            //물고기 5개
-                        }
-                        else
-                        {
-                            //물고기 6개
-                        }
-                        break;
-                }
-                fishtrap_waitcount_list.RemoveAt(fishtrap_list.IndexOf(hitinfo_trap.collider.gameObject));
-                fishtrap_wait_bool_list.RemoveAt(fishtrap_list.IndexOf(hitinfo_trap.collider.gameObject));
-                fishtrap_list.Remove(hitinfo_trap.collider.gameObject);
-                Destroy(hitinfo_trap.collider.gameObject);
-            }
-        }
-        else if (press_fishtrap_image.activeSelf)
-        {
-            press_fishtrap_image.SetActive(false);
-            press_water_image.SetActive(true);
-        }
         //통발 설치
-        //if(통발을 장착 했는지 확인)
-        else if (Physics.Raycast(charactor.position + charactor.up * 5f, -charactor.up, 5.2f, laymask_water))
+        if (!press_fishtrap_image.activeSelf)
         {
-            press_water_image.SetActive(true);
-            if (fishtrap_list.Count < 4)
+            //if(통발을 장착 했는지 확인)
+            if (Physics.Raycast(charactor.position + charactor.up * 5f, -charactor.up, 5.2f, laymask_water))
             {
-                fishtrap_overlap.SetActive(true);
-                fishtrap_overlap.transform.position = setting_point.transform.position;
-            }
-            else
-            {
-                fishtrap_overlap.SetActive(false);
-            }
-            if (Input.GetButtonDown("Fire1"))
-            {
+                press_water_image.SetActive(true);
                 if (fishtrap_list.Count < 4)
                 {
-                    fishtrap_overlap.SetActive(false);
-                    FishTrapCreate(setting_point.transform.position, fish_trap);
+                    fishtrap_overlap.SetActive(true);
+                    fishtrap_overlap.transform.position = setting_point.transform.position;
                 }
                 else
                 {
-                    if(!fishtrap_text.activeSelf)
+                    fishtrap_overlap.SetActive(false);
+                }
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    if (fishtrap_list.Count < 4)
                     {
-                        fishtrap_count_already = true;
+                        fishtrap_overlap.SetActive(false);
+                        FishTrapCreate(setting_point.transform.position, fish_trap);
+                    }
+                    else
+                    {
+                        if (!fishtrap_text.activeSelf)
+                        {
+                            fishtrap_count_already = true;
+                        }
                     }
                 }
             }
-        }
-        else if (press_water_image.activeSelf)
-        {
-            press_water_image.SetActive(false);
-            fishtrap_overlap.SetActive(false);
+            else if (press_water_image.activeSelf)
+            {
+                press_water_image.SetActive(false);
+                fishtrap_overlap.SetActive(false);
+            }
         }
     }
     ///<summary>
@@ -376,7 +256,7 @@ public class Ingame_Interection : MonoBehaviour
     ///<summary>
     ///돌 캐는 함수
     ///</summary>
-    public void RayCastRock(Transform charactor, GameObject press_rock_image, GameObject press_stone_image, string[] key_custom_arry, GameObject rock_stone, LayerMask laymask_rock, LayerMask laymask_stone)
+    public void RayCastRock(Transform charactor, GameObject rock_stone, LayerMask laymask_rock)
     {
         //if(곡괭이를 장착 했는지 확인)
         RaycastHit hitinfo;
@@ -386,24 +266,12 @@ public class Ingame_Interection : MonoBehaviour
             if (Input.GetButtonDown("Fire1"))
             {
                 //곡괭이질 애니메이션
-                RockItemCreate(hitinfo.point, hitinfo.collider.gameObject.transform.position, rock_stone);
+                RockItemCreate(hitinfo.point, charactor.position - hitinfo.point + charactor.up, rock_stone);
             }
         }
         else if (press_rock_image.activeSelf)
         {
             press_rock_image.SetActive(false);
-        }
-        else if (Physics.SphereCast(charactor.position - charactor.forward, 1f, charactor.forward, out hitinfo, 2f, laymask_stone))
-        {
-            press_stone_image.SetActive(true);
-            if (Input.GetKeyDown(key_custom_arry[1]))
-            {
-                //줍는 애니메이션 및 줍기 구현
-            }
-        }
-        else if(press_stone_image.activeSelf)
-        {
-            press_stone_image.SetActive(false);
         }
     }
     ///<summary>
@@ -411,6 +279,269 @@ public class Ingame_Interection : MonoBehaviour
     ///</summary>
     private void RockItemCreate(Vector3 item_point, Vector3  tr_point, GameObject rock_stone)
     {
-        Destroy(Instantiate(rock_stone, item_point - tr_point.normalized, Quaternion.identity), 30f);
+        Destroy(Instantiate(rock_stone, item_point + tr_point * 0.3f, Quaternion.identity), 30f);
+    }
+    /// <summary>
+    /// 아이템 줍기 함수
+    /// </summary>
+    /// <param name="charactor">Player Transform</param>
+    /// <param name="layermask">PickUp_Item LayerMask</param>
+    public void PickUpItem(Transform charactor, LayerMask layermask, string[] key_custom_arry)
+    {
+        RaycastHit hitinfo;
+        if (Physics.SphereCast(charactor.position - charactor.forward, 1f, charactor.forward, out hitinfo, 2f, layermask))
+        {//여기는 해당 아이템을 집는 기능 구현 부분
+            if(hitinfo.collider.gameObject.tag == "10001")//도끼
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "10002")//곡괭이
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "10003")//창
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "10004")//낚시대
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "10005")//통발
+            {
+                press_fishtrap_image.SetActive(true);
+                press_water_image.SetActive(false);
+                fishtrap_overlap.SetActive(false);
+                if (Input.GetKeyDown(key_custom_arry[1]))
+                {
+                    //통발 줍는 애니메이션
+                    //인벤토리에 통발과 물고기 저장
+                    int rnd = UnityEngine.Random.Range(1, 101);
+                    switch (fishtrap_waitcount_list[fishtrap_list.IndexOf(hitinfo.collider.gameObject)])
+                    {//통발 시간에 따른 물고기 회수량 확률 적용
+                        case 0:
+                            if (rnd < 95)
+                            {
+                                //물고기 0개
+                            }
+                            else
+                            {
+                                //물고기 1개
+                            }
+                            break;
+                        case 1:
+                            if (rnd < 50)
+                            {
+                                //물고기 1개
+                            }
+                            else
+                            {
+                                //물고기 2개
+                            }
+                            break;
+                        case 2:
+                            if (rnd < 15)
+                            {
+                                //물고기 1개
+                            }
+                            else if (rnd < 50)
+                            {
+                                //물고기 2개
+                            }
+                            else
+                            {
+                                //물고기 3개
+                            }
+                            break;
+                        case 3:
+                            if (rnd < 5)
+                            {
+                                //물고기 1개
+                            }
+                            else if (rnd < 30)
+                            {
+                                //물고기 2개
+                            }
+                            else if (rnd < 60)
+                            {
+                                //물고기 3개
+                            }
+                            else
+                            {
+                                //물고기 4개
+                            }
+                            break;
+                        case 4:
+                            if (rnd < 5)
+                            {
+                                //물고기 2개
+                            }
+                            else if (rnd < 30)
+                            {
+                                //물고기 3개
+                            }
+                            else if (rnd < 60)
+                            {
+                                //물고기 4개
+                            }
+                            else
+                            {
+                                //물고기 5개
+                            }
+                            break;
+                        default:
+                            if (rnd < 5)
+                            {
+                                //물고기 3개
+                            }
+                            else if (rnd < 30)
+                            {
+                                //물고기 4개
+                            }
+                            else if (rnd < 60)
+                            {
+                                //물고기 5개
+                            }
+                            else
+                            {
+                                //물고기 6개
+                            }
+                            break;
+                    }
+                    fishtrap_waitcount_list.RemoveAt(fishtrap_list.IndexOf(hitinfo.collider.gameObject));
+                    fishtrap_wait_bool_list.RemoveAt(fishtrap_list.IndexOf(hitinfo.collider.gameObject));
+                    fishtrap_list.Remove(hitinfo.collider.gameObject);
+                    Destroy(hitinfo.collider.gameObject);
+                }
+            }
+            else if (hitinfo.collider.gameObject.tag == "10006")//코코넛 그릇
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "10007")//횃불
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "10008")//가방
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "20001")//해독제
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "20002")//상처약
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "20003")//코코넛
+            {
+                press_treeitem_image.SetActive(true);
+                if (Input.GetKeyDown(key_custom_arry[1]))
+                {
+                    //줍는 에니메이션
+                    //인벤토리 데이터 베이스에 코코넛 저장
+                    Destroy(hitinfo.collider.gameObject);
+                }
+            }
+            else if (hitinfo.collider.gameObject.tag == "20004")//정어리
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "20005")//물이담긴 나무그릇
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "20006")//복어
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "20007")//넙치
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "20008")//도미
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "20009")//다랑어
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "20010")//구운 정어리
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "20011")//구운 복어
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "20012")//구운 넙치
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "20013")//구운 도미
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "20014")//구운 다랑어
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "30001")//통나무
+            {
+
+                press_treeitem_image.SetActive(true);
+                if (Input.GetKeyDown(key_custom_arry[1]))
+                {
+                    //줍는 에니메이션
+                    //인벤토리 데이터 베이스에 통나무 저장
+                    Destroy(hitinfo.collider.gameObject);
+                }
+            }
+            else if (hitinfo.collider.gameObject.tag == "30002")//덩굴
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "30003")//돌
+            {
+                press_stone_image.SetActive(true);
+                if (Input.GetKeyDown(key_custom_arry[1]))
+                {
+                    //줍는 애니메이션 및 줍기 구현
+                    Destroy(hitinfo.collider.gameObject);
+                }
+            }
+            else if (hitinfo.collider.gameObject.tag == "30004")//꽃
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "30005")//나뭇가지
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "30006")//야자수 잎
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "40001")//상자
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "40002")//집
+            {
+
+            }
+            else if (hitinfo.collider.gameObject.tag == "40003")//모닥불
+            {
+
+            }
+        }
+        else
+        {//여기는 줍기 UI 총괄로 꺼주는 파트
+            press_treeitem_image.SetActive(false);
+            press_fishtrap_image.SetActive(false);
+            press_stone_image.SetActive(false);
+        }
     }
 }

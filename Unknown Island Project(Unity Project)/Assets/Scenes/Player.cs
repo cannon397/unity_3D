@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
 
         cameraArm.rotation = Quaternion.Euler(x, camAngle.y + mouseDelta.x, camAngle.z);
 
-        if (viewpoint_bool == true)
+        if (viewpoint_bool == true)//3인칭
         {
             Camera.fieldOfView = 60f;
             RaycastHit hitinfo;
@@ -62,10 +62,10 @@ public class Player : MonoBehaviour
             }
             yield return wait;
         }
-        else
+        else//1인칭
         {
             Camera.fieldOfView = 50f;
-            camera.position = cameraArm.position + cameraArm.up.normalized * 0.3f + cameraArm.forward.normalized * -0.1f;
+            camera.position = cameraArm.position + cameraArm.forward.normalized * 0.1f;
         }
     }
     //점프 하지 않았을때 move 함수
@@ -115,16 +115,22 @@ public class Player : MonoBehaviour
         // 캐릭터 움직임.
         controller.Move(moveDir * Time.deltaTime);
     }
-    public void PointOfView(string[] key_custom_arry)
+    public void PointOfView(Transform charactor, string[] key_custom_arry)
     {
         if (Input.GetKeyDown(key_custom_arry[0]))
         {
             if(viewpoint_bool == true)
-            {
+            {//1인칭 으로 변환
+                charactor.Find("Cap").gameObject.SetActive(false);
+                charactor.Find("CrossBag").gameObject.SetActive(false);
+                charactor.Find("Head Set").gameObject.SetActive(false);
                 viewpoint_bool = false;
             }
-            else 
-            {
+            else
+            {//3인칭 으로 변환
+                charactor.Find("Cap").gameObject.SetActive(true);
+                charactor.Find("CrossBag").gameObject.SetActive(true);
+                charactor.Find("Head Set").gameObject.SetActive(true);
                 viewpoint_bool = true;
             }
         }
