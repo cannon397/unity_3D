@@ -16,8 +16,10 @@ public class Player : MonoBehaviour
     float hAxis;
     float vAxis;
     bool wDown;
+    bool wJump;
 
     public static bool jumpStatus;
+    private static bool onair = false;
     private static bool viewpoint_bool;//ture = 3rd
 
     private static float gravity;
@@ -71,7 +73,6 @@ public class Player : MonoBehaviour
     //점프 하지 않았을때 move 함수
     public void Move(Transform cameraArm, Transform characterBody, CharacterController controller, Animator animator, float speed)
     {
-        Debug.DrawRay(cameraArm.position, new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized, Color.red);
 
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
@@ -102,6 +103,8 @@ public class Player : MonoBehaviour
         }
         animator.SetBool("isWalk", moveInput != Vector2.zero);
         animator.SetBool("isRun", wDown && moveInput != Vector2.zero && moveInput.y > 0);
+        animator.SetBool("isWalkBack", moveInput != Vector2.zero && moveInput.y < 0);
+        animator.SetBool("isGround", controller.isGrounded);
         // 캐릭터에 중력 적용.
         moveDir.y += -gravity * Time.deltaTime;
         if (!jumpStatus)
@@ -138,18 +141,17 @@ public class Player : MonoBehaviour
     //점프 가능한 상태인지 판단하는 함수
     public void JumpStatusOn(Transform charactor, LayerMask floor, LayerMask rock)
     {
-        RaycastHit hitinfo;
-        if (Physics.Raycast(charactor.position + charactor.up * 5f, -charactor.up, out hitinfo, 5.2f, floor))//레이케스트 성공시
+        if (Physics.Raycast(charactor.position + charactor.up * 0.8f, -charactor.up, 1f, floor))//레이케스트 성공시
         {
             jumpStatus = false;
         }
-        else if (Physics.Raycast(charactor.position + charactor.up * 5f, -charactor.up, out hitinfo, 5.2f, rock))
+        else if (Physics.Raycast(charactor.position + charactor.up * 0.8f, -charactor.up, 1f, rock))
         {
             jumpStatus = false;
         }
         else
         {
-            jumpStatus = true;
+            jumpStatus = true;//점프중
         }
     }
     //점프 할때 쓰는 move 함수
@@ -158,12 +160,12 @@ public class Player : MonoBehaviour
         jump = jumpPower;
         if (Input.GetButtonDown("Jump") && !jumpStatus)
         {
+            animator.SetBool("isJump", true);
             float time = 0f;
-            while(time < 0.35f)
+            while(time < 0.6f)
             {
                 hAxis = Input.GetAxisRaw("Horizontal");
                 vAxis = Input.GetAxisRaw("Vertical");
-                wDown = Input.GetButton("Run");
 
 
 
@@ -195,6 +197,7 @@ public class Player : MonoBehaviour
                 time += Time.deltaTime;
                 yield return wait;
             }
+            animator.SetBool("isJump", false);
         }
     }
 }

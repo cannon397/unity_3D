@@ -80,7 +80,6 @@ public class Ingame_Interection : MonoBehaviour
     {
         //if(도끼를 장착 했는지 확인)
         RaycastHit hitinfo;
-        Debug.DrawRay(charactor.position - charactor.forward, charactor.forward, Color.yellow, 2f);
         if (Physics.SphereCast(charactor.position - charactor.forward, 1f, charactor.forward, out hitinfo, 2f, laymask_tree))
         {
             press_tree_image.SetActive(true);
