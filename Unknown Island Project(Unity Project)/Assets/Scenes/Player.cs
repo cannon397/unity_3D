@@ -90,7 +90,6 @@ public class Player : MonoBehaviour
 
         if (isMove)
         {
-
             characterBody.forward = moveDir_1;
             if(moveInput.y > 0)
             {
@@ -105,6 +104,7 @@ public class Player : MonoBehaviour
         animator.SetBool("isRun", wDown && moveInput != Vector2.zero && moveInput.y > 0);
         animator.SetBool("isWalkBack", moveInput != Vector2.zero && moveInput.y < 0);
         animator.SetBool("isGround", controller.isGrounded);
+        animator.SetBool("isJump", jumpStatus);
         // 캐릭터에 중력 적용.
         moveDir.y += -gravity * Time.deltaTime;
         if (!jumpStatus)
@@ -160,7 +160,7 @@ public class Player : MonoBehaviour
         jump = jumpPower;
         if (Input.GetButtonDown("Jump") && !jumpStatus)
         {
-            animator.SetBool("isJump", true);
+            animator.SetTrigger("doJump");
             float time = 0f;
             while(time < 0.6f)
             {
@@ -197,7 +197,6 @@ public class Player : MonoBehaviour
                 time += Time.deltaTime;
                 yield return wait;
             }
-            animator.SetBool("isJump", false);
         }
     }
 }

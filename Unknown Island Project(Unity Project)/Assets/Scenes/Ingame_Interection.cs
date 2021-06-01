@@ -15,7 +15,7 @@ public class Ingame_Interection : MonoBehaviour
     static private List<GameObject> fishtrap_list;
     static private List<int> fishtrap_waitcount_list;//통발이 기다린 시간에 따라 +1 씩 증가하니까 그에 따른 물고기 양도 확률 적으로 증가하게 하셈
     static private List<bool> fishtrap_wait_bool_list;
-
+    private Animator animator;
     static private bool fishtrap_count_already;
 
     private float time;
@@ -39,6 +39,8 @@ public class Ingame_Interection : MonoBehaviour
         fishtrap_list = new List<GameObject>();
         fishtrap_waitcount_list = new List<int>();
         fishtrap_wait_bool_list = new List<bool>();
+
+        animator = GameObject.Find("Player").GetComponentInChildren<Animator>();
 
         press_tree_image = GameObject.Find("Press_Tree_Image");
         press_tree_image.SetActive(false);
@@ -86,7 +88,7 @@ public class Ingame_Interection : MonoBehaviour
             if (Input.GetButtonDown("Fire1"))
             {
                 //나무 패는 에니메이션
-
+                animator.SetTrigger("doLogging");
                 TreeItemCreate(hitinfo.collider.gameObject.transform, tree_log, tree_fruit);
 
 
@@ -265,6 +267,7 @@ public class Ingame_Interection : MonoBehaviour
             if (Input.GetButtonDown("Fire1"))
             {
                 //곡괭이질 애니메이션
+                animator.SetTrigger("doMining");
                 RockItemCreate(hitinfo.point, charactor.position - hitinfo.point + charactor.up, rock_stone);
             }
         }
@@ -314,6 +317,7 @@ public class Ingame_Interection : MonoBehaviour
                 if (Input.GetKeyDown(key_custom_arry[1]))
                 {
                     //통발 줍는 애니메이션
+                    animator.SetTrigger("doPickup");
                     //인벤토리에 통발과 물고기 저장
                     int rnd = UnityEngine.Random.Range(1, 101);
                     switch (fishtrap_waitcount_list[fishtrap_list.IndexOf(hitinfo.collider.gameObject)])
@@ -439,6 +443,7 @@ public class Ingame_Interection : MonoBehaviour
                 if (Input.GetKeyDown(key_custom_arry[1]))
                 {
                     //줍는 에니메이션
+                    animator.SetTrigger("doPickup");
                     //인벤토리 데이터 베이스에 코코넛 저장
                     Destroy(hitinfo.collider.gameObject);
                 }
@@ -494,6 +499,7 @@ public class Ingame_Interection : MonoBehaviour
                 if (Input.GetKeyDown(key_custom_arry[1]))
                 {
                     //줍는 에니메이션
+                    animator.SetTrigger("doPickup");
                     //인벤토리 데이터 베이스에 통나무 저장
                     Destroy(hitinfo.collider.gameObject);
                 }
@@ -508,6 +514,8 @@ public class Ingame_Interection : MonoBehaviour
                 if (Input.GetKeyDown(key_custom_arry[1]))
                 {
                     //줍는 애니메이션 및 줍기 구현
+                    animator.SetTrigger("doPickup");
+                    //인벤토리에 돌 저장
                     Destroy(hitinfo.collider.gameObject);
                 }
             }
@@ -537,7 +545,7 @@ public class Ingame_Interection : MonoBehaviour
             }
         }
         else
-        {//여기는 줍기 UI 총괄로 꺼주는 파트
+        {//여기는 줍기 UI, 애니메이션 Bool 총괄로 꺼주는 파트
             press_treeitem_image.SetActive(false);
             press_fishtrap_image.SetActive(false);
             press_stone_image.SetActive(false);
