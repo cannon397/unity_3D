@@ -6,6 +6,7 @@ using UnityEngine;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public class Item
 {
@@ -95,6 +96,7 @@ public class ItemJson
     public List<Item> item_list = new List<Item>();
     public List<List<ItemStatus>> item_status_list = new List<List<ItemStatus>>();
     public List<List<ItemCombinationFormula>> item_combin_list = new List<List<ItemCombinationFormula>>();
+    public JsonData item_data;
     public ItemJson()
     {
         
@@ -147,7 +149,8 @@ public class ItemJson
         
         
         string json_string = File.ReadAllText(Application.dataPath + "/Scenes/Item/ItemData.json");
-        JsonData item_data = JsonMapper.ToObject(json_string);
+
+         item_data = JsonMapper.ToObject(json_string);
 
 
     }
