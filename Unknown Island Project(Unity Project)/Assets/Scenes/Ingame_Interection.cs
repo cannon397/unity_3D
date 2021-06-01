@@ -78,7 +78,7 @@ public class Ingame_Interection : MonoBehaviour
     ///<summary>
     ///유저가 나무를 향해 화면을 보고 있는지 판단해서 press E 이미지를 띄우고 그 상태에서 E 누르면 나무를 캐고(비활성화) 하위 아이템을 해당 좌표에 활성화 후 순간이동 시키는 함수
     ///</summary>
-    public void RayCastTree(Transform charactor, GameObject tree_log, GameObject tree_fruit, LayerMask laymask_tree)
+    public IEnumerator RayCastTree(Transform charactor, GameObject tree_log, GameObject tree_fruit, LayerMask laymask_tree)
     {
         //if(도끼를 장착 했는지 확인)
         RaycastHit hitinfo;
@@ -87,9 +87,18 @@ public class Ingame_Interection : MonoBehaviour
             press_tree_image.SetActive(true);
             if (Input.GetButtonDown("Fire1"))
             {
+                int frame = 0;
                 //나무 패는 에니메이션
                 animator.SetTrigger("doLogging");
-                TreeItemCreate(hitinfo.collider.gameObject.transform, tree_log, tree_fruit);
+                while(frame < 30)
+                {
+                    if(frame == 29)
+                    {
+                        TreeItemCreate(hitinfo.collider.gameObject.transform, tree_log, tree_fruit);
+                    }
+                    frame++;
+                    yield return new WaitForFixedUpdate();
+                }
 
 
                 hitinfo.collider.gameObject.SetActive(false);

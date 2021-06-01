@@ -386,7 +386,7 @@ public class UKI_script : MonoBehaviour
             pl.PointOfView(characterBody, key_custom_arry);
         }
         pl.JumpStatusOn(characterBody, laymask_floor, laymask_rock);
-        ii.RayCastTree(characterBody, tree_log, tree_fruit, laymask_tree);
+        StartCoroutine(ii.RayCastTree(characterBody, tree_log, tree_fruit, laymask_tree));
         ii.RayCastWaterFishTrap(characterBody, fish_trap, laymask_water);
         ii.RayCastRock(characterBody, rock_stone, laymask_rock);
         ii.PickUpItem(characterBody, laymask_pickup, key_custom_arry);

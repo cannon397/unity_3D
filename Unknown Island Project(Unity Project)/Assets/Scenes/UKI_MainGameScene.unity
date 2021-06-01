@@ -132,8 +132,8 @@ GameObject:
   - component: {fileID: 27758485}
   - component: {fileID: 27758488}
   - component: {fileID: 27758487}
-  - component: {fileID: 27758486}
   - component: {fileID: 27758489}
+  - component: {fileID: 27758486}
   m_Layer: 14
   m_Name: Rock_stone
   m_TagString: 30003
@@ -150,13 +150,13 @@ Transform:
   m_GameObject: {fileID: 27758484}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.36, y: -11.21, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 574057726}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &27758486
-SphereCollider:
+--- !u!65 &27758486
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -166,8 +166,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.5830659, y: 0.57653016, z: 1.190796}
+  m_Center: {x: -0.039483007, y: 0.18833102, z: -0.14587392}
 --- !u!23 &27758487
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -214,7 +214,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 27758484}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 3061476506142545229, guid: bf55b1da472c6754ab9c43cb0d27a62d, type: 3}
 --- !u!54 &27758489
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2269,7 +2269,7 @@ Transform:
   m_GameObject: {fileID: 939778974}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.23, y: -7.02, z: 0.86}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.5}
   m_Children: []
   m_Father: {fileID: 623297543}
   m_RootOrder: 0
@@ -2285,8 +2285,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1.6043854}
+  m_Center: {x: 0, y: 0, z: -0.3021927}
 --- !u!23 &939778977
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2305,7 +2305,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 7390871704515345542, guid: cdef15ed128e6214298e0ecb4345b042, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2333,7 +2333,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939778974}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -9134618851414624062, guid: cdef15ed128e6214298e0ecb4345b042, type: 3}
 --- !u!54 &939778979
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4356,7 +4356,7 @@ Transform:
   m_GameObject: {fileID: 1908985695}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.03, y: -10.08, z: 3.76}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1545117483}
   m_RootOrder: 0
@@ -4387,9 +4387,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
+  m_Radius: 1.21
+  m_Height: 11.04
+  m_Direction: 2
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &1908985699
 MeshRenderer:
@@ -4409,7 +4409,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: -8499701361930146817, guid: 7fe84420caaf03f47b7544fc3b838ec7, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4437,7 +4437,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908985695}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -951608786083511892, guid: 7fe84420caaf03f47b7544fc3b838ec7, type: 3}
 --- !u!1 &1940066396
 GameObject:
   m_ObjectHideFlags: 0
@@ -4831,7 +4831,7 @@ Transform:
   m_GameObject: {fileID: 1960484616}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.926, y: -7.02, z: 0.848}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.5}
   m_Children: []
   m_Father: {fileID: 623297543}
   m_RootOrder: 1
@@ -4882,7 +4882,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1960484616}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -9134618851414624062, guid: cdef15ed128e6214298e0ecb4345b042, type: 3}
 --- !u!1 &2024677581
 GameObject:
   m_ObjectHideFlags: 0
@@ -5122,7 +5122,7 @@ Transform:
   m_GameObject: {fileID: 2071499022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.51, y: -10.63, z: -1.17}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 1545117483}
   m_RootOrder: 1
@@ -5154,7 +5154,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.89
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &2071499026
 MeshRenderer:
@@ -5174,7 +5174,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 824015559753126921, guid: 6020d06e057ee9d46a90c98f862accd4, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5202,7 +5202,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2071499022}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 745218288965529717, guid: 6020d06e057ee9d46a90c98f862accd4, type: 3}
 --- !u!1001 &2072554970
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25599,7 +25599,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5896569515054162687}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -78.70999, y: -260.19, z: 188.094}
+  m_LocalPosition: {x: -157.3, y: -260.19, z: 158}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children:
   - {fileID: 835403716}
