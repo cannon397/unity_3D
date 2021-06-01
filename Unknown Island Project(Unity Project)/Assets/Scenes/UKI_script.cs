@@ -64,7 +64,7 @@ public class UKI_script : MonoBehaviour
     public GameObject keycustom_check_panel;
 
     public GameObject nowon_setting_panel;
-
+    private Inventory iv;
 
 
 
@@ -132,6 +132,7 @@ public class UKI_script : MonoBehaviour
         ds = new Dispancer();
         ss = new Setting_Status();
         ij = new ItemJson();
+        iv = new Inventory(20,ij);
         animator = GameObject.Find("Player").GetComponentInChildren<Animator>();
         controller = GameObject.Find("Player").GetComponentInChildren<CharacterController>();
         camera_dstc = Mathf.Sqrt(4 * 4);
