@@ -17,7 +17,7 @@ public class Item
     public int item_id; //아이템 기본키
     public string item_name; //아이템 이름
     public string item_description; //아이템 설명
-    //public Sprite item_icon; //아이템 이미지
+    public string item_icon; //아이템 이미지
     public ItemType item_type; //아이템 종류
     public ItemStatus item_status;//아이템 상태
     public ItemCombinationFormula item_combiation_formula; //아이템 조합식
@@ -122,11 +122,11 @@ public class ItemJson
         item_list.Add(new Item(20007, "넙치", "넙치다. 못생겼어!", Item.ItemType.use, new ItemStatus(0, 10, 0, 20), new ItemCombinationFormula()));
         item_list.Add(new Item(20008, "도미", "도미다. 고급 생선!", Item.ItemType.use, new ItemStatus(0, 15, 0, 30), new ItemCombinationFormula()));
         item_list.Add(new Item(20009, "다랑어", "다랑어다. 이걸 잡았다고!?", Item.ItemType.use, new ItemStatus(0, 50, 0, 25), new ItemCombinationFormula()));
-        item_list.Add(new Item(20010, "구운 정어리", "구운 정어리다. 작고 소중해.", Item.ItemType.use, new ItemStatus(0, 10, 0, 10), new ItemCombinationFormula()));
-        item_list.Add(new Item(20010, "구운 복어", "구운 복어다. 안심은 금물!", Item.ItemType.use, new ItemStatus(0, 10, 0, 15), new ItemCombinationFormula()));
-        item_list.Add(new Item(20012, "구운 넙치", "구운 넙치다. 못생긴건 여전해.", Item.ItemType.use, new ItemStatus(0, 25, 0, 15), new ItemCombinationFormula()));
-        item_list.Add(new Item(20013, "구운 도미", "구운 도미다. 더 고급져졌어.", Item.ItemType.use, new ItemStatus(0, 20, 0, 35), new ItemCombinationFormula()));
-        item_list.Add(new Item(20014, "구운 다랑어", "구운 다랑어다. 구워도 맛있어!", Item.ItemType.use, new ItemStatus(0, 30, 0, 55), new ItemCombinationFormula()));
+        item_list.Add(new Item(20010, "구운 정어리", "구운 정어리다. 작고 소중해.", Item.ItemType.use, new ItemStatus(0, 10, 0, 10), new ItemCombinationFormula(new Dictionary<string, int>() { { "20004", 1 }, { "10006", 1 } })));
+        item_list.Add(new Item(20010, "구운 복어", "구운 복어다. 안심은 금물!", Item.ItemType.use, new ItemStatus(0, 10, 0, 15), new ItemCombinationFormula(new Dictionary<string, int>() { { "20006", 1 }, { "10006", 1 } })));
+        item_list.Add(new Item(20012, "구운 넙치", "구운 넙치다. 못생긴건 여전해.", Item.ItemType.use, new ItemStatus(0, 25, 0, 15), new ItemCombinationFormula(new Dictionary<string, int>() { { "20007", 1 }, { "10006", 1 } })));
+        item_list.Add(new Item(20013, "구운 도미", "구운 도미다. 더 고급져졌어.", Item.ItemType.use, new ItemStatus(0, 20, 0, 35), new ItemCombinationFormula(new Dictionary<string, int>() { { "20008", 1 }, { "10006", 1 } })));
+        item_list.Add(new Item(20014, "구운 다랑어", "구운 다랑어다. 구워도 맛있어!", Item.ItemType.use, new ItemStatus(0, 30, 0, 55), new ItemCombinationFormula(new Dictionary<string, int>() { { "20009", 1 }, { "10006", 1 } })));
 
         //기타아이템
         item_list.Add(new Item(30001, "통나무", "통나무이다. 쓰임이 많을 것 같다.", Item.ItemType.etc,  new ItemCombinationFormula()));

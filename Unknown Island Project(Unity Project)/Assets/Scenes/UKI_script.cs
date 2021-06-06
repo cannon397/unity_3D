@@ -121,6 +121,7 @@ public class UKI_script : MonoBehaviour
     private Dispancer ds;
     private Setting_Status ss;
     private ItemJson ij;
+    private Util ut;
 
     void Start()
     {
@@ -133,11 +134,15 @@ public class UKI_script : MonoBehaviour
         ss = new Setting_Status();
         ij = new ItemJson();
         iv = new Inventory(20,ij);
+        ut = new Util();
         animator = GameObject.Find("Player").GetComponentInChildren<Animator>();
         controller = GameObject.Find("Player").GetComponentInChildren<CharacterController>();
         camera_dstc = Mathf.Sqrt(4 * 4);
         game_puase_bool = false;
         key_adr = 9999;
+
+        iv.Add(20001, 1);
+        
 
         tree_list = new List<GameObject>();
         tree_list = ds.TreeDispanceList();
@@ -376,6 +381,8 @@ public class UKI_script : MonoBehaviour
 
     void Update()
     {
+        iv.InventoryDoubleClick();
+        iv.drag();
         if (game_puase_bool)
         {
 
