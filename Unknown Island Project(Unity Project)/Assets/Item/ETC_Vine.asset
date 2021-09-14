@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: ETC_Vine
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  item_id: 30002
+  item_name: "\uB369\uAD74"
+  item_description: "\uB369\uAD74\uC774\uB2E4. \uBB36\uC744 \uB54C \uC6A9\uC774\uD558\uB2E4."
+  item_icon: {fileID: 0}
+  item_type: 3
+  item_prefab: {fileID: 0}
+  g_EntityPrefabDictionary:
+    g_InspectorKeys: []
+    g_InspectorValues: 

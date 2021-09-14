@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Use_Approximately
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  item_id: 20002
+  item_name: "\uC0C1\uCC98\uC57D"
+  item_description: "\uC0C1\uCC98\uB97C \uCE58\uB8CC\uD560 \uC218 \uC788\uC744 \uAC83
+    \uAC19\uB2E4."
+  item_icon: {fileID: 0}
+  item_type: 2
+  item_prefab: {fileID: 0}
+  item_combin_infor:
+    g_InspectorKeys:
+    - {fileID: 6934775537655361548, guid: 0da43f1f7a35eb04aa63e455cfef5a3b, type: 3}
+    - {fileID: 5811652340822418264, guid: 3547aac7285407649945cd5b7698dd44, type: 3}
+    - {fileID: 3557470496371924193, guid: 680c18e6ac094be478ebc25b7921b881, type: 3}
+    g_InspectorValues: 010000000100000001000000

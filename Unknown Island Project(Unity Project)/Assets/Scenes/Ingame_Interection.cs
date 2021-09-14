@@ -20,6 +20,9 @@ public class Ingame_Interection : MonoBehaviour
 
     private float time;
 
+
+    private Inventory inventory;
+
     public GameObject fishtrap_text;
     public GameObject setting_point;
     public GameObject fishtrap_overlap;
@@ -30,7 +33,7 @@ public class Ingame_Interection : MonoBehaviour
     public static GameObject press_fishtrap_image;
     public static GameObject press_rock_image;
     public static GameObject press_stone_image;
-
+    public static bool test = true;
     private UKI_script uki;
     public Ingame_Interection()
     {
@@ -62,13 +65,13 @@ public class Ingame_Interection : MonoBehaviour
         fishtrap_overlap.SetActive(false);
 
         fishtrap_count_already = false;
-
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         uki = new UKI_script();
     }
 
     void Start()
     {
-
+        
     }
 
     void Update()
@@ -80,6 +83,10 @@ public class Ingame_Interection : MonoBehaviour
     ///</summary>
     public IEnumerator RayCastTree(Transform charactor, GameObject tree_log, GameObject tree_fruit, LayerMask laymask_tree)
     {
+        while (true)
+        {
+
+        
         //if(도끼를 장착 했는지 확인)
         RaycastHit hitinfo;
         if (Physics.SphereCast(charactor.position - charactor.forward, 1f, charactor.forward, out hitinfo, 2f, laymask_tree))
@@ -89,16 +96,23 @@ public class Ingame_Interection : MonoBehaviour
             {
                 int frame = 0;
                 //나무 패는 에니메이션
-                animator.SetTrigger("doLogging");
-                while(frame < 30)
+                if (test)
                 {
-                    if(frame == 29)
-                    {
-                        TreeItemCreate(hitinfo.collider.gameObject.transform, tree_log, tree_fruit);
-                    }
-                    frame++;
-                    yield return new WaitForFixedUpdate();
+                    animator.SetTrigger("doLogging");
+                    test = false;
                 }
+
+                
+                    
+                    
+                test = true;
+                Debug.Log("시간 : " + animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+                Debug.Log(animator.GetCurrentAnimatorStateInfo(0));
+
+                TreeItemCreate(hitinfo.collider.gameObject.transform, tree_log, tree_fruit);
+
+                   
+
 
 
                 hitinfo.collider.gameObject.SetActive(false);
@@ -108,6 +122,9 @@ public class Ingame_Interection : MonoBehaviour
         {
             press_tree_image.SetActive(false);
         }
+            yield return null;
+        }
+
     }
     ///<summary>
     ///나무 재생성 하는 함수
@@ -302,24 +319,10 @@ public class Ingame_Interection : MonoBehaviour
         RaycastHit hitinfo;
         if (Physics.SphereCast(charactor.position - charactor.forward, 1f, charactor.forward, out hitinfo, 2f, layermask))
         {//여기는 해당 아이템을 집는 기능 구현 부분
-            if(hitinfo.collider.gameObject.tag == "10001")//도끼
+           
+            if (hitinfo.collider.gameObject.tag == "10005")//통발
             {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "10002")//곡괭이
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "10003")//창
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "10004")//낚시대
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "10005")//통발
-            {
+               
                 press_fishtrap_image.SetActive(true);
                 press_water_image.SetActive(false);
                 fishtrap_overlap.SetActive(false);
@@ -426,26 +429,7 @@ public class Ingame_Interection : MonoBehaviour
                     Destroy(hitinfo.collider.gameObject);
                 }
             }
-            else if (hitinfo.collider.gameObject.tag == "10006")//코코넛 그릇
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "10007")//횃불
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "10008")//가방
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "20001")//해독제
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "20002")//상처약
-            {
-
-            }
+           
             else if (hitinfo.collider.gameObject.tag == "20003")//코코넛
             {
                 press_treeitem_image.SetActive(true);
@@ -453,54 +437,14 @@ public class Ingame_Interection : MonoBehaviour
                 {
                     //줍는 에니메이션
                     animator.SetTrigger("doPickup");
+                    
                     //인벤토리 데이터 베이스에 코코넛 저장
+                    
+                    inventory.AcquireItem(hitinfo.collider.gameObject.GetComponent<ItemPickUp>().item);
                     Destroy(hitinfo.collider.gameObject);
                 }
             }
-            else if (hitinfo.collider.gameObject.tag == "20004")//정어리
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "20005")//물이담긴 나무그릇
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "20006")//복어
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "20007")//넙치
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "20008")//도미
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "20009")//다랑어
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "20010")//구운 정어리
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "20011")//구운 복어
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "20012")//구운 넙치
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "20013")//구운 도미
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "20014")//구운 다랑어
-            {
-
-            }
+          
             else if (hitinfo.collider.gameObject.tag == "30001")//통나무
             {
 
@@ -509,49 +453,26 @@ public class Ingame_Interection : MonoBehaviour
                 {
                     //줍는 에니메이션
                     animator.SetTrigger("doPickup");
+                    inventory.AcquireItem(hitinfo.collider.gameObject.GetComponent<ItemPickUp>().item);
+                    
                     //인벤토리 데이터 베이스에 통나무 저장
                     Destroy(hitinfo.collider.gameObject);
                 }
             }
-            else if (hitinfo.collider.gameObject.tag == "30002")//덩굴
-            {
 
-            }
             else if (hitinfo.collider.gameObject.tag == "30003")//돌
             {
                 press_stone_image.SetActive(true);
                 if (Input.GetKeyDown(key_custom_arry[1]))
                 {
                     //줍는 애니메이션 및 줍기 구현
+                    inventory.AcquireItem(hitinfo.collider.gameObject.GetComponent<ItemPickUp>().item);
                     animator.SetTrigger("doPickup");
                     //인벤토리에 돌 저장
                     Destroy(hitinfo.collider.gameObject);
                 }
             }
-            else if (hitinfo.collider.gameObject.tag == "30004")//꽃
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "30005")//나뭇가지
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "30006")//야자수 잎
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "40001")//상자
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "40002")//집
-            {
-
-            }
-            else if (hitinfo.collider.gameObject.tag == "40003")//모닥불
-            {
-
-            }
+           
         }
         else
         {//여기는 줍기 UI, 애니메이션 Bool 총괄로 꺼주는 파트

@@ -844,3 +844,15 @@ AnimatorStateMachine:
   m_ExitPosition: {x: -800, y: 770, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 1219251157563538887}
+--- !u!114 &7643809239376741361
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffd74c56f5cd3f948a45c28860d6e7fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

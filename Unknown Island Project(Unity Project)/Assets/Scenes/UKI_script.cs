@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using Assets.Scenes;
 using System;
+using Newtonsoft.Json;
 
 public class UKI_script : MonoBehaviour
 {
@@ -64,7 +65,7 @@ public class UKI_script : MonoBehaviour
     public GameObject keycustom_check_panel;
 
     public GameObject nowon_setting_panel;
-    private Inventory iv;
+    
 
 
 
@@ -78,6 +79,8 @@ public class UKI_script : MonoBehaviour
     [SerializeField]
     private Transform characterBody;
     private CharacterController controller;
+
+
 
     public LayerMask laymask_tree;
     public LayerMask laymask_floor;
@@ -120,7 +123,7 @@ public class UKI_script : MonoBehaviour
     private pause_menu pm;
     private Dispancer ds;
     private Setting_Status ss;
-    private ItemJson ij;
+   
     private Util ut;
 
     void Start()
@@ -132,8 +135,11 @@ public class UKI_script : MonoBehaviour
         pm = new pause_menu(sh);
         ds = new Dispancer();
         ss = new Setting_Status();
-        ij = new ItemJson();
-        iv = new Inventory(20,ij);
+
+        
+       
+
+        
         ut = new Util();
         animator = GameObject.Find("Player").GetComponentInChildren<Animator>();
         controller = GameObject.Find("Player").GetComponentInChildren<CharacterController>();
@@ -141,15 +147,13 @@ public class UKI_script : MonoBehaviour
         game_puase_bool = false;
         key_adr = 9999;
 
-        iv.Add(20001, 1);
-        
 
         tree_list = new List<GameObject>();
         tree_list = ds.TreeDispanceList();
         keycab_list = ds.KeyDispanceList();
 
 
-
+        
         tree_log = GameObject.Find("Tree_Log");
         tree_fruit = GameObject.Find("Tree_Fruit");
         fish_trap = GameObject.Find("Fish_trap");
@@ -376,14 +380,16 @@ public class UKI_script : MonoBehaviour
         StartCoroutine(ss.StatusBleed(wait_bleed, wait_fix, 7, 10));
         StartCoroutine(ss.StatusCold(wait_cold, wait_fix, 3, 10));
         StartCoroutine(ii.ResetTree(tree_list, wait_treereset, wait_fix));
+        StartCoroutine(ii.RayCastTree(characterBody, tree_log, tree_fruit, laymask_tree));
+
     }
 
 
     void Update()
     {
-        iv.InventoryDoubleClick();
-        iv.drag();
-        if (game_puase_bool)
+        //inventory.AcquireItem(10001);
+
+        if (game_puase_bool || Inventory.inventoryActivated || Crafting.CraftingActivated)
         {
 
         }
@@ -394,7 +400,7 @@ public class UKI_script : MonoBehaviour
             pl.PointOfView(characterBody, key_custom_arry);
         }
         pl.JumpStatusOn(characterBody, laymask_floor, laymask_rock);
-        StartCoroutine(ii.RayCastTree(characterBody, tree_log, tree_fruit, laymask_tree));
+        //StartCoroutine(ii.RayCastTree(characterBody, tree_log, tree_fruit, laymask_tree));
         ii.RayCastWaterFishTrap(characterBody, fish_trap, laymask_water);
         ii.RayCastRock(characterBody, rock_stone, laymask_rock);
         ii.PickUpItem(characterBody, laymask_pickup, key_custom_arry);
@@ -405,7 +411,7 @@ public class UKI_script : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (game_puase_bool)
+        if (game_puase_bool || Inventory.inventoryActivated || Crafting.CraftingActivated)
         {
 
         }

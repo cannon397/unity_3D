@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: ETC_Tree_Log
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  item_id: 30001
+  item_name: "\uD1B5\uB098\uBB34"
+  item_description: "\uD1B5\uB098\uBB34, \uD1B5\uB098\uBB34\uC774\uB2E4. \uC4F0\uC784\uC774
+    \uB9CE\uC744 \uAC83 \uAC19\uB2E4."
+  item_icon: {fileID: 21300000, guid: c542efd42310c6144af6c18c45e1ad3d, type: 3}
+  item_type: 3
+  item_prefab: {fileID: 527181781029573148, guid: f72178cc6a616bc4f94fc289138acced,
+    type: 3}
+  g_EntityPrefabDictionary:
+    g_InspectorKeys: []
+    g_InspectorValues: 

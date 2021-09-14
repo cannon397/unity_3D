@@ -42,6 +42,9 @@ TagManager:
   - 40001
   - 40002
   - 40003
+  - Tab_Build
+  - Tab_Cook
+  - Tab_Tool
   layers:
   - Default
   - TransparentFX

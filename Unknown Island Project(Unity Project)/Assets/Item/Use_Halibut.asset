@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Use_Halibut
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  item_id: 20007
+  item_name: "\uB119\uCE58"
+  item_description: "\uB119\uCE58\uB2E4. \uBABB\uC0DD\uACBC\uC5B4!"
+  item_icon: {fileID: 0}
+  item_type: 2
+  item_prefab: {fileID: 0}
+  g_EntityPrefabDictionary:
+    g_InspectorKeys: []
+    g_InspectorValues: 

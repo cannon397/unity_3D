@@ -37,32 +37,35 @@ public class Util
         
         return null;
     }
-    //public void DoubleClick()
-    //{
+    public bool DoubleClick()
+    {
 
-    //    if (m_IsOneClick && ((Time.time - m_Timer) > m_DoubleClickSecond))
-    //    {
+        if (m_IsOneClick && ((Time.time - m_Timer) > m_DoubleClickSecond))
+        {
 
-    //        //Debug.Log("One Click");
-    //        m_IsOneClick = false;
-    //    }
+            //Debug.Log("One Click");
+            m_IsOneClick = false;
+            return false;
+        }
 
-    //    if (Input.GetMouseButtonDown(0))
-    //    {
-    //        if (!m_IsOneClick)
-    //        {
-    //            m_Timer = Time.time;
-    //            m_IsOneClick = true;
-    //        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (!m_IsOneClick)
+            {
+                m_Timer = Time.time;
+                m_IsOneClick = true;
+            }
 
-    //        else if (m_IsOneClick && ((Time.time - m_Timer) < m_DoubleClickSecond))
-    //        {
+            else if (m_IsOneClick && ((Time.time - m_Timer) < m_DoubleClickSecond))
+            {
 
-    //            //Debug.Log("Double Click");
-    //            m_IsOneClick = false;
-    //        }
-    //    }
-    //}
+                //Debug.Log("Double Click");
+                m_IsOneClick = false;
+                return true;
+            }
+        }
+        return false;
+    }
     public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("Start");

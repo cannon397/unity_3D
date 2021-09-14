@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: ETC_PalmLeaves
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  item_id: 30006
+  item_name: "\uC57C\uC790\uC218 \uC78E"
+  item_description: "\uC57C\uC790\uC218 \uC78E\uC774\uB2E4. \uB36E\uACE0\uC790\uBA74
+    \uB530\uB4EF\uD560 \uAC83 \uAC19\uB2E4."
+  item_icon: {fileID: 21300000, guid: 231ee8538a051ab429cd8f6fdf64642a, type: 3}
+  item_type: 3
+  item_prefab: {fileID: 0}
+  item_combin_infor:
+    g_InspectorKeys: []
+    g_InspectorValues: 

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Equip_TorcLiight
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  item_id: 10007
+  item_name: "\uD683\uBD88"
+  item_description: "\uD683\uBD88\uC774\uB2E4. \uC8FC\uBCC0\uC744 \uBC1D\uD600\uBCF4\uC790."
+  item_icon: {fileID: 0}
+  item_type: 1
+  item_prefab: {fileID: 0}
+  item_combin_infor:
+    g_InspectorKeys:
+    - {fileID: 8709095470247776474, guid: f72178cc6a616bc4f94fc289138acced, type: 3}
+    - {fileID: 6934775537655361548, guid: 0da43f1f7a35eb04aa63e455cfef5a3b, type: 3}
+    g_InspectorValues: 0100000001000000

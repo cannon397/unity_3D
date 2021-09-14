@@ -197,6 +197,7 @@ public class pause_menu : MonoBehaviour
                         key_custom_arry[2] = Input.inputString;
                         break;
                 }
+
                 KeyCustomChangeImage(button, Input.inputString);
                 keycustom_check_panel.SetActive(false);
             }
@@ -285,6 +286,7 @@ public class pause_menu : MonoBehaviour
     /// <param name="resolution_dropdown"></param>
     public void MonitorSize(Dropdown fullscreen_dropdown, Dropdown resolution_dropdown)
     {
+     
         if (fullscreen_dropdown.value == 0)
         {
             switch (resolution_dropdown.value)
